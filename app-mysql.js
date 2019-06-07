@@ -17,15 +17,15 @@ connection.connect();
 });*/
  
 
-/*connection.query('SELECT * from Test', (error, results, fields) => {
-    if (error) throw error;
-    console.log(results);
-    connection.end();
-});*/
+// connection.query('SELECT * from Test', (error, results, fields) => {
+//     if (error) throw error;
+//     console.log(results);
+//     connection.end();
+// });
 
-var test = {id: 6, ten:'F'};
+var test = {id: 7, ten:'G'};
 
-connection.query('insert into Test set ?', (error, results, fields) => {
+connection.query('insert into Test set ?', test, (error, results, fields) => {
     if (error) throw error;
     console.log(results);
     connection.end();
