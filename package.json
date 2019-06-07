@@ -1,0 +1,25 @@
+{
+  "name": "Web_CK",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app-mysql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/homebizzz/Web_CK.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/homebizzz/Web_CK/issues"
+  },
+  "homepage": "https://github.com/homebizzz/Web_CK#readme",
+  "dependencies": {
+    "md5.js": "^1.3.5",
+    "mysql": "^2.17.1"
+  }
+}
