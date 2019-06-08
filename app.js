@@ -16,9 +16,9 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
-// app.get('/categories', (req, res) => {
-//     res.render('categories');
-// })
+app.get('/categories', (req, res) => {
+    res.render('categories');
+})
 
 app.listen(3000, () => {
     console.log('Web Server is running at http://localhost:3000');
