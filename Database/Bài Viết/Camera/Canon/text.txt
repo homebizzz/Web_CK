@@ -1,0 +1,25 @@
+tittle: Canon ra mắt PowerShot N, máy ảnh 12MP có thể chụp từ bất kì vị trí nào
+
+<image>
+
+Canon vừa chính thức ra mắt chiếc máy chụp ảnh PowerShot N, một mẫu camera mà người dùng có thể cầm theo mọi hướng nhờ có thiết kế đặc biệt hình vuông. PowerShot N sở hữu ống kính zoom quang 8x (tiêu cự tương đương máy phim là 28-224mm), khẩu độ f/3-5.9. Về mặt hình ảnh, Canon trang bị cho máy cảm biến CMOS 12MP High-Sensitivity cùng bộ xử lí hình ảnh DIGIC 5, hứa hẹn khả năng chụp thiếu sáng tốt với dải ISO 80-6400. Máy cho phép quay video độ phân giải 1080p @ 24fps hoặc 720p @ 32fps. Đèn flash phía trước vừa đóng vai trò trợ sáng khi chụp hình và quay phim, vừa giúp lấy nét trong môi trường tối.
+
+Canon nói rằng “với một vòng zoom và chụp ảnh được đặt ở phần trên lẫn dưới ống kính, hình có thể được chụp từ bất kì bị trí nào”. Cụ thể hơn, vòng bên ngoài sẽ đảm nhiệm chức năng như một nút chụp ảnh bình thường và có thể nhấn ở bất kì điểm nào, còn vòng bên trong sẽ có chức năng zoom. Màn hình phía sau có kích thước 2,8″ độ phân giải 461.000 pixel, hỗ trợ cảm ứng điện dung và có thể lật được 90 độ, tiện cho việc chụp các cảnh cao quá đầu hoặc những góc rất thấp. Người dùng cũng có thể điều khiển việc chụp ảnh thông qua màn hình này.
+
+Nhà sản xuất cho biết thêm rằng PowerShot N sử dụng thẻ nhớ microSD, pin sạc (có thể sạc qua cổng USB). Máy có một chế độ mang tên Eco sẽ tự động giảm độ sáng và tắt màn hình đi sau 10 giây không sử dụng. Một khi con quay hồi chuyển bên trong thiết bị nhận thấy có sự di chuyển máy thì màn hình sẽ tự bật lại. Canon nói Eco mode sẽ giúp tăng thời gian dùng pin lên 30% so với bình thường.
+
+Ngoài ra, kết nối Wi-Fi tích hợp với một nút Mobile Device Connect riêng sẽ giúp người dùng chia sẻ nội dung theo giao thức ngang hàng (ad-hoc) đến các thiết bị di động. Bằng phần mềm CameraWindow chạy trên Android hoặc iOS, những tấm ảnh từ PowerShot N có thể được nhanh chóng đăng lên các mạng xã hội. Những thiết bị thường dùng sẽ được camera ghi nhớ, cho phép nhấn một nút là truy cập ngay trong những lần sử dụng sau. Người dùng cũng được “đăng lời nhận xét trực tiếp từ camera của mình lên những tấm ảnh đã upload”, “chọn đích đến để tải ảnh lên Facebook – chia sẻ với mọi người hoặc chỉ post lên một số nhóm xác định”.
+
+Canon nói PowerShot N sẽ được bán ra vào tháng 4 với giá 300$, có hai tùy chọn màu trắng hoặc đen. Canon cũng đang lên kế hoạch ra mắt nhiều phụ kiện để dùng với mẫu compact đặc biệt này, trong đó bao gồm một số thứ giúp đeo camera lên cổ để tiện hơn cho việc chụp ảnh.
+
+Một số tính năng khác của Canon PowerShot N:
+
+Chế độ chụp ảnh Creative Shot: tự động phân tích ảnh và áp dụng 5 hiệu ứng khác nhau lên tấm hình gốc dựa trên thông số ánh sáng, màu sắc,… Như vậy, người dùng sẽ có thêm 5 phiên bản khác của tấm ảnh mình đã ghi lại
+Tính năng chống rung “Intelligent Image Stabilization” giúp camera tự chọn chế độ ổn định thích hợp tùy theo điều kiện chụp
+Nút quay phim được tách riêng
+Hệ thống “Hybrid Auto” giúp tăng cường tốc độ lấy nét, khả năng “Face ID” giúp máy xác định và khóa nét vào những gương mặt quen thuộc
+Có thể tải ảnh lên dịch vụ Canon iMAGE GATEWAYiii thông qua phần mềm trong máy tính
+Hỗ trợ in ảnh không dây qua giao thức PictBridgeiv với một số máy in Canon
+Hỗ trợ 58 chế độ cảnh khác nhau trong Smart AUTO Mode
+Tính năng Smart Shutter giúp bám nét đối tượng, khi nhấc ngón tay ra khỏi màn hình là chụp
+Kích thước: 79 x 60 x 29mm
