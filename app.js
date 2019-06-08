@@ -81,6 +81,30 @@ app.get('/profile', (req, res)=> {
     res.render('profile');
 })
 
+app.get('/BTV-post', (req, res)=> {
+    app.engine('hbs', exphbs({
+        defaultLayout: 'mainAdmin.hbs',
+        layoutsDir: 'views/_layouts'
+    }));
+    res.render('BTV-post');
+})
+
+app.get('/Writer-posts', (req, res)=> {
+    app.engine('hbs', exphbs({
+        defaultLayout: 'mainAdmin.hbs',
+        layoutsDir: 'views/_layouts'
+    }));
+    res.render('Writer-posts');
+})
+
+app.get('/Writer-detail', (req, res)=> {
+    app.engine('hbs', exphbs({
+        defaultLayout: 'mainAdmin.hbs',
+        layoutsDir: 'views/_layouts'
+    }));
+    res.render('Writer-detail');
+})
+
 app.listen(3000, () => {
     console.log('Web Server is running at http://localhost:3000');
 })
