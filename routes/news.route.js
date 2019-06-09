@@ -7,8 +7,9 @@ router.get('/', (req, res) => {
     var p = newspaperModel.all();
     
     p.then(rows => {
-        res.render('test', {
-        newspapers: rows[0]
+        res.render('index', {
+        newspapers1: rows[0],
+        newspapers2: rows[1]
         });
     }).catch(err => {
         console.log(err);

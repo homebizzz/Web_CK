@@ -14,19 +14,13 @@ app.use(express.static('assets'));
 app.use(express.static('assset1'));
 app.use(express.static('ckeditor'));
 
+app.use('/', require('./routes/news.route'));
+
 // trang chu
 app.get('/', (req, res) => {
-    //res.render('index');
-    res.render('test')
+    res.render('index');
 })
 
-<<<<<<< HEAD
-app.use('/test', require('./routes/news.route'));
-
-// app.get('/categories', (req, res) => {
-//     res.render('categories');
-// })
-=======
 // chuyen muc
 app.get('/categories', (req, res) => {
     res.render('categories');
@@ -112,7 +106,6 @@ app.get('/Writer-detail', (req, res)=> {
     }));
     res.render('Writer-detail');
 })
->>>>>>> 5ae33b59b0af4a5be361382e6cc0c1cb54ecdd2c
 
 app.listen(3000, () => {
     console.log('Web Server is running at http://localhost:3000');
