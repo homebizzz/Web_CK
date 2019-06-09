@@ -13,8 +13,11 @@ app.set('view engine', 'hbs');
 app.use(express.static('assets'));
 //
 app.get('/', (req, res) => {
-    res.render('index');
+    //res.render('index');
+    res.render('test')
 })
+
+app.use('/test', require('./routes/news.route'));
 
 // app.get('/categories', (req, res) => {
 //     res.render('categories');
