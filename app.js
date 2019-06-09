@@ -46,7 +46,7 @@ app.get('/dashboard', (req, res)=> {
         defaultLayout: 'mainAdmin.hbs',
         layoutsDir: 'views/_layouts'
     }));
-    res.render('admin-user');
+    res.render('admin/admin-user');
 })
 
 app.get('/admin-posts', (req, res)=> {
@@ -54,7 +54,7 @@ app.get('/admin-posts', (req, res)=> {
         defaultLayout: 'mainAdmin.hbs',
         layoutsDir: 'views/_layouts'
     }));
-    res.render('admin-posts');
+    res.render('admin/admin-posts');
 })
 
 app.get('/admin-categories', (req, res)=> {
@@ -62,7 +62,7 @@ app.get('/admin-categories', (req, res)=> {
         defaultLayout: 'mainAdmin.hbs',
         layoutsDir: 'views/_layouts'
     }));
-    res.render('admin-categories');
+    res.render('admin/admin-categories');
 })
 
 app.get('/admin-tags', (req, res)=> {
@@ -70,7 +70,7 @@ app.get('/admin-tags', (req, res)=> {
         defaultLayout: 'mainAdmin.hbs',
         layoutsDir: 'views/_layouts'
     }));
-    res.render('admin-tags');
+    res.render('admin/admin-tags');
 })
 
 app.get('/profile', (req, res)=> {
@@ -86,7 +86,7 @@ app.get('/BTV-post', (req, res)=> {
         defaultLayout: 'mainAdmin.hbs',
         layoutsDir: 'views/_layouts'
     }));
-    res.render('BTV-post');
+    res.render('BTV/BTV-post');
 })
 
 app.get('/Writer-posts', (req, res)=> {
@@ -94,7 +94,7 @@ app.get('/Writer-posts', (req, res)=> {
         defaultLayout: 'mainAdmin.hbs',
         layoutsDir: 'views/_layouts'
     }));
-    res.render('Writer-posts');
+    res.render('Writer/Writer-posts');
 })
 
 app.get('/Writer-detail', (req, res)=> {
@@ -102,7 +102,7 @@ app.get('/Writer-detail', (req, res)=> {
         defaultLayout: 'mainAdmin.hbs',
         layoutsDir: 'views/_layouts'
     }));
-    res.render('Writer-detail');
+    res.render('Writer/Writer-detail');
 })
 
 app.listen(3000, () => {
