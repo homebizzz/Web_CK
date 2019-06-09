@@ -14,6 +14,8 @@ app.use(express.static('assets'));
 app.use(express.static('assset1'));
 app.use(express.static('ckeditor'));
 
+app.use('/', require('./routes/news.route'));
+
 // trang chu
 app.get('/', (req, res) => {
     res.render('index');
