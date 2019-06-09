@@ -22,7 +22,7 @@ CREATE TABLE CATEGORIES(
 
 CREATE TABLE CATEGORYSONS(
     Id int not null primary key auto_increment,
-    Name varchar(50) unique,
+    Name varchar(50),
 		Category_id int,
 		foreign key (Category_id) references CATEGORIES(Id)
 );
@@ -36,6 +36,8 @@ CREATE TABLE NEWSPAPERS (
     Content longtext,
     Is_premium int,
     status int,
+		Count_Like int,
+		Summary mediumtext,
     foreign key (CategorySon_id) references CATEGORYSONS(Id)
 );
 
