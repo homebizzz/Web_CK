@@ -2,23 +2,10 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var hbs_sections = require('express-handlebars-sections');
 var app = express();
-var app1 = express();
-
-app1.engine('hbs', exphbs({
-    defaultLayout: 'mainSign.hbs',
-    layoutsDir: 'views/_layouts',
-    helpers:{
-        section: hbs_sections()
-    }
-}))
-app1.set('view engine', 'hbs');
 
 app.engine('hbs', exphbs({
     defaultLayout: 'main.hbs',
-    layoutsDir: 'views/_layouts',
-    helpers:{
-        section: hbs_sections()
-    }
+    layoutsDir: 'views/_layouts'
 }))
 
 app.set('view engine', 'hbs');
@@ -52,6 +39,13 @@ app.get('/subcriber', (req, res) => {
 
 //log in
 app.get('/sign-in-up', (req, res) => {
+    app.engine('hbs', exphbs({
+        defaultLayout: 'mainSign.hbs',
+        layoutsDir: 'views/_layouts',
+        helpers:{
+            section: hbs_sections()
+        }
+    }));
     res.render('sign-in-up');
 })
 
