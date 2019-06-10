@@ -2,6 +2,6 @@ var db = require('../utils/db');
 
 module.exports = {
     all: () => {
-        return db.load('select * from newspapers');
+        return db.load('select * from Test');
     }
 }
