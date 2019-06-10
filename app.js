@@ -90,21 +90,15 @@ app.get('/admin-posts', (req, res)=> {
     res.render('admin/admin-posts');
 })
 
-app.get('/admin-categories', (req, res)=> {
-    app.engine('hbs', exphbs({
-        defaultLayout: 'mainAdmin.hbs',
-        layoutsDir: 'views/_layouts'
-    }));
-    res.render('admin/admin-categories');
+app.use('/admin-categories', require('./routes/admin/categories.route'));
+app.get('/admin-categories', (req, res) => {
+    res.render('admin/admin-categories', {layout: false});
 })
 
-app.get('/admin-tags', (req, res)=> {
-    app.engine('hbs', exphbs({
-        defaultLayout: 'mainAdmin.hbs',
-        layoutsDir: 'views/_layouts'
-    }));
-    res.render('admin/admin-tags');
-})
+app.use('/admin-tags', require('./routes/admin/categories.route'));
+// app.get('/admin-tags', (req, res)=> {
+//     res.render('admin/admin-tags', {layout: false});
+// })
 
 app.get('/profile', (req, res)=> {
     app.engine('hbs', exphbs({
