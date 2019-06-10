@@ -75,10 +75,10 @@ app.get('/inputOTP', (req, res) => {
 
 //
 app.get('/dashboard', (req, res)=> {
-    app.engine('hbs', exphbs({
-        defaultLayout: 'mainAdmin.hbs',
-        layoutsDir: 'views/_layouts'
-    }));
+    // app.engine('hbs', exphbs({
+    //     defaultLayout: 'mainAdmin.hbs',
+    //     layoutsDir: 'views/_layouts'
+    // }));
     res.render('admin/admin-user');
 })
 
