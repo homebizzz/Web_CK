@@ -14,6 +14,7 @@ app.use(express.static('assets'));
 app.use(express.static('assset1'));
 app.use(express.static('ckeditor'));
 
+app.use('/sign-in-up', require('./routes/account.route'))
 app.use('/', require('./routes/news.route'));
 
 // trang chu
