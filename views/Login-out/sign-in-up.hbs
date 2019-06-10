@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" >
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Đăng nhập/Đăng kí</title>
@@ -9,33 +8,13 @@
     
 </head>
 
-{{#section 'js'}}
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
-    <script>
-    $(function () {
-        $('#sig').validate({
-            rules:{
-                username:{
-                    required:true
-                }
-            },
-            message:{
-                username:{
-                    required: 'Your user name is required.',
-                }
-            }
-        });
-    })
-</script>
-{{/section}}
-
 <body>
 <div id = "contID" class="cont">
         <div class="form sign-in">
-            <h2>Chào mừng bạn trở lại,</h2>
+            <h2>Chào mừng bạn trở lại</h2>
             <label>
                 <span>Email</span>
-                <input type="email" />
+                <input type="email" autofocus/>
             </label>
             <label>
                 <span>Mật khẩu</span>
@@ -62,24 +41,24 @@
             </div>
             <form novalidate action="" method="POST" id="signinForm">
                 <div class="form sign-up">
-                    <h2>Khám phá công nghệ,</h2>
+                    <h2>Khám phá công nghệ</h2>
                     <label>
                         <span>Name</span>
-                        <input name="username" type="text" />
+                        <input name="username" type="text"/>
                     </label>
                     <label>
                         <span>Email</span>
-                        <input type="email" />
+                        <input name="email" type="email" />
                     </label>
                     <label>
                         <span>Mật khẩu</span>
-                        <input type="password" />
+                        <input name="password" type="password" />
                     </label>
                     <label>
                         <span>Xác nhận lại mật khẩu</span>
-                        <input type="password" />
+                        <input type="password" name="confirm" />
                     </label>
-                    <button type="button" type="submit" class="submit">Đăng kí</button>
+                    <button  type="submit" class="submit">Đăng kí</button>
                     <button type="button" class="fb-btn">Join with <span>facebook</span></button>
                 </div>
             </form>
@@ -90,6 +69,52 @@
 document.querySelector('.img__btn').addEventListener('click', function () {
     document.querySelector('.cont').classList.toggle('s--signup');
 });
+</script>
+
+<script src="js/jquery-2.1.4.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script>
+    $(function () {
+        $('#signinForm').validate({
+            rules:{
+                username:{
+                    required: true
+                },
+                email:{
+                    required: true
+                },
+                password:{
+                    required: true
+                },
+                confirm:{
+                    required: true
+                }
+            },
+            messages:{
+                username:{
+                    required: 'Your user name is required.'
+                },
+                email:{
+                    required: 'Your email is required.'
+                },
+                password:{
+                    required: 'Your password is required.'
+                },
+                confirm:{
+                    required: 'Your confirm password is required'
+                }
+            },
+            errorElement: 'small',
+            errorClass: 'help-block text-danger',
+            highlight: function(e){
+                $(e).removeClass('is-isvalid').addClass('is-invalid');
+            },
+            unhighlight:function(e){
+                $(e).removeClass('is-isvalid').addClass('is-invalid');
+            }
+        });
+    })
 </script>
 
 </body>
