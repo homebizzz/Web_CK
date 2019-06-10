@@ -5,7 +5,10 @@ var app = express();
 
 app.engine('hbs', exphbs({
     defaultLayout: 'main.hbs',
-    layoutsDir: 'views/_layouts'
+    layoutsDir: 'views/_layouts',
+    helpers:{
+        section: hbs_sections()
+    }
 }))
 
 app.set('view engine', 'hbs');
@@ -14,7 +17,7 @@ app.use(express.static('assets'));
 app.use(express.static('assset1'));
 app.use(express.static('ckeditor'));
 
-app.use('/sign-in-up', require('./routes/account.route'))
+app.use('/sign-in-up', require('./routes/account.route'));
 app.use('/', require('./routes/news.route'));
 
 // trang chu

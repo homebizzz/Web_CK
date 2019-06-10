@@ -1,34 +1,24 @@
 {{#section 'js'}}
-<script src = "https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
 <script>
-    $(function(){
-        $('#signinForm').validate({
-            rules:{
-                username: {
-                    required: true
-                }
-            },
-            messages:{
-                username: {
-                    required: 'Your username is required.',
-                }
+$(function () {
+    $('#signinForm').validate({
+        rules:{
+            username:{
+                required:true
             }
-        })   
-    })
+        },
+        message:{
+            username:{
+                required: 'Your user name is required.',
+            }
+        }
+    });
+})
 </script>
 {{/section}}
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-    <meta charset="UTF-8">
-    <title>Đăng nhập/Đăng kí</title>
 
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-    <link rel="stylesheet" href="/css/style-login.css">
-</head>
-
-<body>
-    <!-- test -->
+<form novalidate action="" method="POST" id="signinForm">
     <div id = "contID" class="cont">
         <div class="form sign-in">
             <h2>Chào mừng bạn trở lại,</h2>
@@ -40,8 +30,8 @@
                 <span>Mật khẩu</span>
                 <input type="password" />
             </label>
-            <p class="forgot-pass"><a style="color: black;" href="/inputOTP">Quên mật khẩu?</a></p>
-            <button type="button" class="submit"><a href="/admin-posts">Đăng nhập </a></button>
+            <p class="forgot-pass"><a style="color: black;" href="inputOTP.html">Quên mật khẩu?</a></p>
+            <button type="button" class="submit"><a href="admin/admin-posts.html">Đăng nhập </a></button>
             <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
         </div>
         <div class="sub-cont">
@@ -73,53 +63,20 @@
                     <span>Mật khẩu</span>
                     <input type="password" />
                 </label>
-                <p class="forgot-pass"><a style="color: black;" href="inputOTP.html">Quên mật khẩu?</a></p>
-                <button type="button" class="submit"><a href="admin/admin-posts.html">Đăng nhập </a></button>
-                <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
+                <label>
+                    <span>Xác nhận lại mật khẩu</span>
+                    <input type="password" />
+                </label>
+                <button type="button" type="submit" class="submit">Đăng kí</button>
+                <button type="button" class="fb-btn">Join with <span>facebook</span></button>
             </div>
-            <div class="sub-cont">
-                <div class="img">
-                    <div class="img__text m--up">
-                        <h2>Đăng kí tài khoản mới</h2>
-                        <p>Đăng kí và khám phá những thông tin mới về công nghệ!</p>
-                    </div>
-                    <div class="img__text m--in">
-                        <h2>One of us?</h2>
-                        <p>Nếu bạn đã có tài khoản, chỉ cần đăng nhập.</p>
-                    </div>
-                    <div class="img__btn">
-                        <span class="m--up">Đăng kí</span>
-                        <span class="m--in">Đăng nhập</span>
-                    </div>
-                </div>
-                <div class="form sign-up">
-                    <h2>Khám phá công nghệ,</h2>
-                    <label>
-                        <span>Name</span>
-                        <input name="username" type="text" />
-                    </label>
-                    <label>
-                        <span>Email</span>
-                        <input type="email" />
-                    </label>
-                    <label>
-                        <span>Mật khẩu</span>
-                        <input type="password" />
-                    </label>
-                    <label>
-                        <span>Xác nhận lại mật khẩu</span>
-                        <input type="password" />
-                    </label>
-                    <button type="button" type="submit" class="submit">Đăng kí</button>
-                    <button type="button" class="fb-btn">Join with <span>facebook</span></button>
-                </div>
-                
-            </div>
+            
         </div>
-    </form>
-    <script>
-        document.querySelector('.img__btn').addEventListener('click', function() {
-            document.querySelector('.cont').classList.toggle('s--signup');
-        });
-    </script>
-</html>
+    </div>
+</form>
+
+<script>
+document.querySelector('.img__btn').addEventListener('click', function () {
+    document.querySelector('.cont').classList.toggle('s--signup');
+});
+</script>
