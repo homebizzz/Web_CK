@@ -47,8 +47,31 @@ app.get('/sign-in-up', (req, res) => {
             section: hbs_sections()
         }
     }));
-    res.render('sign-in-up');
+    res.render('Login-out/sign-in-up');
 })
+
+app.get('/forgotPassword', (req, res) => {
+    app.engine('hbs', exphbs({
+        defaultLayout: 'mainSign.hbs',
+        layoutsDir: 'views/_layouts',
+        helpers:{
+            section: hbs_sections()
+        }
+    }));
+    res.render('Login-out/forgotPassword');
+})
+
+app.get('/inputOTP', (req, res) => {
+    app.engine('hbs', exphbs({
+        defaultLayout: 'mainSign.hbs',
+        layoutsDir: 'views/_layouts',
+        helpers:{
+            section: hbs_sections()
+        }
+    }));
+    res.render('Login-out/inputOTP');
+})
+
 
 //
 app.get('/dashboard', (req, res)=> {

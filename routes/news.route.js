@@ -4,12 +4,14 @@ var newspaperModel = require('../models/news.model');
 var router = express.Router();
 
 router.get('/', (req, res) => {
+    var noiBat = newspaperModel.hot();
     var p = newspaperModel.all();
-    
-    p.then(rows => {
+
+    noiBat.then(rows => {
         res.render('index', {
-        newspapers1: rows[0],
-        newspapers2: rows[1]
+        newspaper_TinNong: rows[0],
+        newspaper_NoiBat1: rows[1],
+        newspaper_NoiBat2: rows[2]    
         });
     }).catch(err => {
         console.log(err);
