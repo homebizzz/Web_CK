@@ -11,7 +11,7 @@
 
 <body>
 <div id = "contID" class="cont">
-    <form novalidate action="" method="POST" id="signinForm">
+    <form novalidate action="dsadsa" method="POST" id="signinForm">
         <div class="form sign-in">
             <h2>Chào mừng bạn trở lại</h2>
             <label>
@@ -42,24 +42,24 @@
                 <span class="m--in">Đăng nhập</span>
             </div>
         </div>
-        <form novalidate action="" method="POST" id="resgisterForm">
+        <form novalidate action="/sign-in-up/register" method="POST" id="resgisterForm">
             <div class="form sign-up">
                 <h2>Khám phá công nghệ</h2>
                 <label>
                     <span>Name</span>
-                    <input name="username" type="text"/>
+                    <input name="username" id="userName" type="text"/>
                 </label>
                 <label>
                     <span>Email</span>
-                    <input name="email" type="email" />
+                    <input name="email" id="userEmail" type="email" />
                 </label>
                 <label>
                     <span>Mật khẩu</span>
-                    <input name="password" type="password" />
+                    <input name="password" id="passwordUser" type="password"/>
                 </label>
                 <label>
                     <span>Xác nhận lại mật khẩu</span>
-                    <input type="password" name="confirm" />
+                    <input type="password" id="confirmUserPassword" name="confirm" />
                 </label>
                 <button  type="submit" class="submit">Đăng kí</button>
                 <button type="button" class="fb-btn">Join with <span>facebook</span></button>

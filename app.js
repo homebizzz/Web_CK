@@ -1,8 +1,9 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
 var hbs_sections = require('express-handlebars-sections');
-var app = express();
 
+var app = express();
+app.use(express.urlencoded());
 app.engine('hbs', exphbs({
     defaultLayout: 'main.hbs',
     layoutsDir: 'views/_layouts',
@@ -39,12 +40,8 @@ app.get('/subcriber', (req, res) => {
     res.render('indexSubcriber');
 })
 
-
 //log in
 app.use('/sign-in-up', require('./routes/account.route'));
-// app.get('/sign-in-up', (req, res) => {
-//     res.render('Login-out/sign-in-up', {layout: false});
-// })
 
 app.get('/forgotPassword', (req, res) => {
     app.engine('hbs', exphbs({

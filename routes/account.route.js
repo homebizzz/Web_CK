@@ -12,9 +12,10 @@ router.get('/',(req ,  res, next) =>
     });
 })
 
-router.post('/', (req ,  res, next)=>{
+router.post('/register', (req ,  res, next)=>{
+    console.log(req.body);
     var saltRounds = 10;
-    var hash = bcrypt.hashSync(req.password, saltRounds);
+    var hash = bcrypt.hashSync(req.body.password, saltRounds);
     var daySubscript = moment();
 
     var entity = {
