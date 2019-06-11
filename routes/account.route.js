@@ -16,12 +16,12 @@ router.post('/register', (req ,  res, next)=>{
     console.log(req.body);
     var saltRounds = 10;
     var hash = bcrypt.hashSync(req.body.password, saltRounds);
-    var daySubscript = moment();
+    var daySubscript = moment().format('YYYY-MM-DD');
 
     var entity = {
+        Name: req.body.username,
         Email: req.body.email,
         Password: hash,
-        Name: req.body.name,
         Subscribe_date: daySubscript,
         Permission: 4
     }
