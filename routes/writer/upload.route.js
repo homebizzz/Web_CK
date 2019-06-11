@@ -9,6 +9,7 @@ router.get('/',(req ,  res, next) =>
     var temp = uploadModel.loadByConfirmID();
 
     temp.then(rows => {
+        console.log(rows);
         res.render('Writer/Writer-posts', {
             layout: false,
             news: rows

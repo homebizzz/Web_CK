@@ -66,40 +66,14 @@ app.get('/inputOTP', (req, res) => {
 })
 
 
-//
-app.get('/dashboard', (req, res)=> {
-    // app.engine('hbs', exphbs({
-    //     defaultLayout: 'mainAdmin.hbs',
-    //     layoutsDir: 'views/_layouts'
-    // }));
-    res.render('admin/admin-user');
-})
-
-app.get('/admin-posts', (req, res)=> {
-    app.engine('hbs', exphbs({
-        defaultLayout: 'mainAdmin.hbs',
-        layoutsDir: 'views/_layouts'
-    }));
-    res.render('admin/admin-posts');
-})
-
+//ADMIN
+app.use('/admin-posts', require('./routes/admin/posts.route'));
 app.use('/admin-categories', require('./routes/admin/categories.route'));
-app.get('/admin-categories', (req, res) => {
-    res.render('admin/admin-categories', {layout: false});
-})
+app.use('/admin-tags', require('./routes/admin/tags.route'));
+app.use('/admin-users', require('./routes/admin/users.route'));
 
-app.use('/admin-tags', require('./routes/admin/categories.route'));
-// app.get('/admin-tags', (req, res)=> {
-//     res.render('admin/admin-tags', {layout: false});
-// })
-
-app.get('/profile', (req, res)=> {
-    app.engine('hbs', exphbs({
-        defaultLayout: 'mainAdmin.hbs',
-        layoutsDir: 'views/_layouts'
-    }));
-    res.render('profile');
-})
+//PROFILE
+app.use('/profile', require('./routes/profile.route'));
 
 app.get('/BTV-post', (req, res)=> {
     app.engine('hbs', exphbs({
