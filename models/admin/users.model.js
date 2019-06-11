@@ -2,6 +2,6 @@ var db = require('../../utils/db');
 
 module.exports = {
     all: () => {
-        return db.load('select * from categories order by Id asc');
+        return db.load('select * from users order by Id asc');
     }
 }
