@@ -25,5 +25,23 @@ module.exports = {
                 connection.end();
             });
         }); 
+    },
+
+    add: (tableName, entity) => {
+        return new Promise ((resolve, reject) => {
+            var sql = `insert into ${tableName} set ?`;
+            var connection = createConnection();
+            connection.connect();
+
+            connection.query(sql, entity, (error, value) => {
+                if (error) {
+                    reject(error);
+                }
+                else {
+                    resolve(value.insertId);
+                }
+                connection.end();
+            });
+        });
     }
 };
