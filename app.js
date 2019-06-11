@@ -7,7 +7,7 @@ app.engine('hbs', exphbs({
     defaultLayout: 'main.hbs',
     layoutsDir: 'views/_layouts',
     helpers:{
-        section :hbs_sections()
+        section: hbs_sections()
     }
 }))
 
@@ -42,9 +42,9 @@ app.get('/subcriber', (req, res) => {
 
 //log in
 app.use('/sign-in-up', require('./routes/account.route'));
-app.get('/sign-in-up', (req, res) => {
-    res.render('Login-out/sign-in-up', {layout: false});
-})
+// app.get('/sign-in-up', (req, res) => {
+//     res.render('Login-out/sign-in-up', {layout: false});
+// })
 
 app.get('/forgotPassword', (req, res) => {
     app.engine('hbs', exphbs({
