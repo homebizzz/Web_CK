@@ -1,15 +1,15 @@
 var express = require('express');
-var categoryModel = require('../../models/admin/categories.model');
+var postsModel = require('../../models/admin/posts.model');
 
 var router = express.Router();
 
 router.get('/', (req, res) => {
-    var p = categoryModel.all();
+    var p = postsModel.all();
 
     p.then(rows => {
-        res.render('admin/admin-categories', {
+        res.render('admin/admin-posts', {
             layout: false,
-            categories: rows
+            posts: rows
         });
     }).catch(err => {
         console.log(err);
