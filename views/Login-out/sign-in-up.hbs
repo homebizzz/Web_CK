@@ -82,13 +82,13 @@ document.querySelector('.img__btn').addEventListener('click', function () {
         $('#resgisterForm').validate({
             rules:{
                 username:{
-                    required: true,
-                    {{!-- remote: {
-                        url 
-                    } --}}
+                    required: true
                 },
                 email:{
-                    required: true
+                    required: true,
+                    remote: {
+                        url: '/sign-in-up/is-available'
+                    }
                 },
                 password:{
                     required: true,
@@ -104,7 +104,8 @@ document.querySelector('.img__btn').addEventListener('click', function () {
                     required: 'Your user name is required.'
                 },
                 email:{
-                    required: 'Your email is required.'
+                    required: 'Your email is required.',
+                    remote: 'Email has been used. Try another Email'
                 },
                 password:{
                     required: 'Your password is required.'

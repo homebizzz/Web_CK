@@ -5,6 +5,17 @@ var userModel = require('../models/user.model');
 
 var router = express.Router();
 
+router.get('/is-available', (req, res, next) => {
+    var email = req.query.email;
+    userModel.singleByEmail(email).then(rows => {
+      if (rows.length > 0) {
+        return res.json(false);
+      }
+  
+      return res.json(true);
+    })
+  })
+
 router.get('/',(req ,  res, next) =>
 {
     res.render('Login-out/sign-in-up',{
