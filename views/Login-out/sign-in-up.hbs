@@ -82,7 +82,10 @@ document.querySelector('.img__btn').addEventListener('click', function () {
         $('#resgisterForm').validate({
             rules:{
                 username:{
-                    required: true
+                    required: true,
+                    {{!-- remote: {
+                        url 
+                    } --}}
                 },
                 email:{
                     required: true
