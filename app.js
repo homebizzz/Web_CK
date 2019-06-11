@@ -109,13 +109,9 @@ app.get('/BTV-post', (req, res)=> {
     res.render('BTV/BTV-post');
 })
 
-app.get('/Writer-posts', (req, res)=> {
-    app.engine('hbs', exphbs({
-        defaultLayout: 'mainAdmin.hbs',
-        layoutsDir: 'views/_layouts'
-    }));
-    res.render('Writer/Writer-posts');
-})
+//////////
+app.use('/writer', require('./routes/writer/upload.route'));
+
 
 app.get('/Writer-detail', (req, res)=> {
     app.engine('hbs', exphbs({
