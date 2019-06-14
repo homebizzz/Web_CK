@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 09/06/2019 21:43:11
+ Date: 14/06/2019 16:48:53
 */
 
 SET NAMES utf8mb4;
@@ -216,21 +216,27 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`  (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Email` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NULL DEFAULT NULL,
-  `Password` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NULL DEFAULT NULL,
+  `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NULL DEFAULT NULL,
   `Name` varchar(50) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NULL DEFAULT NULL,
-  `Birth_date` date NULL DEFAULT NULL,
   `Pseudonym` varchar(20) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NULL DEFAULT NULL,
   `Subscribe_date` date NULL DEFAULT NULL,
   `Permission` int(11) NULL DEFAULT NULL,
+  `Id_Author` int(255) NULL DEFAULT NULL,
   PRIMARY KEY (`Id`) USING BTREE,
   INDEX `Permission`(`Permission`) USING BTREE,
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`Permission`) REFERENCES `permissions` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_vietnamese_ci ROW_FORMAT = Dynamic;
+  INDEX `users_ibfk_2`(`Id_Author`) USING BTREE,
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`Permission`) REFERENCES `permissions` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `users_ibfk_2` FOREIGN KEY (`Id_Author`) REFERENCES `users` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_vietnamese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'tientruongphamnhat@gmail.com', '123456', 'Trương Phạm Nhật Tiến', '1997-11-07', 'Tien', '2019-06-08', 1);
-INSERT INTO `users` VALUES (2, 'tringuyen@gmail.com', '234567', 'Nguyễn Minh Trí', '1997-12-19', 'Tri', '2019-06-08', 2);
+INSERT INTO `users` VALUES (1, 'tientruongphamnhat@gmail.com', '123456', 'Trương Phạm Nhật Tiến', 'Tien', '2019-06-08', 1, NULL);
+INSERT INTO `users` VALUES (2, 'tringuyen@gmail.com', '234567', 'Nguyễn Minh Trí', 'Tri', '2019-06-08', 2, NULL);
+INSERT INTO `users` VALUES (3, 'hqt@gmail.com', '$2b$10$27o94K8IpbjgqtqmTIdGYuk5l52X6RCl/My8ZLc/GHImS8hHhNaqi', 'Hà Quang Trọng', NULL, '2019-06-12', 4, NULL);
+INSERT INTO `users` VALUES (4, 'tnnt@gmail.com', '$2b$10$zazyUsYmUTb43TuxTgZhwu3H149Me5NRelffcQv4u6xYzU1iXm1gW', 'Trần Nguyễn Ngọc Trường', NULL, '2019-06-12', 4, NULL);
+INSERT INTO `users` VALUES (5, 'lttt@gmail.com', '$2b$10$KppEY5hch8oti8l8yCGrd.PLZFaqGxvUqs/YpIAfvUIsUCbOasf/6', 'Lê Thanh Thành Toại', NULL, '2019-06-12', 4, NULL);
+INSERT INTO `users` VALUES (6, 'nht@gmail.com', '$2b$10$ifzF77XMMo7qLROSbngyN.1LiqKoXDArQlaceG4IrAPtLr.FXfz/K', 'Nguyễn Hồng Tới', NULL, '2019-06-12', 4, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
