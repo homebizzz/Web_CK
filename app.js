@@ -36,7 +36,7 @@ app.get('/subcriber', (req, res) => {
 })
 
 //log in
-app.use('/sign-in-up', require('./routes/account.route'));
+app.use('/account', require('./routes/account.route'));
 
 app.get('/forgotPassword', (req, res) => {
     app.engine('hbs', exphbs({
@@ -68,7 +68,7 @@ app.use('/admin-tags', require('./routes/admin/tags.route'));
 app.use('/admin-users', require('./routes/admin/users.route'));
 
 //PROFILE
-app.use('/profile', require('./routes/profile.route'));
+// app.use('/profile', require('./routes/profile.route'));
 
 app.get('/BTV-post', (req, res)=> {
     app.engine('hbs', exphbs({

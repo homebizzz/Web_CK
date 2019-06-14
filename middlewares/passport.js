@@ -8,16 +8,16 @@ module.exports = function (app) {
   app.use(passport.session());
 
   var ls = new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password'
-  }, (username, password, done) => {
-    userModel.singleByUserName(username).then(rows => {
+    usernameField: 'signInEmail',
+    passwordField: 'signInPassword'
+  }, (signInEmail, signInPassword, done) => {
+    userModel.singleByEmail(signInEmail).then(rows => {
       if (rows.length === 0) {
-        return done(null, false, { message: 'Invalid username.' });
+        return done(null, false, { message: 'Invalid Email.' });
       }
 
       var user = rows[0];
-      var ret = bcrypt.compareSync(password, rows[0].f_Password);
+      var ret = bcrypt.compareSync(signInPassword, rows[0].Password);
       if (ret) {
         return done(null, user);
       }

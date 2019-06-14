@@ -3,17 +3,28 @@
     <meta charset="UTF-8">
     <title>Đăng nhập/Đăng kí</title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-    <link rel="stylesheet" href="css/style-login.css">
+    <link rel="stylesheet" href="../css/style-login.css">
     
 </head>
 
 <body>
 <div id = "contID" class="cont">
-    <form novalidate action="" method="POST" id="signinForm">
+    <form novalidate action="/account/login" method="POST" id="signinForm">
         <div class="form sign-in">
             <h2>Chào mừng bạn trở lại</h2>
+            <div style="margin-left: 160px; width: 260px;">
+                    {{#if err_message}}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button style="text-align: right" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{err_message}}
+                    </div>
+                {{/if}}
+                </div>
             <label>
                 <span>Email</span>
                 <input name="signInEmail" type="email" autofocus/>
@@ -23,7 +34,7 @@
                 <input name="signInPassword" type="password"/>
             </label>
             <p class="forgot-pass"><a style="color: black;" href="inputOTP.html">Quên mật khẩu?</a></p>
-            <button type="submit" class="submit"><a href="admin/admin-posts.html">Đăng nhập </a></button>
+            <button type="submit" class="submit"><a>Đăng nhập </a></button>
             <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
         </div>
     </form>
@@ -42,7 +53,7 @@
                 <span class="m--in">Đăng nhập</span>
             </div>
         </div>
-        <form novalidate action="" method="POST" id="resgisterForm">
+        <form novalidate action="/account/register" method="POST" id="resgisterForm">
             <div class="form sign-up">
                 <h2>Khám phá công nghệ</h2>
                 <label>
@@ -74,7 +85,10 @@ document.querySelector('.img__btn').addEventListener('click', function () {
 });
 </script>
 
-<script src="js/jquery-2.1.4.min.js"></script>
+<script src="../js/jquery-2.1.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script>
@@ -87,7 +101,7 @@ document.querySelector('.img__btn').addEventListener('click', function () {
                 email:{
                     required: true,
                     remote: {
-                        url: '/sign-in-up/is-available'
+                        url: '/account/is-available'
                     }
                 },
                 password:{
