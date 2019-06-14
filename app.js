@@ -1,22 +1,17 @@
 var express = require('express');
-var exphbs = require('express-handlebars');
-var hbs_sections = require('express-handlebars-sections');
+
 
 var app = express();
 app.use(express.urlencoded());
-app.engine('hbs', exphbs({
-    defaultLayout: 'main.hbs',
-    layoutsDir: 'views/_layouts',
-    helpers:{
-        section: hbs_sections()
-    }
-}))
 
-app.set('view engine', 'hbs');
 //
 app.use(express.static('assets'));
 app.use(express.static('assset1'));
 app.use(express.static('ckeditor'));
+
+require('./middlewares/view-engine')(app);
+require('./middlewares/session')(app);
+require('./middlewares/passport')(app);
 
 app.use('/', require('./routes/news.route'));
 
@@ -94,6 +89,14 @@ app.get('/Writer-detail', (req, res)=> {
     }));
     res.render('Writer/Writer-detail');
 })
+
+// app.use((error,req,res,next)=>{
+//     res.render('error',{
+//         layout: false,
+//         message: error.message,
+//         error
+//     })
+// })
 
 app.listen(3000, () => {
     console.log('Web Server is running at http://localhost:3000');

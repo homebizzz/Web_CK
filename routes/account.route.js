@@ -38,7 +38,7 @@ router.post('/register', (req ,  res, next)=>{
     }
 
     userModel.add(entity).then(id =>{
-        res.redirect('/');
+        res.redirect('/sign-in-out');
     })
 })
 
