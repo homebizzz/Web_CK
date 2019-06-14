@@ -8,7 +8,6 @@ CREATE TABLE USERS (
     Email varchar(50),
     Password varchar(50),
     Name varchar(50),
-    Birth_date date,
     Pseudonym varchar(20),
     Subscribe_date date,
 		Permission int,
@@ -38,7 +37,9 @@ CREATE TABLE NEWSPAPERS (
     status int,
 		Count_Like int,
 		Summary mediumtext,
-    foreign key (CategorySon_id) references CATEGORYSONS(Id)
+		Id_Author int,
+    foreign key (CategorySon_id) references CATEGORYSONS(Id),
+		foreign key (Id_Author) references users(Id)
 );
 
 CREATE TABLE NEWSPAPER_IMAGES(
