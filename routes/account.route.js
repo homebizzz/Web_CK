@@ -27,7 +27,7 @@ router.get('/sign-in-up',(req ,  res, next) =>
 
 router.get('/profile',(req ,  res, next) =>
 {
-    res.render('userprofile',{
+    res.render('userProfile',{
         layout: false
     });
 })
