@@ -5,7 +5,9 @@ var router = express.Router();
 
 router.get('/', (req, res) => {
     var p = categoryModel.all();
-
+    categoryModel.single(Id).then(rows => {
+        category: rows
+    })
     p.then(rows => {
         res.render('admin/admin-categories', {
             layout: false,
@@ -14,6 +16,10 @@ router.get('/', (req, res) => {
     }).catch(err => {
         console.log(err);
     });
+
+    
 })
+
+
 
 module.exports = router;
