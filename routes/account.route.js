@@ -38,12 +38,12 @@ router.get('/sign-in-up',(req ,  res, next) =>
     });
 })
 
-// router.get('/userprofile',(req ,  res, next) =>
-// {
-//     res.render('userprofile',{
-//         layout: false
-//     });
-// })
+router.get('/profile',(req ,  res, next) =>
+{
+    res.render('userProfile',{
+        layout: false
+    });
+})
 
 router.post('/register', (req ,  res, next)=>{
     var saltRounds = 10;

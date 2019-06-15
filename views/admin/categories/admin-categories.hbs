@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Tech - Quản lý chuyên mục</title>
-	<link href="../../css/bootstrap.min.css" rel="stylesheet">
-	<link href="../../css/font-awesome.min.css" rel="stylesheet">
-	<link href="../../css/datepicker3.css" rel="stylesheet">
-	<link href="../../css/styles.css" rel="stylesheet">
+	<link href="../../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../../css/datepicker3.css" rel="stylesheet">
+	<link href="../../../css/styles.css" rel="stylesheet">
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -76,7 +76,7 @@
 	            <div class="container">
 	                <div class="row">
 	                    <div class="col-md-4">
-	                        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addCategoryModal">
+	                        <a href="/admin-categories/add" class="btn btn-primary btn-block">
 	                            <i class="fa fa-plus"></i> Thêm chuyên mục mới
 	                        </a>
 	                    </div>
@@ -104,12 +104,9 @@
 		                            <td scope="row">{{Id}}</td>
 		                            <td>{{Name}}</td>
 		                            <td>
-		                                <a href="#" class="btn btn-secondary">
-		                                   <i class="fa fa-remove"></i>
-		                                </a>
-		                                <a href="/admin-categories/edit/{{Id}}" class="btn btn-secondary" >
+		                                <a href="/admin-categories/edit/{{Id}}" class="btn btn-primary btn-sm" >
 		                                   <i class="fa fa-edit"></i>
-		                                </a>	
+		                                </a>
 		                            </td>
 		                        </tr>
 								{{/each}}
@@ -144,74 +141,17 @@
 		        </div>
 		    </section>
 		</div>
-
-		<!-- ADD CATEGORY MODAL -->
-		<div class="modal fade" id="addCategoryModal">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header bg-primary">
-							<h5 class="modal-title text-white" id="addPostModalLabel">Thêm chuyên mục</h5>
-							<button class="close" data-dismiss="modal">
-								<span>&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group">
-									<label for="title" class="form-control-label">Tên chuyên mục</label>
-									<input type="text" id="title" class="form-control">
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-							<button class="btn btn-primary" data-dismiss="modal">Thêm</button>
-						</div>
-					</div>
-				</div>
-		</div>
-
-		<!-- EDIT CATEGORY MODAL -->
-		{{!-- <div class="modal fade" id="editCategoryModal">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header bg-primary">
-							<h5 class="modal-title text-white" id="addPostModalLabel">Sửa chuyên mục</h5>
-							<button class="close" data-dismiss="modal">
-								<span>&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form method="POST" action="">
-								<div class="form-group">
-									<label for="txtCatID" class="form-control-label">#</label>
-									<input readonly type="text" id="txtCatID" class="form-control">
-								</div>
-								<div class="form-group">
-									<label for="txtCatName" class="form-control-label">Tên chuyên mục</label>
-									<input type="text" id="txtCatName" class="form-control">
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-							<button class="btn btn-primary" data-dismiss="modal">Thêm</button>
-						</div>
-					</div>
-				</div>
-		</div> --}}
-
 	</div>
 	<!--/.main-->
 
-	<script src="../js/jquery-1.11.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/chart.min.js"></script>
-	<script src="../js/chart-data.js"></script>
-	<script src="../js/easypiechart.js"></script>
-	<script src="../js/easypiechart-data.js"></script>
-	<script src="../js/bootstrap-datepicker.js"></script>
-	<script src="../js/custom.js"></script>
+	<script src="../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../js/bootstrap.min.js"></script>
+	<script src="../../../js/chart.min.js"></script>
+	<script src="../../../js/chart-data.js"></script>
+	<script src="../../../js/easypiechart.js"></script>
+	<script src="../../../js/easypiechart-data.js"></script>
+	<script src="../../../js/bootstrap-datepicker.js"></script>
+	<script src="../../../js/custom.js"></script>
 	
 </body>
 </html>

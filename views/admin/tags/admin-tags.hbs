@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Tech - Quản lý nhãn</title>
-	<link href="../css/bootstrap.min.css" rel="stylesheet">
-	<link href="../css/font-awesome.min.css" rel="stylesheet">
-	<link href="../css/datepicker3.css" rel="stylesheet">
-	<link href="../css/styles.css" rel="stylesheet">
+	<link href="../../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../../css/datepicker3.css" rel="stylesheet">
+	<link href="../../../css/styles.css" rel="stylesheet">
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -31,10 +31,10 @@
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<a href="profile"><img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""></a>
+				<a href="/profile"><img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""></a>
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name"><a href="profile">Truong TRAN</a></div>
+				<div class="profile-usertitle-name"><a href="/profile">Truong TRAN</a></div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
 			<div class="clear"></div>
@@ -46,11 +46,11 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="admin-posts"><em class="fa fa-pencil-square-o">&nbsp;</em> Quản lý bài viết</a></li>
-			<li><a href="admin-categories"><em class="fa fa-cubes">&nbsp;</em> Quản lý chuyên mục</a></li>
-			<li class="active"><a href="admin-tags"><em class="fa fa-tags">&nbsp;</em> Quản lý nhãn</a></li>
-			<li><a href="admin-users"><em class="fa fa-users">&nbsp;</em> Quản lý người dùng</a></li>
-			<li><a href="sign-in-up"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="/admin-posts"><em class="fa fa-pencil-square-o">&nbsp;</em> Quản lý bài viết</a></li>
+			<li><a href="/admin-categories"><em class="fa fa-cubes">&nbsp;</em> Quản lý chuyên mục</a></li>
+			<li class="active"><a href="/admin-tags"><em class="fa fa-tags">&nbsp;</em> Quản lý nhãn</a></li>
+			<li><a href="/admin-users"><em class="fa fa-users">&nbsp;</em> Quản lý người dùng</a></li>
+			<li><a href="/sign-in-up"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 
@@ -76,7 +76,7 @@
 	            <div class="container">
 	                <div class="row">
 	                    <div class="col-md-4">
-	                        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addTagModal">
+	                        <a href="/admin-tags/add" class="btn btn-primary btn-block">
 	                            <i class="fa fa-plus"></i> Thêm nhãn
 	                        </a>
 	                    </div>
@@ -104,10 +104,7 @@
 		                            <td scope="row">{{Id}}</td>
 		                            <td>{{Name}}</td>
 		                            <td>
-		                                <a href="#" class="btn btn-secondary">
-		                                   <i class="fa fa-remove"></i>
-		                                </a>
-		                                <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#editTagModal">
+		                                <a href="/admin-tags/edit/{{Id}}" class="btn btn-primary btn-sm" >
 		                                   <i class="fa fa-edit"></i>
 		                                </a>	
 		                            </td>
@@ -144,70 +141,17 @@
 		        </div>
 		    </section>
 		</div>
-
-		<!-- ADD TAG MODAL -->
-		<div class="modal fade" id="addTagModal">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header bg-primary">
-							<h5 class="modal-title text-white" id="addPostModalLabel">Thêm nhãn</h5>
-							<button class="close" data-dismiss="modal">
-								<span>&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group">
-									<label for="title" class="form-control-label">Tên nhãn</label>
-									<input type="text" id="title" class="form-control">
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-							<button class="btn btn-primary" data-dismiss="modal">Thêm</button>
-						</div>
-					</div>
-				</div>
-		</div>
-
-		<!-- EDIT TAG MODAL -->
-		<div class="modal fade" id="editTagModal">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header bg-primary">
-							<h5 class="modal-title text-white" id="addPostModalLabel">Sửa nhãn</h5>
-							<button class="close" data-dismiss="modal">
-								<span>&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form>
-								<div class="form-group">
-									<label for="title" class="form-control-label">Tên nhãn</label>
-									<input type="text" id="title" class="form-control">
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-							<button class="btn btn-primary" data-dismiss="modal">Thêm</button>
-						</div>
-					</div>
-				</div>
-		</div>
-
 	</div>
 	<!--/.main-->
 
-	<script src="../js/jquery-1.11.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/chart.min.js"></script>
-	<script src="../js/chart-data.js"></script>
-	<script src="../js/easypiechart.js"></script>
-	<script src="../js/easypiechart-data.js"></script>
-	<script src="../js/bootstrap-datepicker.js"></script>
-	<script src="../js/custom.js"></script>
+	<script src="../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../js/bootstrap.min.js"></script>
+	<script src="../../../js/chart.min.js"></script>
+	<script src="../../../js/chart-data.js"></script>
+	<script src="../../../js/easypiechart.js"></script>
+	<script src="../../../js/easypiechart-data.js"></script>
+	<script src="../../../js/bootstrap-datepicker.js"></script>
+	<script src="../../../js/custom.js"></script>
 	
 </body>
 </html>

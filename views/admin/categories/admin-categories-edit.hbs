@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Tech - Quản lý chuyên mục</title>
-	<link href="../../css/bootstrap.min.css" rel="stylesheet">
-	<link href="../../css/font-awesome.min.css" rel="stylesheet">
-	<link href="../../css/datepicker3.css" rel="stylesheet">
-	<link href="../../css/styles.css" rel="stylesheet">
+	<link href="../../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../../css/datepicker3.css" rel="stylesheet">
+	<link href="../../../css/styles.css" rel="stylesheet">
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -83,26 +83,31 @@
 						<div class="modal-content">
 							<div class="modal-header bg-primary">
 								<h5 class="modal-title text-white" id="addPostModalLabel">Sửa chuyên mục</h5>
-								<button class="close" data-dismiss="modal">
-									<span>&times;</span>
-								</button>
 							</div>
-							<div class="modal-body">
-								<form method="POST" action="">
+							<form method="POST" action="/admin-categories/update">
+								<div class="modal-body">
 									<div class="form-group">
 										<label for="txtCatID" class="form-control-label">#</label>
-										<input readonly type="text" id="txtCatID" class="form-control" value="{{this.category.Id}}">
+										<input readonly type="text" id="txtCatID" name="Id" class="form-control" value="{{this.category.Id}}">
 									</div>
 									<div class="form-group">
 										<label for="txtCatName" class="form-control-label">Tên chuyên mục</label>
-										<input type="text" id="txtCatName" class="form-control" value="{{this.category.Name}}">
+										<input type="text" id="txtCatName" name="Name" class="form-control" value="{{this.category.Name}}" autofocus placeholder="Nhập tên chuyên mục">
 									</div>
-								</form>
-							</div>
-							<div class="modal-footer">
-								<button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-								<button class="btn btn-primary" data-dismiss="modal">Thêm</button>
-							</div>
+								</div>
+								<div class="modal-footer">
+									<a class="btn btn-primary" data-dismiss="modal" href="/admin-categories">
+										<i class="fa fa-backward" aria-hidden="true"></i> Quay lại</a>
+									<button type="submit" class="btn btn-outline-danger" formaction="/admin-categories/delete">
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
+										Xóa
+									</button>
+									<button type="submit" class="btn btn-success" data-dismiss="modal">
+										<i class="fa fa-check" aria-hidden="true"></i>
+										Lưu
+									</button>
+								</div>
+							</form>
 						</div>
 					</div>
 			</div>
@@ -112,14 +117,14 @@
 	</div>
 	<!--/.main-->
 
-	<script src="../../js/jquery-1.11.1.min.js"></script>
-	<script src="../../js/bootstrap.min.js"></script>
-	<script src="../../js/chart.min.js"></script>
-	<script src="../../js/chart-data.js"></script>
-	<script src="../../js/easypiechart.js"></script>
-	<script src="../../js/easypiechart-data.js"></script>
-	<script src="../../js/bootstrap-datepicker.js"></script>
-	<script src="../../js/custom.js"></script>
+	<script src="../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../js/bootstrap.min.js"></script>
+	<script src="../../../js/chart.min.js"></script>
+	<script src="../../../js/chart-data.js"></script>
+	<script src="../../../js/easypiechart.js"></script>
+	<script src="../../../js/easypiechart-data.js"></script>
+	<script src="../../../js/bootstrap-datepicker.js"></script>
+	<script src="../../../js/custom.js"></script>
 	
 </body>
 </html>
