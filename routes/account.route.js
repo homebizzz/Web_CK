@@ -25,6 +25,13 @@ router.get('/sign-in-up',(req ,  res, next) =>
     });
 })
 
+router.get('/profile',(req ,  res, next) =>
+{
+    res.render('userprofile',{
+        layout: false
+    });
+})
+
 router.post('/register', (req ,  res, next)=>{
     console.log(req.body);
     var saltRounds = 10;
@@ -57,7 +64,6 @@ router.post('/login', (req ,  res, next)=>{
     }
 
     req.logIn(user, err => {
-      console.log(user);
       if (err)
         return next(err);
 
@@ -67,11 +73,12 @@ router.post('/login', (req ,  res, next)=>{
 })
 
 router.get('/profile', auth, (req, res, next) => {
-  res.end('profile');
+  res.redirect('/account/profile');
 })
 
-// router.post('/logout', auth, (req, res, next) => {
-//   res.redirect('/account/sign-in-up');
-// })
+router.post('/logout', auth, (req, res, next) => {
+  req.logOut();
+  res.redirect('/account/sign-in-up');
+})
 
 module.exports = router;
