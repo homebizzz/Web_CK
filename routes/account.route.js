@@ -72,8 +72,8 @@ router.post('/login', (req ,  res, next)=>{
   })(req, res, next);
 })
 
-router.get('/profile', auth, (req, res, next) => {
-  res.redirect('/account/profile');
+router.get('/userprofile', auth, (req, res, next) => {
+  res.render('userProfile',{layout: false});
 })
 
 router.post('/logout', auth, (req, res, next) => {
