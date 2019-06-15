@@ -19,5 +19,5 @@ module.exports = {
 
     delete: id => {
         return db.delete('categories', 'Id', id);
-      },
+    },
 }
