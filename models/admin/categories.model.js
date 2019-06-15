@@ -5,6 +5,14 @@ module.exports = {
         return db.load('select * from categories order by Id asc');
     },
 
+    pageByCat: (limit, offset) => {
+        return db.load(`select * from categories order by Id asc limit ${limit} offset ${offset} `);
+    },
+
+    countByCat: catId => {
+        return db.load(`select count(*) as total from categories`);
+    },
+
     single: id => {
         return db.load(`select * from categories where Id = ${id}`);
     },

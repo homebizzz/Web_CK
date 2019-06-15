@@ -116,23 +116,22 @@
 		                    <nav class="ml-4">
 		                        <ul class="pagination">
 		                            <li class="page-item disabled">
-		                                <a href="#" class="page-link">Trước</a>
-		                            </li>
-		                            <li class="page-item active">
-		                                <a href="#" class="page-link">1</a>
-		                            </li>
-		                            <li class="page-item">
-		                                <a href="#" class="page-link">2</a>
-		                            </li>
-		                            <li class="page-item">
-		                                <a href="#" class="page-link">3</a>
-		                            </li>
-		                            <li class="page-item">
-		                                <a href="#" class="page-link">...</a>
-		                            </li>
-		                            <li class="page-item">
-		                                <a href="#" class="page-link">Tiếp</a>
-		                            </li>
+										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trước</a>
+									</li>
+									{{#each this.pages}}
+									{{#if active}}
+									<li class="page-item active" aria-current="page">
+										<a class="page-link" href="javascript:;">{{value}} <span class="sr-only">(current)</span></a>
+									</li>
+									{{else}}
+									<li class="page-item">
+										<a class="page-link" href="?page={{value}}">{{value}}</a>
+									</li>
+									{{/if}}
+									{{/each}}
+									<li class="page-item">
+										<a class="page-link" href="#">Tiếp</a>
+									</li>
 		                        </ul>
 		                    </nav>
 
