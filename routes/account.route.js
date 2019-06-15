@@ -25,12 +25,12 @@ router.get('/sign-in-up',(req ,  res, next) =>
     });
 })
 
-router.get('/profile',(req ,  res, next) =>
-{
-    res.render('userprofile',{
-        layout: false
-    });
-})
+// router.get('/userprofile',(req ,  res, next) =>
+// {
+//     res.render('userprofile',{
+//         layout: false
+//     });
+// })
 
 router.post('/register', (req ,  res, next)=>{
     console.log(req.body);
@@ -72,8 +72,8 @@ router.post('/login', (req ,  res, next)=>{
   })(req, res, next);
 })
 
-router.get('/profile', auth, (req, res, next) => {
-  res.redirect('/account/profile');
+router.get('/userprofile', auth, (req, res, next) => {
+  res.render('userProfile',{layout: false});
 })
 
 router.post('/logout', auth, (req, res, next) => {
