@@ -62,8 +62,8 @@ app.get('/inputOTP', (req, res) => {
 
 
 //ADMIN
-app.use('/admin-posts', require('./routes/admin/posts.route'));
 app.use('/admin-categories', require('./routes/admin/categories.route'));
+app.use('/admin-posts', require('./routes/admin/posts.route'));
 app.use('/admin-tags', require('./routes/admin/tags.route'));
 app.use('/admin-users', require('./routes/admin/users.route'));
 
