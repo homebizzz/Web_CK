@@ -75,7 +75,8 @@ router.get('/Draft', (req, res, next) => {
         res.render('admin/posts/admin-posts', {
         layout: false,
         posts: rows,
-        pages
+        pages,
+        isDraft: true
         });
     }).catch(next);
 })
