@@ -1,5 +1,6 @@
 var express = require('express');
 
+var morgan = require('morgan');
 
 var app = express();
 app.use(express.urlencoded());
@@ -8,6 +9,7 @@ app.use(express.urlencoded());
 app.use(express.static('assets'));
 app.use(express.static('assset1'));
 app.use(express.static('ckeditor'));
+app.use(morgan('dev'));
 
 require('./middlewares/view-engine')(app);
 require('./middlewares/session')(app);

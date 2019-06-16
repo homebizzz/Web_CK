@@ -13,12 +13,11 @@ router.get('/is-available', (req, res, next) => {
     if (rows.length > 0) {
       return res.json(false);
     }
-
     return res.json(true);
   })
 })
 
-router.get('/is-available1',auth, (req, res, next) => {
+router.get('/is-available1', (req, res, next) => {
   var email = req.query.email;
   userModel.singleByEmail(email).then(rows => {
     // console.log(rows[0].Email);
@@ -91,7 +90,7 @@ router.post('/changeInfo', (req , res, next)=>{
     Pseudonym: req.body.pseudonym,
     Permission: req.body.permission
   }
-  userModel.update(entity).then(n => {
+  userModel.update(entity).then( n => {
     res.redirect('/account/profile');
   }).catch(err => {
     console.log(err);
@@ -109,7 +108,11 @@ router.get('/userprofile', auth, (req, res, next) => {
 })
 
 router.get('/profile', auth, (req, res, next) => {
-  res.render('profile',{layout: false});
+  userModel.singleByEmail(res.locals.authUser.Email)
+  .then(value =>{
+    res.render('profile',{layout: false, user : value});
+  })
+  
 })
 
 router.post('/logout', auth, (req, res, next) => {

@@ -34,10 +34,12 @@
 			<div class="profile-userpic">
 				<a href="profile"><img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""></a>
 			</div>
+			{{#each this.user}}
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name"><a href="profile">{{authUser.Name}}</a></div>
+				<div class="profile-usertitle-name"><a href="profile">{{Name}}</a></div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
+			{{/each}}
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
@@ -94,24 +96,26 @@
 						<div class="card-header">
 							<h4>&nbsp;</h4>
 						</div>
+						{{#each this.user}}
 						<div class="card-block">
 							<div class="form-group">
 								<label class="form-control-label">Họ và tên</label>
-								<input type="text" name="username" class="form-control" value="{{authUser.Name}}">
+								<input type="text" name="username" class="form-control" value="{{Name}}">
 							</div>
 							<div class="form-group">
 								<label for="email" class="form-control-label">Email</label>
-								<input type="email" name="email" class="form-control" value="{{authUser.Email}}">
+								<input type="email" name="email" class="form-control" value="{{Email}}">
 							</div>
 							<div class="form-group">
 								<label  class="form-control-label">Bút danh</label>
-								<input type="text" name="pseudonym" class="form-control" value="{{authUser.Pseudonym}}">
+								<input type="text" name="pseudonym" class="form-control" value="{{Pseudonym}}">
 							</div>
 							<div class="form-group">
 								<label  class="form-control-label">Chức Vụ</label>
-								<input name="permission" type="number" class="form-control" value="{{authUser.Permission}}">
+								<input name="permission" type="number" class="form-control" value="{{Permission}}">
 							</div>
 						</div>
+						{{/each}}
 					</div>
 				</div>
 				<div class="col-md-3" style="margin-left: 400px; margin-bottom: 20px">
