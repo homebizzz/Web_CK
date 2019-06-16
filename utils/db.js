@@ -5,15 +5,11 @@ var createConnection = () => {
         host: 'localhost',
         port: '3306',
         user: 'root',
+        password: 'thuyan123',
         database: 'newspapers'
     });
-//         host: 'localhost',
-//         port: '3306',
-//         user: 'root',
-//         password: 't2ntruong811',
-//         database: 'newspaper'
-//     });
-// } 
+
+} 
 
 module.exports = {
     load: sql => {
