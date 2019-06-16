@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Tech - Quản lý chuyên mục</title>
+	<title>Tech - Quản lý người dùng</title>
 	<link href="../../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../../css/font-awesome.min.css" rel="stylesheet">
 	<link href="../../../css/datepicker3.css" rel="stylesheet">
@@ -47,9 +47,9 @@
 		</form>
 		<ul class="nav menu">
 			<li><a href="/admin-posts"><em class="fa fa-pencil-square-o">&nbsp;</em> Quản lý bài viết</a></li>
-			<li class="active"><a href="/admin-categories"><em class="fa fa-cubes">&nbsp;</em> Quản lý chuyên mục</a></li>
+			<li><a href="/admin-categories"><em class="fa fa-cubes">&nbsp;</em> Quản lý chuyên mục</a></li>
 			<li><a href="/admin-tags"><em class="fa fa-tags">&nbsp;</em> Quản lý nhãn</a></li>
-			<li><a href="/admin-users"><em class="fa fa-users">&nbsp;</em> Quản lý người dùng</a></li>
+			<li class="active"><a href="/admin-users"><em class="fa fa-users">&nbsp;</em> Quản lý người dùng</a></li>
 			<li><a href="/sign-in-up"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
@@ -60,34 +60,65 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Quản lý chuyên mục</li>
+				<li class="active">Quản lý người dùng</li>
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Quản lý chuyên mục</h1>
+				<h1 class="page-header">Quản lý người dùng</h1>
 			</div>
 		</div><!--/.row-->
 
 		<div class="row">
 			<!-- Viết tiếp nội dung ở đây -->
-			<!-- ADD CATEGORY MODAL -->
+			
+			<!-- ADD USER MODAL -->
 			<div>
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header bg-primary">
-							<h5 class="modal-title text-white" id="addPostModalLabel">Thêm chuyên mục</h5>
+							<h5 class="modal-title text-white" id="addPostModalLabel">Thêm người dùng</h5>
 						</div>
 						<form method="POST">
 							<div class="modal-body">
 								<div class="form-group">
-									<label for="txtCatName" class="form-control-label">Tên chuyên mục</label>
-									<input type="text" id="txtCatName" name="Name" class="form-control" autofocus placeholder="Nhập tên chuyên mục">
+									<label for="txtUserName" class="form-control-label">Họ và tên</label>
+									<input type="text" id="txtUserName" name="Name" class="form-control" placeholder="Nhập họ và tên">
+								</div>
+								<div class="form-group">
+									<label for="txtUserEmail" class="form-control-label">Email</label>
+									<input type="text" id="txtUserEmail" name="Email" class="form-control" placeholder="Nhập Email">
+								</div>
+								<div class="form-group">
+									<label for="cbbPerName" class="form-control-label">Quyền người dùng</label>
+									{{!-- <input type="text" id="txtPerName" name="permission" class="form-control" value="{{this.user.Permission}}" placeholder="Nhập quyền"> --}}
+									<select class="form-control" name="Permission" id="cbbPerName">
+										{{#each this.permissions}}
+										<option value="{{Id}}">{{Name}}</option>
+										{{/each}}
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="txtUserPse" class="form-control-label">Bút danh</label>
+									<input type="text" id="txtUserPse" name="Pseudonym" class="form-control" placeholder="Nhập bút danh">
+								</div>
+								<div class="form-group">
+									<label for="cbbCatName" class="form-control-label">Tên chuyên mục</label>
+									{{!-- <input type="text" id="txtCatName" name="category" class="form-control" value="{{this.user.Category}}" autofocus placeholder="Nhập chuyên mục"> --}}
+									<select class="form-control" name="IdCategory" id="cbbCatName">
+										{{#each this.categories}}
+										<option value="{{Id}}">{{Name}}</option>
+										{{/each}}
+									</select>
+								</div>
+								<div class="form-group" hidden>
+									<label for="txtUserIsDel" class="form-control-label"></label>
+									<input type="text" id="txtUseIsDel" name="IsDelete" class="form-control" placeholder="Nhập bút danh" value="0">
 								</div>
 							</div>
 							<div class="modal-footer">
-								<a class="btn btn-primary" data-dismiss="modal" href="/admin-categories">
+								<a class="btn btn-primary" data-dismiss="modal" href="/admin-users">
 									<i class="fa fa-backward" aria-hidden="true"></i> Quay lại</a>
 								<button type="submit" class="btn btn-success" data-dismiss="modal">
 									<i class="fa fa-check" aria-hidden="true"></i>
@@ -98,6 +129,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</div>
 	<!--/.main-->
 

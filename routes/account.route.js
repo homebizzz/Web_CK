@@ -99,8 +99,28 @@ router.post('/changeInfo', (req , res, next)=>{
 })
 
 router.post('/changePasword', (req ,  res, next)=>{
-  console.log('hello');
-  
+  userModel.single(res.locals.authUser.Id)
+  .then(value=>{
+    var ret = bcrypt.compareSync(req.body.currentpassword, value[0].Password);
+    if(ret)
+    {
+      var saltRounds = 10;
+      var hash = bcrypt.hashSync(req.body.newpassword, saltRounds);
+      var entity={
+        Id: req.user.Id,
+        Password: hash
+      }
+      userModel.updatePassword(entity).then( n => {
+        res.redirect('/account/profile');
+      }).catch(err => {
+        res.end('error occured.')
+      });
+    }
+    else
+    {
+      res.end('Sai mật khẩu.')
+    }
+  });
 })
 
 router.get('/userprofile', auth, (req, res, next) => {
