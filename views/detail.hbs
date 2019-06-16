@@ -2,92 +2,12 @@
     <div class="container">
     <div class="row">
     <div class="col-md-8">
+
+
     <div class="entity_wrapper">
-        <div class="entity_title">
-            <h1><a href="#">Concept 'iPhone Z' màn hình gập 2 bản lề.</a></h1>
-        </div>
-        <!-- entity_title -->
-    
-        <div class="entity_meta"><a href="#" target="_self">10Aug- 2015</a>, by: <a href="#" target="_self">Eric joan</a>
-        </div>
-        <!-- entity_meta -->
-    
-        <div class="entity_rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-full"></i>
-        </div>
-        <!-- entity_rating -->
-    
-        <div class="entity_social">
-            <a href="#" class="icons-sm sh-ic">
-                <i class="fa fa-share-alt"></i>
-                <b>424</b> <span class="share_ic">Shares</span>
-            </a>
-            <a href="#" class="icons-sm fb-ic"><i class="fa fa-facebook"></i></a>
-            <!--Twitter-->
-            <a href="#" class="icons-sm tw-ic"><i class="fa fa-twitter"></i></a>
-            <!--Google +-->
-            <a href="#" class="icons-sm inst-ic"><i class="fa fa-google-plus"> </i></a>
-            <!--Linkedin-->
-            <a href="#" class="icons-sm tmb-ic"><i class="fa fa-ge"> </i></a>
-            <!--Pinterest-->
-            <a href="#" class="icons-sm rss-ic"><i class="fa fa-rss"> </i></a>
-        </div>
-        <!-- entity_social -->
-    
-        <div class="entity_thumb">
-            <img style="width: 600px; height: 600px" class="img-responsive" src="/img/iphoneZ.jpg" alt="feature-top">
-        </div>
-        <!-- entity_thumb -->
-    
-        <div class="entity_content">
-            <p>
-                Hãng thiết kế Nga Caviar vừa giới thiệu concept chiếc iPhone với màn hình gập 2 bản lề. Đây có thể là ý tưởng tham khảo tốt cho Apple.
-
-                Caviar, công ty thiết kế của Nga, mới đây đã ra mắt concept của chiếc iPhone với màn hình gập. Và như dự đoán, mẫu concept này hoàn toàn đi xa hơn những gì chúng ta có thể tưởng tượng.
-
-                Trước đó, Caviar từng giới thiệu chiếc iPhone với Apple Watch đính kèm ở mặt lưng cùng nhiều sản phẩm mạ vàng, đính kim cương cao cấp khác.
-
-                Dường như chưa thoả mãn với màn hình chỉ có thể gấp một lần, chiếc “iPhone Z” của Caviar được trang bị tấm nền hiển thị với hai bản lề, gấp lại hình chữ Z. Kết quả là một chiếc iPhone có kích cỡ bằng iPad khi mở ra, cho người dùng trải nghiệm tuyệt vời nhất có thể.
-
-                Với thiết kế đặc biệt của mình, chiếc iPhone này còn có thể hoạt động với "chế độ laptop", có đầy đủ bàn phím và màn hình.
-
-                Cụm camera TrueDepth trong bản concept này được làm nhỏ lại và chỉ chiếm một góc nhỏ tấm nền hiển thị.
-
-                Các fan Apple đang mong chờ sự thay đổi lớn trong thiết kế đến từ ông lớn công nghệ Mỹ với mẫu iPhone mới nhất. Tuy nhiên, hiện chưa có thông tin nào về việc Apple sẽ ra mắt điện thoại màn hình gập trong năm nay, hay thậm chí năm sau.
-
-                Chế độ chụp ảnh selfie của chiếc iPhone Z. Cụm camera chính cũng sẽ trở thành camera selfie.
-
-                Người đại diện Caviar cho biết: “Chúng tôi, thương hiệu đã làm việc với nhóm kỹ thuật của Apple và người sử dụng sản phẩm trong suốt 7 năm, có cho mình ý tưởng riêng. Và công ty quyết định thể hiện chúng dưới những concept như trên”.
-
-                iPhone Z của Caviar được trang bị cổng Type-C như iPad Pro. Hãng thậm chí còn ước tính chiếc điện thoại sẽ có giá không dưới 2.800 euro. Mức giá này cao hơn cả một chiếc MacBook Pro.
-
-                Caviar hy vọng sẽ truyền cảm hứng cho Apple với thiết kế của mình. Apple đang thực sự bị tụt lại phía sau trong cuộc chạy đua màn hình gập với các hãng điện thoại Châu Á.
-            </p>
-        </div>
-        <!-- entity_content -->
-    
-        <div class="entity_footer">
-            <div class="entity_tag">
-                <span class="blank"><a href="#">Tech</a></span>
-                <span class="blank"><a href="#">Transport</a></span>
-                <span class="blank"><a href="#">Mobile</a></span>
-                <span class="blank"><a href="#">Gadgets</a></span>
-            </div>
-            <!-- entity_tag -->
-    
-            <div class="entity_social">
-                <span><i class="fa fa-share-alt"></i>424 <a href="#">Shares</a> </span>
-                <span><i class="fa fa-comments-o"></i>4 <a href="#">Comments</a> </span>
-            </div>
-            <!-- entity_social -->
-    
-        </div>
-        <!-- entity_footer -->
-    
+        {{#each this.detail}}
+            {{{Content}}}
+        {{/each}}
     </div>
     <!-- entity_wrapper -->
     

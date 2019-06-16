@@ -10,16 +10,6 @@ var createConnection = () => {
     });
 } 
 
-// var createConnection = () => {
-//     return mysql.createConnection({
-//         host: 'localhost',
-//         port: '3306',
-//         user: 'root',
-//         password: 'thuyan123',
-//         database: 'newspapers'
-//     });
-// }
-
 module.exports = {
     load: sql => {
         return new Promise((resolve, reject) => {
@@ -57,7 +47,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
         var id = entity[idField];
         delete entity[idField];
-
+        
         var sql = `update ${tableName} set ? where ${idField} = ?`;
         var connection = createConnection();
         connection.connect();

@@ -21,10 +21,15 @@ module.exports = {
     return db.add('users', entity);
   },
 
-  update: entity => {
-    var id = entity.Id;
-    delete entity.Id;
-    return db.update('users', 'Id', entity, id);
+  updateInfo: entity => {
+    let sql = `update users set Name = '${entity.Name}', Email = '${entity.Email}',
+     Pseudonym = '${entity.Pseudonym}', Permission =  '${entity.Permission}' where Id = ${entity.Id}`;
+    return db.load(sql);
+  },
+
+  updatePassword: entity => {
+    let sql = `update users set Password = '${entity.Password}' where Id = ${entity.Id}`;
+    return db.load(sql);
   },
 
   delete: id => {

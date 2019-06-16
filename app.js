@@ -1,5 +1,6 @@
 var express = require('express');
 
+var morgan = require('morgan');
 
 var app = express();
 app.use(express.urlencoded());
@@ -8,6 +9,7 @@ app.use(express.urlencoded());
 app.use(express.static('assets'));
 app.use(express.static('assset1'));
 app.use(express.static('ckeditor'));
+app.use(morgan('dev'));
 
 require('./middlewares/view-engine')(app);
 require('./middlewares/session')(app);
@@ -23,14 +25,10 @@ app.get('/', (req, res) => {
 })
 
 // chuyen muc
-app.get('/categories', (req, res) => {
-    res.render('categories');
-})
+app.use('/categories', require('./routes/category.route'));
 
 // chi tiet 1 bai viet
-app.get('/detail', (req, res) => {
-    res.render('detail');
-})
+app.use('/categories', require('./routes/category.route'));
 
 // trang chu cua subcriber co dki
 app.get('/subcriber', (req, res) => {

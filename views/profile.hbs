@@ -34,10 +34,12 @@
 			<div class="profile-userpic">
 				<a href="profile"><img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""></a>
 			</div>
+			{{#each this.user}}
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name"><a href="profile">{{authUser.Name}}</a></div>
+				<div class="profile-usertitle-name"><a href="profile">{{Name}}</a></div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
+			{{/each}}
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
@@ -77,9 +79,7 @@
 		        <div class="container">
 		            <div class="row">
 		                <div class="col-md-3">
-
 		                    <a class="btn btn-success btn-block" data-toggle="modal" data-target="#passwordModal">
-
 		                        <i class="fa fa-lock"></i> Đổi mật khẩu
 		                    </a>
 		                </div>
@@ -94,24 +94,26 @@
 						<div class="card-header">
 							<h4>&nbsp;</h4>
 						</div>
+						{{#each this.user}}
 						<div class="card-block">
 							<div class="form-group">
 								<label class="form-control-label">Họ và tên</label>
-								<input type="text" name="username" class="form-control" value="{{authUser.Name}}">
+								<input type="text" name="username" class="form-control" value="{{Name}}">
 							</div>
 							<div class="form-group">
 								<label for="email" class="form-control-label">Email</label>
-								<input type="email" name="email" class="form-control" value="{{authUser.Email}}">
+								<input type="email" name="email" class="form-control" value="{{Email}}">
 							</div>
 							<div class="form-group">
 								<label  class="form-control-label">Bút danh</label>
-								<input type="text" name="pseudonym" class="form-control" value="{{authUser.Pseudonym}}">
+								<input type="text" name="pseudonym" class="form-control" value="{{Pseudonym}}">
 							</div>
 							<div class="form-group">
 								<label  class="form-control-label">Chức Vụ</label>
-								<input name="permission" type="number" class="form-control" value="{{authUser.Permission}}">
+								<input name="permission" type="number" class="form-control" value="{{Permission}}">
 							</div>
 						</div>
+						{{/each}}
 					</div>
 				</div>
 				<div class="col-md-3" style="margin-left: 400px; margin-bottom: 20px">
@@ -124,7 +126,7 @@
 		    <!-- PROFILE MODAL -->
 		    <div class="modal fade" id="passwordModal">
 		        <div class="modal-dialog modal-lg">
-		            <form novalidate action="/account/changePassword" method="POST" id="changePasswordFrom" class="modal-content">
+		            <form novalidate action="/account/changePasword" method="POST" id="changePasswordForm" class="modal-content">
 		                <div class="modal-header bg-warning">
 		                    <h5 class="modal-title text-white" id="passwordModalLabel">Đổi mật khẩu</h5>
 		                    <button class="close" data-dismiss="modal">
@@ -134,7 +136,7 @@
 		                <div class="modal-body">
 		                        <div class="form-group">
 		                            <label for="password" class="form-control-label">Mật khẩu hiện tại</label>
-		                            <input name="currentpasword" type="password" class="form-control">
+		                            <input name="currentpassword" type="password" class="form-control">
 		                        </div>
 		                        <div class="form-group">
 		                            <label for="password" class="form-control-label">Mật khẩu mới</label>
@@ -147,7 +149,7 @@
 		                </div>
 		                <div class="modal-footer">
 		                    <button class="btn btn-outline-secondary" data-dismiss="modal">Đóng</button>
-		                    <button class="btn btn-outline-warning" type="submit" data-dismiss="modal">Xác nhận</button>
+		                    <button class="btn btn-outline-warning" type="submit" >Xác nhận</button>
 		                </div>
 		            </form>
 		        </div>
@@ -217,9 +219,9 @@
 
 <script>
     $(function () {
-        $('#changePasswordFrom').validate({
+        $('#changePasswordForm').validate({
             rules:{
-                currentpasword:{
+                currentpassword:{
                     required: true
                 },
                 newpassword:{
