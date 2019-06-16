@@ -23,7 +23,7 @@ router.get('/is-available1',auth, (req, res, next) => {
   userModel.singleByEmail(email).then(rows => {
     // console.log(rows[0].Email);
     // console.log(req.user);
-    if (rows.length > 0 ){
+    if (rows.length > 0 && rows[0].Email != req.user.Email){
       return res.json(false);
     }
 
@@ -38,12 +38,12 @@ router.get('/sign-in-up',(req ,  res, next) =>
     });
 })
 
-router.get('/profile',(req ,  res, next) =>
-{
-    res.render('userProfile',{
-        layout: false
-    });
-})
+// router.get('/profile',(req ,  res, next) =>
+// {
+//     res.render('userProfile',{
+//         layout: false
+//     });
+// })
 
 router.post('/register', (req ,  res, next)=>{
     var saltRounds = 10;
@@ -84,7 +84,19 @@ router.post('/login', (req , res, next)=>{
 })
 
 router.post('/changeInfo', (req , res, next)=>{
-  console.log('helo');
+  var entity={
+    Id: req.user.Id,
+    Name: req.body.username,
+    Email: req.body.email,
+    Pseudonym: req.body.pseudonym,
+    Permission: req.body.permission
+  }
+  userModel.update(entity).then(n => {
+    res.redirect('/account/profile');
+  }).catch(err => {
+    console.log(err);
+    res.end('error occured.')
+  });
 })
 
 router.post('/changePasword', (req ,  res, next)=>{
