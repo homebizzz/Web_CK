@@ -1,14 +1,14 @@
 var mysql = require('mysql');
 
-// var createConnection = () => {
-//     return mysql.createConnection({
-//         host: 'localhost',
-//         port: '3306',
-//         user: 'root',
-//         password: '123456',
-//         database: 'newspaper'
-//     });
-// } 
+var createConnection = () => {
+    return mysql.createConnection({
+        host: 'localhost',
+        port: '3306',
+        user: 'root',
+        password: '123456',
+        database: 'newspaper'
+    });
+} 
 
 // var createConnection = () => {
 //     return mysql.createConnection({
@@ -18,17 +18,7 @@ var mysql = require('mysql');
 //         password: 'thuyan123',
 //         database: 'newspapers'
 //     });
-// } 
-
-var createConnection = () => {
-    return mysql.createConnection({
-        host: 'localhost',
-        port: '3306',
-        user: 'root',
-        password: 't2ntruong811',
-        database: 'newspaper'
-    });
-} 
+// }
 
 module.exports = {
     load: sql => {
