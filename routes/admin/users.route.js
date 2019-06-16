@@ -103,7 +103,7 @@ router.post('/update', (req, res) => {
       res.end('error occured.')
     });
 })
-  
+
 router.post('/delete', (req, res) => {
     userModel.delete(req.body.Id).then(n => {
         res.redirect('/admin-users');

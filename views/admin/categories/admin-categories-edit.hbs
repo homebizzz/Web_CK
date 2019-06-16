@@ -46,7 +46,18 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="/admin-posts"><em class="fa fa-pencil-square-o">&nbsp;</em> Quản lý bài viết</a></li>
+			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
+				<em class="fa fa-navicon">&nbsp;</em> Quản lý bài viết <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="sub-item-1">
+					<li><a class="" href="/admin-posts">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết đã duyệt
+					</a></li>
+					<li><a class="" href="/admin-posts/draft">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết chưa duyệt
+					</a></li>
+				</ul>
+			</li>
 			<li class="active"><a href="/admin-categories"><em class="fa fa-cubes">&nbsp;</em> Quản lý chuyên mục</a></li>
 			<li><a href="/admin-tags"><em class="fa fa-tags">&nbsp;</em> Quản lý nhãn</a></li>
 			<li><a href="/admin-users"><em class="fa fa-users">&nbsp;</em> Quản lý người dùng</a></li>
