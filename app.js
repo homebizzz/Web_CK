@@ -90,13 +90,20 @@ app.get('/Writer-detail', (req, res)=> {
     res.render('Writer/Writer-detail');
 })
 
-// app.use((error,req,res,next)=>{
-//     res.render('error',{
-//         layout: false,
-//         message: error.message,
-//         error
-//     })
-// })
+app.use((error, req, res, next)=>{
+    res.render('error',{
+        layout: false,
+        message: error.message,
+        error
+    })
+})
+
+app.get('/error', (req, res)=> {
+    
+    res.render('error',{
+        layout: false
+    });
+})
 
 app.listen(3000, () => {
     console.log('Web Server is running at http://localhost:3000');
