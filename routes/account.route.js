@@ -13,12 +13,11 @@ router.get('/is-available', (req, res, next) => {
     if (rows.length > 0) {
       return res.json(false);
     }
-
     return res.json(true);
   })
 })
 
-router.get('/is-available1',auth, (req, res, next) => {
+router.get('/is-available1', (req, res, next) => {
   var email = req.query.email;
   userModel.singleByEmail(email).then(rows => {
     // console.log(rows[0].Email);
@@ -91,7 +90,7 @@ router.post('/changeInfo', (req , res, next)=>{
     Pseudonym: req.body.pseudonym,
     Permission: req.body.permission
   }
-  userModel.update(entity).then(n => {
+  userModel.update(entity).then( n => {
     res.redirect('/account/profile');
   }).catch(err => {
     console.log(err);
@@ -100,8 +99,28 @@ router.post('/changeInfo', (req , res, next)=>{
 })
 
 router.post('/changePasword', (req ,  res, next)=>{
-  console.log('hello');
-  
+  userModel.single(res.locals.authUser.Id)
+  .then(value=>{
+    var ret = bcrypt.compareSync(req.body.currentpassword, value[0].Password);
+    if(ret)
+    {
+      var saltRounds = 10;
+      var hash = bcrypt.hashSync(req.body.newpassword, saltRounds);
+      var entity={
+        Id: req.user.Id,
+        Password: hash
+      }
+      userModel.updatePassword(entity).then( n => {
+        res.redirect('/account/profile');
+      }).catch(err => {
+        res.end('error occured.')
+      });
+    }
+    else
+    {
+      res.end('Sai mật khẩu.')
+    }
+  });
 })
 
 router.get('/userprofile', auth, (req, res, next) => {
@@ -109,7 +128,11 @@ router.get('/userprofile', auth, (req, res, next) => {
 })
 
 router.get('/profile', auth, (req, res, next) => {
-  res.render('profile',{layout: false});
+  userModel.singleByEmail(res.locals.authUser.Email)
+  .then(value =>{
+    res.render('profile',{layout: false, user : value});
+  })
+  
 })
 
 router.post('/logout', auth, (req, res, next) => {
