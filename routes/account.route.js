@@ -8,15 +8,28 @@ var auth = require('../middlewares/auth');
 var router = express.Router();
 
 router.get('/is-available', (req, res, next) => {
-    var email = req.query.email;
-    userModel.singleByEmail(email).then(rows => {
-      if (rows.length > 0) {
-        return res.json(false);
-      }
-  
-      return res.json(true);
-    })
+  var email = req.query.email;
+  userModel.singleByEmail(email).then(rows => {
+    if (rows.length > 0) {
+      return res.json(false);
+    }
+
+    return res.json(true);
   })
+})
+
+router.get('/is-available1',auth, (req, res, next) => {
+  var email = req.query.email;
+  userModel.singleByEmail(email).then(rows => {
+    // console.log(rows[0].Email);
+    // console.log(req.user);
+    if (rows.length > 0 ){
+      return res.json(false);
+    }
+
+    return res.json(true);
+  })
+})
 
 router.get('/sign-in-up',(req ,  res, next) =>
 {
@@ -25,8 +38,14 @@ router.get('/sign-in-up',(req ,  res, next) =>
     });
 })
 
+router.get('/profile',(req ,  res, next) =>
+{
+    res.render('userProfile',{
+        layout: false
+    });
+})
+
 router.post('/register', (req ,  res, next)=>{
-    console.log(req.body);
     var saltRounds = 10;
     var hash = bcrypt.hashSync(req.body.password, saltRounds);
     var daySubscript = moment().format('YYYY-MM-DD');
@@ -38,13 +57,12 @@ router.post('/register', (req ,  res, next)=>{
         Subscribe_date: daySubscript,
         Permission: 4
     }
-    console.log(entity);
     userModel.add(entity).then(id =>{
         res.redirect('/');
     })
 })
 
-router.post('/login', (req ,  res, next)=>{
+router.post('/login', (req , res, next)=>{
   passport.authenticate('local', (err, user, info) => {
     if (err)
       return next(err);
@@ -57,7 +75,6 @@ router.post('/login', (req ,  res, next)=>{
     }
 
     req.logIn(user, err => {
-      console.log(user);
       if (err)
         return next(err);
 
@@ -66,12 +83,26 @@ router.post('/login', (req ,  res, next)=>{
   })(req, res, next);
 })
 
-router.get('/profile', auth, (req, res, next) => {
-  res.end('profile');
+router.post('/changeInfo', (req , res, next)=>{
+  console.log('helo');
 })
 
-// router.post('/logout', auth, (req, res, next) => {
-//   res.redirect('/account/sign-in-up');
-// })
+router.post('/changePasword', (req ,  res, next)=>{
+  console.log('hello');
+  
+})
+
+router.get('/userprofile', auth, (req, res, next) => {
+  res.render('userProfile',{layout: false});
+})
+
+router.get('/profile', auth, (req, res, next) => {
+  res.render('profile',{layout: false});
+})
+
+router.post('/logout', auth, (req, res, next) => {
+  req.logOut();
+  res.redirect('/account/sign-in-up');
+})
 
 module.exports = router;

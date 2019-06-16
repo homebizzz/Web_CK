@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tech - Quản lý chuyên mục</title>
+	<link href="../../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../../css/datepicker3.css" rel="stylesheet">
+	<link href="../../../css/styles.css" rel="stylesheet">
+	
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+				<a class="navbar-brand" href="/">Tech</a>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div class="profile-sidebar">
+			<div class="profile-userpic">
+				<a href="/profile"><img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""></a>
+			</div>
+			<div class="profile-usertitle">
+				<div class="profile-usertitle-name"><a href="/profile">Truong TRAN</a></div>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="divider"></div>
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="/admin-posts"><em class="fa fa-pencil-square-o">&nbsp;</em> Quản lý bài viết</a></li>
+			<li class="active"><a href="/admin-categories"><em class="fa fa-cubes">&nbsp;</em> Quản lý chuyên mục</a></li>
+			<li><a href="/admin-tags"><em class="fa fa-tags">&nbsp;</em> Quản lý nhãn</a></li>
+			<li><a href="/admin-users"><em class="fa fa-users">&nbsp;</em> Quản lý người dùng</a></li>
+			<li><a href="/sign-in-up"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+		</ul>
+	</div><!--/.sidebar-->
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				<li class="active">Quản lý chuyên mục</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Quản lý chuyên mục</h1>
+			</div>
+		</div><!--/.row-->
+
+		<div class="row">
+			<!-- Viết tiếp nội dung ở đây -->
+			{{#if this.error}}
+			<div class="alert alert-danger" role="alert">
+			Id không tồn tại. <a href="/admin-categories" class="alert-link">Quay lại</a>.
+			</div>
+			{{else}}
+			<!-- EDIT CATEGORY MODAL -->
+			<div>
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header bg-primary">
+								<h5 class="modal-title text-white" id="addPostModalLabel">Sửa chuyên mục</h5>
+							</div>
+							<form method="POST" action="/admin-categories/update">
+								<div class="modal-body">
+									<div class="form-group">
+										<label for="txtCatID" class="form-control-label">#</label>
+										<input readonly type="text" id="txtCatID" name="Id" class="form-control" value="{{this.category.Id}}">
+									</div>
+									<div class="form-group">
+										<label for="txtCatName" class="form-control-label">Tên chuyên mục</label>
+										<input type="text" id="txtCatName" name="Name" class="form-control" value="{{this.category.Name}}" autofocus placeholder="Nhập tên chuyên mục">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<a class="btn btn-primary" data-dismiss="modal" href="/admin-categories">
+										<i class="fa fa-backward" aria-hidden="true"></i> Quay lại</a>
+									<button type="submit" class="btn btn-outline-danger" formaction="/admin-categories/delete">
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
+										Xóa
+									</button>
+									<button type="submit" class="btn btn-success" data-dismiss="modal">
+										<i class="fa fa-check" aria-hidden="true"></i>
+										Lưu
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+			</div>
+			{{/if}}
+			
+
+	</div>
+	<!--/.main-->
+
+	<script src="../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../js/bootstrap.min.js"></script>
+	<script src="../../../js/chart.min.js"></script>
+	<script src="../../../js/chart-data.js"></script>
+	<script src="../../../js/easypiechart.js"></script>
+	<script src="../../../js/easypiechart-data.js"></script>
+	<script src="../../../js/bootstrap-datepicker.js"></script>
+	<script src="../../../js/custom.js"></script>
+	
+</body>
+</html>
