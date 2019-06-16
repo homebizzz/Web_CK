@@ -3,17 +3,39 @@ var tagModel = require('../../models/admin/tags.model');
 
 var router = express.Router();
 
-router.get('/', (req, res) => {
-    var p = tagModel.all();
+router.get('/', (req, res, next) => {
+  var id = req.params.id;
+  var page = req.query.page || 1;
+  if (page < 1) page = 1;
 
-    p.then(rows => {
-        res.render('admin/tags/admin-tags', {
-            layout: false,
-            tags: rows
-        });
-    }).catch(err => {
-        console.log(err);
+  var limit = 6;
+  var offset = (page - 1) * limit;
+
+  Promise.all([
+    tagModel.pageByTag(limit, offset),
+    tagModel.countByTag(),
+  ]).then(([rows, count_rows]) => {
+    // for (const c of res.locals.lcCategories) {
+    //   if (c.Id === +id) {
+    //     c.isActive = true;
+    //   }
+    // }
+
+    var total = count_rows[0].total;
+    var nPages = Math.floor(total / limit);
+    if (total % limit > 0) nPages++;
+    var pages = [];
+    for (i = 1; i <= nPages; i++) {
+      var obj = { value: i, active: i === +page };
+      pages.push(obj);
+    }
+
+    res.render('admin/tags/admin-tags', {
+      layout: false,
+      tags: rows,
+      pages
     });
+  }).catch(next);
 })
 
 router.get('/add', (req, res) => {

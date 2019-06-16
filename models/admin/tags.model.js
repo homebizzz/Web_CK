@@ -5,6 +5,14 @@ module.exports = {
         return db.load('select * from tags order by Id asc');
     },
 
+    pageByTag: (limit, offset) => {
+        return db.load(`select * from tags order by Id asc limit ${limit} offset ${offset} `);
+    },
+
+    countByTag: catId => {
+        return db.load(`select count(*) as total from tags`);
+    },
+
     single: id => {
         return db.load(`select * from tags where Id = ${id}`);
     },
