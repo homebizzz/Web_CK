@@ -12,6 +12,13 @@ module.exports = {
                         order by Id asc limit ${limit} offset ${offset} `);
     },
 
+    pageByPermission: (perName, limit, offset) => {
+        return db.load(`select User.Id as Id, User.Name as Name, User.Email as Email, User.Pseudonym as Pseudonym, User.Subscribe_date as Subscribe_date, Cat.Name as Category, Per.Name as Permission
+                        from users as User, permissions as Per, categories as Cat
+                        where User.IdCategory = Cat.Id and User.Permission = Per.Id and User.IsDelete = 0 and Per.Name = '${perName}'
+                        order by Id asc limit ${limit} offset ${offset} `);
+    },
+
     countByUser: catId => {
         return db.load(`select count(*) as total from users where IsDelete = 0`);
     },

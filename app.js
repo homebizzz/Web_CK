@@ -25,14 +25,10 @@ app.get('/', (req, res) => {
 })
 
 // chuyen muc
-app.get('/categories', (req, res) => {
-    res.render('categories');
-})
+app.use('/categories', require('./routes/category.route'));
 
 // chi tiet 1 bai viet
-app.get('/detail', (req, res) => {
-    res.render('detail');
-})
+app.use('/categories', require('./routes/category.route'));
 
 // trang chu cua subcriber co dki
 app.get('/subcriber', (req, res) => {
