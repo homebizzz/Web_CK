@@ -2,7 +2,7 @@ var db = require('../utils/db');
 
 module.exports = {
     allByCategory: id => {
-        return db.load(`select newspapers.Id, newspapers.Title, newspapers.Created_date, newspapers.Summary, newspapers.Content, newspapers.Count_Like, categories.Name
+        return db.load(`select newspapers.Id, newspapers.Title, newspapers.Created_date, newspapers.Summary, newspapers.Content, newspapers.Count_Like, categories.Name, categorysons.NameSon
                         from newspapers, categories, categorysons 
                         where newspapers.CategorySon_id = categorysons.Id and categories.Id = categorysons.Category_id and categorysons.Id = ${id} order by newspapers.Count_Like DESC`);
     },
