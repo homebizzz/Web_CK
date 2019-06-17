@@ -123,16 +123,27 @@ router.post('/changePasword', (req ,  res, next)=>{
   });
 })
 
-router.get('/userprofile', auth, (req, res, next) => {
+router.post('/deviceroute', (req, res, next) => {
+  console.log(res.locals.authUser);
+  if(res.locals.authUser.Permission==1)
+  {
+    res.redirect('/account/profile');
+  }
+  else
+  {
+    res.redirect('/account/userprofile');
+  }
+})
+
+router.get('/userprofile', (req, res, next) => {
   res.render('userProfile',{layout: false});
 })
 
-router.get('/profile', auth, (req, res, next) => {
+router.get('/profile', (req, res, next) => {
   userModel.singleByEmail(res.locals.authUser.Email)
   .then(value =>{
     res.render('profile',{layout: false, user : value});
   })
-  
 })
 
 router.post('/logout', auth, (req, res, next) => {
