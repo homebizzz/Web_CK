@@ -28,8 +28,10 @@ module.exports = {
         }       
     },
 
-    countByUser: catId => {
-        return db.load(`select count(*) as total from users where IsDelete = 0`);
+    countByUser: perName => {
+        return db.load(`select count(*) as total 
+                        from users, permissions
+                        where IsDelete = 0 and users.Permission = permissions.Id and permissions.Name = '${perName}'`);
     },
 
     allOfPermission: () => {
@@ -44,12 +46,12 @@ module.exports = {
 
     singleByPermission: (perName, id) => {
         if(perName === 'Editor'){
-            return db.load(`select User.Id as Id, User.Name as Name, User.Email as Email, User.Pseudonym as Pseudonym, User.Subscribe_date as Subscribe_date, Cat.Name as Category, Per.Name as Permission
+            return db.load(`select User.Id as Id, User.Name as Name, User.Email as Email, User.Pseudonym as Pseudonym, User.Subscribe_date as Subscribe_date, Cat.Name as Category, Per.Name as Permission, User.IdCategory as IdCategory, User.Permission as IdPermission
                             from users as User, permissions as Per, categories as Cat
                             where User.Permission = Per.Id and User.IdCategory = Cat.Id and User.IsDelete = 0 and User.Id = ${id}`);
         }
         else{
-            return db.load(`select User.Id as Id, User.Name as Name, User.Email as Email, User.Pseudonym as Pseudonym, User.Subscribe_date as Subscribe_date, Per.Name as Permission
+            return db.load(`select User.Id as Id, User.Name as Name, User.Email as Email, User.Pseudonym as Pseudonym, User.Subscribe_date as Subscribe_date, Per.Name as Permission, User.IdCategory as IdCategory, User.Permission as IdPermission
                             from users as User, permissions as Per
                             where User.Permission = Per.Id and  User.IsDelete = 0 and User.Id = ${id}`);
         }      

@@ -69,7 +69,7 @@ app.use('/admin-tags', require('./routes/admin/tags.route'));
 app.use('/admin-users', require('./routes/admin/users.route'));
 app.use('/editor-users', require('./routes/admin/users.route'));
 app.use('/writer-users', require('./routes/admin/users.route'));
-
+// app.use('/editor-posts', require('./routes/admin/posts.route'));
 //PROFILE
 // app.use('/profile', require('./routes/profile.route'));
 

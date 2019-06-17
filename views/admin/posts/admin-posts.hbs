@@ -155,7 +155,81 @@
 		                    <div class="card-header">
 		                        <h4>&nbsp;</h4>
 		                    </div>
-		                    <table class="table table-striped">
+		                    {{#if isPublished}}
+							<table class="table table-striped">
+		                        <thead class="thead-inverse">
+		                        <tr>
+		                            <th>#</th>
+		                            <th>Tiêu đề</th>
+		                            <th>Chuyên mục</th>
+									<th>Tác giả</th>
+		                            <th>Ngày đăng</th>
+									<th>Ngày xuất bản</th>
+		                            <th></th>
+		                        </tr>
+		                        </thead>
+		                        <tbody>
+								{{#each this.posts}}
+		                        <tr>
+		                            <td scope="row">{{news_Id}}</td>
+		                            <td width="400px">{{news_Title}}</td>
+		                            <td>{{cat_Name}}</td>
+									<td>{{user_Name}}</td>
+		                            <td>{{news_cr_date}}</td>
+									<td>{{news_pb_date}}</td>
+		                            <td>
+										<a href="/admin-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
+										<i class="fa fa-edit"></i>
+										</a>
+										<a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
+											<i class="fa fa-location-arrow"> Chi tiết</i>
+										</a>
+		                            </td>
+		                        </tr>
+								{{/each}}
+		                        </tbody>
+		                    </table>
+							{{else}}
+							{{#if isWait}}
+							<table class="table table-striped">
+		                        <thead class="thead-inverse">
+		                        <tr>
+		                            <th>#</th>
+		                            <th>Tiêu đề</th>
+		                            <th>Chuyên mục</th>
+									<th>Tác giả</th>
+		                            <th>Ngày đăng</th>
+									<th>Ngày xuất bản</th>
+		                            <th></th>
+		                        </tr>
+		                        </thead>
+		                        <tbody>
+								{{#each this.posts}}
+		                        <tr>
+		                            <td scope="row">{{news_Id}}</td>
+		                            <td width="400px">{{news_Title}}</td>
+		                            <td>{{cat_Name}}</td>
+									<td>{{user_Name}}</td>
+		                            <td>{{news_cr_date}}</td>
+									<td>{{news_pb_date}}</td>
+		                            <td>
+										<form method="POST" action="/admin-posts/publish/{{news_Id}}">
+											<button class="btn btn-success"><i class="fa fa-check"></i>
+											</button>
+											<a href="/admin-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
+											<i class="fa fa-edit"></i>
+											</a>
+											<a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
+												<i class="fa fa-location-arrow"> Chi tiết</i>
+											</a>
+										</form>
+		                            </td>
+		                        </tr>
+								{{/each}}
+		                        </tbody>
+		                    </table>
+							{{else}}
+							<table class="table table-striped">
 		                        <thead class="thead-inverse">
 		                        <tr>
 		                            <th>#</th>
@@ -170,22 +244,29 @@
 								{{#each this.posts}}
 		                        <tr>
 		                            <td scope="row">{{news_Id}}</td>
-		                            <td>{{news_Title}}</td>
+		                            <td width="400px">{{news_Title}}</td>
 		                            <td>{{cat_Name}}</td>
 									<td>{{user_Name}}</td>
 		                            <td>{{news_cr_date}}</td>
 		                            <td>
-										 <a href="/admin-posts/edit/{{Id}}" class="btn btn-primary btn-sm" >
-		                                   <i class="fa fa-edit"></i>
-		                                </a>
-		                                <a href="#" class="btn btn-secondary">
-		                                    <i class="fa fa-location-arrow"> Chi tiết</i>
-		                                </a>
+										<form method="POST" action="/admin-posts/publish/{{news_Id}}">
+											<button class="btn btn-success"><i class="fa fa-check"></i>
+											</button>
+											<a href="/admin-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
+											<i class="fa fa-edit"></i>
+											</a>
+											<a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
+												<i class="fa fa-location-arrow"> Chi tiết</i>
+											</a>
+										</form>
 		                            </td>
 		                        </tr>
 								{{/each}}
 		                        </tbody>
-		                    </table>
+							</table>
+							{{/if}}
+							{{/if}}
+							
 
 		                    <nav class="ml-4">
 		                        <ul class="pagination">

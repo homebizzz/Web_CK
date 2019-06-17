@@ -5,6 +5,10 @@ module.exports = {
         return db.load('select * from categories order by Id asc');
     },
 
+    allofCatSon: () => { 
+        return db.load('select * from categorysons order by Id asc');
+    },
+
     pageByCat: (limit, offset) => {
         return db.load(`select * from categories order by Id asc limit ${limit} offset ${offset} `);
     },
@@ -15,6 +19,10 @@ module.exports = {
 
     single: id => {
         return db.load(`select * from categories where Id = ${id}`);
+    },
+
+    singleOfCatSon: id => {
+        return db.load(`select * from categorysons where Id = ${id}`);
     },
 
     add: entity => {
