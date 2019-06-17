@@ -27,6 +27,9 @@ app.get('/', (req, res) => {
 // chuyen muc
 app.use('/categories', require('./routes/category.route'));
 
+//chuyen muc con
+app.use('/categoriesSon', require('./routes/categorySon.route'));
+
 // chi tiet 1 bai viet
 app.use('/categories', require('./routes/category.route'));
 
