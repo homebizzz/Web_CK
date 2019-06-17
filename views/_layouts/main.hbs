@@ -22,7 +22,7 @@
 
     <!-- Owl carousel -->
     <link href="../../css/owl.carousel.css" rel="stylesheet">
-    <link href="../css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="../../css/owl.theme.default.min.css" rel="stylesheet">
     <!-- Theme Style -->
     <link href="../../css/style.css" rel="stylesheet">
     {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -150,15 +150,17 @@
 
 
                         <ul class="nav-cta hidden-xs" style="margin-right: 25px">
-                            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i
-                                    class="fa fa-search"></i></a>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle">
+                                    <i class="fa fa-search"></i>
+                                </a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="head-search">
-                                            <form role="form">
+                                            <form role="form" action="/search" method="GET">
                                                 <!-- Input Group -->
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Type Something"> 
+                                                    <input name="search" type="text" class="form-control" placeholder="Type Something"> 
                                                         <span class="input-group-btn">
                                                             <button type="submit" class="btn btn-primary">Search</button>
                                                         </span>

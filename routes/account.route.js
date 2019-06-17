@@ -37,13 +37,6 @@ router.get('/sign-in-up',(req ,  res, next) =>
     });
 })
 
-// router.get('/profile',(req ,  res, next) =>
-// {
-//     res.render('userProfile',{
-//         layout: false
-//     });
-// })
-
 router.post('/register', (req ,  res, next)=>{
     var saltRounds = 10;
     var hash = bcrypt.hashSync(req.body.password, saltRounds);
@@ -54,7 +47,8 @@ router.post('/register', (req ,  res, next)=>{
         Email: req.body.email,
         Password: hash,
         Subscribe_date: daySubscript,
-        Permission: 4
+        Permission: 4,
+        IsDelete: 0
     }
     userModel.add(entity).then(id =>{
         res.redirect('/account/sign-in-up');
