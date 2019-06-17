@@ -2,11 +2,15 @@ var db = require('../utils/db');
 
 module.exports = {
     all: () => {
-        return db.load('select * from newspapers');
+        return db.load(`select newspapers.Id, newspapers.Title, newspapers.Created_date, newspapers.Summary, newspapers.Content, newspapers.Count_Like, categories.Name
+                        from newspapers, categories, categorysons 
+                        where newspapers.CategorySon_id = categorysons.Id and categories.Id = categorysons.Category_id`)
     },
 
     hot: () => {
-        return db.load('select * from newspapers order by Count_Like desc');
+        return db.load(`select newspapers.Id, newspapers.Title, newspapers.Created_date, newspapers.Summary, newspapers.Content, newspapers.Count_Like, categories.Name
+                        from newspapers, categories, categorysons 
+                        where newspapers.CategorySon_id = categorysons.Id and categories.Id = categorysons.Category_id order by newspapers.Count_like DESC`);
     },
 
     allByCategory: name => {

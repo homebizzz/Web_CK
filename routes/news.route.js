@@ -24,52 +24,52 @@ router.get('/', (req, res, next) => {
             userModel.single(res.locals.authUser.Id),
     
             ]).then(([NoiBat, Mobiles, Laptops, AIs, Cameras, Designs, NewPosts, EachMobile, EachLaptop, EachAI, EachCamera, EachDesign, Users]) => {
-                NoiBat[0].Created_date = moment().format('YYYY-MM-DD');
-                NoiBat[1].Created_date = moment().format('YYYY-MM-DD');
-                NoiBat[2].Created_date = moment().format('YYYY-MM-DD');
+                NoiBat[0].Created_date = moment(NoiBat[0].Created_date).format('YYYY-MM-DD');
+                NoiBat[1].Created_date = moment(NoiBat[1].Created_date).format('YYYY-MM-DD');
+                NoiBat[2].Created_date = moment(NoiBat[2].Created_date).format('YYYY-MM-DD');
     
                 Mobiles.forEach(mobile => {
-                    mobile.Created_date = moment().format('YYYY-MM-DD');
+                    mobile.Created_date = moment(mobile.Created_date).format('YYYY-MM-DD');
                 });
     
                 Laptops.forEach(laptop => {
-                    laptop.Created_date = moment().format('YYYY-MM-DD');
+                    laptop.Created_date = moment(laptop.Created_date).format('YYYY-MM-DD');
                 });
     
                 AIs.forEach(ai => {
-                    ai.Created_date = moment().format('YYYY-MM-DD');
+                    ai.Created_date = moment(ai.Created_date).format('YYYY-MM-DD');
                 });
     
                 Cameras.forEach(camera => {
-                    camera.Created_date = moment().format('YYYY-MM-DD');
+                    camera.Created_date = moment(camera.Created_date).format('YYYY-MM-DD');
                 });
     
                 Designs.forEach(design => {
-                    design.Created_date = moment().format('YYYY-MM-DD');
+                    design.Created_date = moment(design.Created_date).format('YYYY-MM-DD');
                 });
     
                 NewPosts.forEach(newpost => {
-                    newpost.Created_date = moment().format('YYYY-MM-DD');
+                    newpost.Created_date = moment(newpost.Created_date).format('YYYY-MM-DD');
                 });
                 //
                 EachMobile.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
     
                 EachLaptop.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
     
                 EachAI.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
     
                 EachCamera.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
     
                 EachDesign.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
                 //
                 if(Users[0].Permission===1)
@@ -236,52 +236,52 @@ router.get('/', (req, res, next) => {
             newspaperModel.allByNewEach("Design")
     
             ]).then(([NoiBat, Mobiles, Laptops, AIs, Cameras, Designs, NewPosts, EachMobile, EachLaptop, EachAI, EachCamera, EachDesign]) => {
-                NoiBat[0].Created_date = moment().format('YYYY-MM-DD');
-                NoiBat[1].Created_date = moment().format('YYYY-MM-DD');
-                NoiBat[2].Created_date = moment().format('YYYY-MM-DD');
+                NoiBat[0].Created_date = moment(NoiBat[0].Created_date).format('YYYY-MM-DD');
+                NoiBat[1].Created_date = moment(NoiBat[1].Created_date).format('YYYY-MM-DD');
+                NoiBat[2].Created_date = moment(NoiBat[2].Created_date).format('YYYY-MM-DD');
     
                 Mobiles.forEach(mobile => {
-                    mobile.Created_date = moment().format('YYYY-MM-DD');
+                    mobile.Created_date = moment(mobile.Created_date).format('YYYY-MM-DD');
                 });
     
                 Laptops.forEach(laptop => {
-                    laptop.Created_date = moment().format('YYYY-MM-DD');
+                    laptop.Created_date = moment(laptop.Created_date).format('YYYY-MM-DD');
                 });
     
                 AIs.forEach(ai => {
-                    ai.Created_date = moment().format('YYYY-MM-DD');
+                    ai.Created_date = moment(ai.Created_date).format('YYYY-MM-DD');
                 });
     
                 Cameras.forEach(camera => {
-                    camera.Created_date = moment().format('YYYY-MM-DD');
+                    camera.Created_date = moment(camera.Created_date).format('YYYY-MM-DD');
                 });
     
                 Designs.forEach(design => {
-                    design.Created_date = moment().format('YYYY-MM-DD');
+                    design.Created_date = moment(design.Created_date).format('YYYY-MM-DD');
                 });
     
                 NewPosts.forEach(newpost => {
-                    newpost.Created_date = moment().format('YYYY-MM-DD');
+                    newpost.Created_date = moment(newpost.Created_date).format('YYYY-MM-DD');
                 });
-                //
+                
                 EachMobile.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
     
                 EachLaptop.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
     
                 EachAI.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
     
                 EachCamera.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
     
                 EachDesign.forEach(temp => {
-                    temp.Created_date = moment().format('YYYY-MM-DD');
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
                 //
     
@@ -308,6 +308,7 @@ router.get('/', (req, res, next) => {
                     design2: Designs[1],
                     design3: Designs[2],
                     design4: Designs[3],
+                    
                     newPost: NewPosts,
     
                     eachMobile: EachMobile[0],
