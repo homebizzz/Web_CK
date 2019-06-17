@@ -4,38 +4,49 @@ var categoryModel = require('../../models/admin/categories.model');
 var router = express.Router();
 
 router.get('/', (req, res, next) => {
-  var id = req.params.id;
-  var page = req.query.page || 1;
-  if (page < 1) page = 1;
-
-  var limit = 6;
-  var offset = (page - 1) * limit;
-
-  Promise.all([
-    categoryModel.pageByCat(limit, offset),
-    categoryModel.countByCat(),
-  ]).then(([rows, count_rows]) => {
-    // for (const c of res.locals.lcCategories) {
-    //   if (c.Id === +id) {
-    //     c.isActive = true;
-    //   }
-    // }
-
-    var total = count_rows[0].total;
-    var nPages = Math.floor(total / limit);
-    if (total % limit > 0) nPages++;
-    var pages = [];
-    for (i = 1; i <= nPages; i++) {
-      var obj = { value: i, active: i === +page };
-      pages.push(obj);
+  if(res.locals.authUser)
+  {
+    if(res.locals.authUser.Permission === 1){
+      var id = req.params.id;
+      var page = req.query.page || 1;
+      if (page < 1) page = 1;
+    
+      var limit = 6;
+      var offset = (page - 1) * limit;
+    
+      Promise.all([
+        categoryModel.pageByCat(limit, offset),
+        categoryModel.countByCat(),
+      ]).then(([rows, count_rows]) => {
+        // for (const c of res.locals.lcCategories) {
+        //   if (c.Id === +id) {
+        //     c.isActive = true;
+        //   }
+        // }
+    
+        var total = count_rows[0].total;
+        var nPages = Math.floor(total / limit);
+        if (total % limit > 0) nPages++;
+        var pages = [];
+        for (i = 1; i <= nPages; i++) {
+          var obj = { value: i, active: i === +page };
+          pages.push(obj);
+        }
+    
+        res.render('admin/categories/admin-categories', {
+          layout: false,
+          categories: rows,
+          pages
+        });
+      }).catch(next);
     }
-
-    res.render('admin/categories/admin-categories', {
-      layout: false,
-      categories: rows,
-      pages
-    });
-  }).catch(next);
+    else{
+        res.end('Quyen truy cap khong hop le');
+    }
+  }
+  else{
+    res.redirect('/account/sign-in-up');
+  }
 })
 
 router.get('/add', (req, res) => {

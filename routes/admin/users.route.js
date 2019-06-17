@@ -6,70 +6,81 @@ var moment = require('moment');
 var router = express.Router();
 
 router.get('/:permission', (req, res, next) => {
-  var permission = req.params.permission;
-  var id = req.params.id;
-
-  var page = req.query.page || 1;
-  if (page < 1) page = 1;
-
-  var limit = 6;
-  var offset = (page - 1) * limit;
-
-  if(permission === 'admin'){
-    isAdmin = true;
-    isEditor = false;
-    isWriter = false;
-    isSubscriber = false;
-  }else if(permission === 'editor'){
-    isEditor = true;
-    isAdmin = false;
-    isWriter = false;
-    isSubscriber = false;
-  }else if(permission === 'writer'){
-    isWriter = true;
-    isAdmin = false;
-    isEditor = false;
-    isSubscriber = false;
-  }else{
-    isSubscriber = true;
-    isAdmin = false;
-    isEditor = false;
-    isWriter = false;
-  }
-
-  Promise.all([
-    userModel.pageByPermission(permission, limit, offset),
-    userModel.countByUser(permission),
-  ]).then(([rows, count_rows]) => {
-    // for (const c of res.locals.lcCategories) {
-    //   if (c.Id === +id) {
-    //     c.isActive = true;
-    //   }
-    // }
-
-    var total = count_rows[0].total;
-    var nPages = Math.floor(total / limit);
-    if (total % limit > 0) nPages++;
-    var pages = [];
-    for (i = 1; i <= nPages; i++) {
-      var obj = { value: i, active: i === +page };
-      pages.push(obj);
+  if(res.locals.authUser)
+  {
+    if(res.locals.authUser.Permission === 1){
+      var permission = req.params.permission;
+      var id = req.params.id;
+    
+      var page = req.query.page || 1;
+      if (page < 1) page = 1;
+    
+      var limit = 6;
+      var offset = (page - 1) * limit;
+    
+      if(permission === 'admin'){
+        isAdmin = true;
+        isEditor = false;
+        isWriter = false;
+        isSubscriber = false;
+      }else if(permission === 'editor'){
+        isEditor = true;
+        isAdmin = false;
+        isWriter = false;
+        isSubscriber = false;
+      }else if(permission === 'writer'){
+        isWriter = true;
+        isAdmin = false;
+        isEditor = false;
+        isSubscriber = false;
+      }else{
+        isSubscriber = true;
+        isAdmin = false;
+        isEditor = false;
+        isWriter = false;
+      }
+    
+      Promise.all([
+        userModel.pageByPermission(permission, limit, offset),
+        userModel.countByUser(permission),
+      ]).then(([rows, count_rows]) => {
+        // for (const c of res.locals.lcCategories) {
+        //   if (c.Id === +id) {
+        //     c.isActive = true;
+        //   }
+        // }
+    
+        var total = count_rows[0].total;
+        var nPages = Math.floor(total / limit);
+        if (total % limit > 0) nPages++;
+        var pages = [];
+        for (i = 1; i <= nPages; i++) {
+          var obj = { value: i, active: i === +page };
+          pages.push(obj);
+        }
+    
+        rows.forEach(user => {
+          user.Subscribe_date = moment(user.Subscribe_date).format('YYYY-MM-DD');
+        });
+    
+        res.render('admin/users/admin-users', {
+          layout: false,
+          users: rows,
+          pages,
+          isAdmin,
+          isEditor,
+          isSubscriber,
+          isWriter
+        });
+      }).catch(next);
     }
-
-    rows.forEach(user => {
-      user.Subscribe_date = moment(user.Subscribe_date).format('YYYY-MM-DD');
-    });
-
-    res.render('admin/users/admin-users', {
-      layout: false,
-      users: rows,
-      pages,
-      isAdmin,
-      isEditor,
-      isSubscriber,
-      isWriter
-    });
-  }).catch(next);
+    else{
+        res.end('Quyen truy cap khong hop le');
+    }
+  }
+  else{
+    res.redirect('/account/sign-in-up');
+  }
 })
 
 router.get('/add/user', (req, res) => {

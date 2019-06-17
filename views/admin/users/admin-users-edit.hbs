@@ -31,10 +31,10 @@
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<a href="/profile"><img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""></a>
+				<a href="/account/profile"><img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""></a>
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name"><a href="/profile">Truong TRAN</a></div>
+				<div class="profile-usertitle-name"><a href="/account/profile">Truong TRAN</a></div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
 			<div class="clear"></div>
@@ -84,7 +84,7 @@
 					</a></li>
 				</ul>
 			</li>
-			<li><a href="/sign-in-up"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="/account/sign-in-up"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 
@@ -182,7 +182,7 @@
 								<div class="form-group">
 									<label for="cbbPerName" class="form-control-label">Quyền người dùng</label>
 									<select class="form-control" name="Permission" id="cbbPerName">
-										<option value="{{this.user.IdPermission}}">{{this.user.Permission}}</option>
+										<option value="{{this.user.IdPermission}}" selected>{{this.user.Permission}}</option>
 										{{#each this.permissions}}
 										<option value="{{Id}}">{{Name}}</option>
 										{{/each}}
@@ -195,7 +195,7 @@
 								<div class="form-group">
 									<label for="cbbCatName" class="form-control-label">Tên chuyên mục</label>
 									<select class="form-control" name="IdCategory" id="cbbCatName">
-										<option value="{{this.user.IdCategory}}">{{this.user.Category}}</option>
+										<option value="{{this.user.IdCategory}}" selected>{{this.user.Category}}</option>
 										{{#each this.categories}}
 										<option value="{{Id}}">{{Name}}</option>
 										{{/each}}
@@ -251,7 +251,7 @@
 									<label for="cbbPerName" class="form-control-label">Quyền người dùng</label>
 									{{!-- <input type="text" id="txtPerName" name="permission" class="form-control" value="{{this.user.Permission}}" placeholder="Nhập quyền"> --}}
 									<select class="form-control" name="Permission" id="cbbPerName">
-										<option value="{{this.user.IdPermission}}">{{this.user.Permission}}</option>
+										<option value="{{this.user.IdPermission}}" selected>{{this.user.Permission}}</option>
 										{{#each this.permissions}}
 										<option value="{{Id}}">{{Name}}</option>
 										{{/each}}
@@ -319,7 +319,7 @@
 								<div class="form-group">
 									<label for="cbbPerName" class="form-control-label">Quyền người dùng</label>
 									<select class="form-control" name="Permission" id="cbbPerName">
-										<option value="{{this.user.IdPermission}}">{{this.user.Permission}}</option>
+										<option value="{{this.user.IdPermission}}" selected>{{this.user.Permission}}</option>
 										{{#each this.permissions}}
 										<option value="{{Id}}">{{Name}}</option>
 										{{/each}}
