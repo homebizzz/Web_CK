@@ -44,6 +44,8 @@ router.get('/:catname', (req, res, next) => {
                 temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
             });
             //
+            console.log(Mobiles[0]);
+
             res.render('categories', {
                 mobile: Mobiles,
                 newPost: NewPosts,
