@@ -27,6 +27,9 @@ app.get('/', (req, res) => {
 // chuyen muc
 app.use('/categories', require('./routes/category.route'));
 
+//chuyen muc con
+app.use('/categoriesSon', require('./routes/categorySon.route'));
+
 // chi tiet 1 bai viet
 app.use('/categories', require('./routes/category.route'));
 
@@ -66,6 +69,8 @@ app.use('/admin-categories', require('./routes/admin/categories.route'));
 app.use('/admin-posts', require('./routes/admin/posts.route'));
 app.use('/admin-tags', require('./routes/admin/tags.route'));
 app.use('/admin-users', require('./routes/admin/users.route'));
+app.use('/editor-users', require('./routes/admin/users.route'));
+app.use('/writer-users', require('./routes/admin/users.route'));
 
 //PROFILE
 // app.use('/profile', require('./routes/profile.route'));

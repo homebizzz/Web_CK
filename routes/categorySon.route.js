@@ -1,13 +1,14 @@
 var express = require('express');
-var newspaperModel = require('../models/category.model');
+var newspaperModel = require('../models/categorySon.model');
 var moment = require('moment');
 
 var router = express.Router();
 
-router.get('/:catname', (req, res, next) => {
-    let cat = req.params.catname;
+router.get('/:idSon', (req, res, next) => {
+    let id = req.params.idSon;
+    console.log('1111', id, '22222');
     Promise.all([
-        newspaperModel.allByCategory(cat),
+        newspaperModel.allByCategory(id),
         newspaperModel.allByNewPost(),
         newspaperModel.allByNewEach("Mobile"),
         newspaperModel.allByNewEach("Laptop"),
@@ -17,34 +18,38 @@ router.get('/:catname', (req, res, next) => {
 
         ]).then(([Mobiles, NewPosts, EachMobile, EachLaptop, EachAI, EachCamera, EachDesign]) => {
             Mobiles.forEach(mobile => {
-                mobile.Created_date = moment(mobile.Created_date).format('YYYY-MM-DD');
+                mobile.Created_date = moment().format('YYYY-MM-DD');
             });
+            // console.log('111111');
+            // console.log(cat);
+            // console.log('111111');
+            console.log(Mobiles[0]);
 
             NewPosts.forEach(newPost => {
-                newPost.Created_date = moment(newPost.Created_date).format('YYYY-MM-DD');
+                newPost.Created_date = moment().format('YYYY-MM-DD');
             });
             //
             EachMobile.forEach(temp => {
-                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+                temp.Created_date = moment().format('YYYY-MM-DD');
             });
 
             EachLaptop.forEach(temp => {
-                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+                temp.Created_date = moment().format('YYYY-MM-DD');
             });
 
             EachAI.forEach(temp => {
-                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+                temp.Created_date = moment().format('YYYY-MM-DD');
             });
 
             EachCamera.forEach(temp => {
-                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+                temp.Created_date = moment().format('YYYY-MM-DD');
             });
 
             EachDesign.forEach(temp => {
-                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+                temp.Created_date = moment().format('YYYY-MM-DD');
             });
             //
-            res.render('categories', {
+            res.render('categoriesSon', {
                 mobile: Mobiles,
                 newPost: NewPosts,
                 eachMobile: EachMobile[0],
@@ -73,15 +78,15 @@ router.get('/:catname/:id', (req, res, next) =>{
         ]).then(([Detail, Category, NewPosts, EachMobile, EachLaptop, EachAI, EachCamera, EachDesign]) => {
 
             Detail.forEach(detail => {
-                detail.Created_date = moment(detail.Created_date).format('YYYY-MM-DD');
+                detail.Created_date = moment().format('YYYY-MM-DD');
             });
 
             Category.forEach(categories => {
-                categories.Created_date = moment(categories.Created_date).format('YYYY-MM-DD');
+                categories.Created_date = moment().format('YYYY-MM-DD');
             });
 
             NewPosts.forEach(newPost => {
-                newPost.Created_date = moment(newPost.Created_date).format('YYYY-MM-DD');
+                newPost.Created_date = moment().format('YYYY-MM-DD');
             });
 
             res.render('detail', {

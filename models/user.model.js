@@ -23,7 +23,7 @@ module.exports = {
 
   updateInfo: entity => {
     let sql = `update users set Name = '${entity.Name}', Email = '${entity.Email}',
-     Pseudonym = '${entity.Pseudonym}', Permission =  '${entity.Permission}' where Id = ${entity.Id}`;
+     Pseudonym = '${entity.Pseudonym}' where Id = ${entity.Id}`;
     return db.load(sql);
   },
 
