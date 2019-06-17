@@ -132,7 +132,7 @@
 	            <div class="container">
 	                <div class="row">
 	                    <div class="col-md-4">
-	                        <a href="/admin-users/add" class="btn btn-primary btn-block">
+	                        <a href="/admin-users/add/user" class="btn btn-primary btn-block">
 	                            <i class="fa fa-plus"></i> Thêm người dùng
 	                        </a>
 	                    </div>
@@ -214,7 +214,7 @@
 		                            <td>{{Email}}</td>
 		                            <td>{{Permission}}</td>
 		                            <td>
-		                                <a href="/admin-users/edit/{{Id}}" class="btn btn-primary btn-sm" >
+		                                <a href="/admin-users/edit/{{Permission}}/{{Id}}" class="btn btn-primary btn-sm" >
 		                                   <i class="fa fa-edit"></i>
 		                                </a>
 		                            </td>
@@ -243,7 +243,7 @@
 		                            <td>{{Permission}}</td>
 		                            <td>{{Pseudonym}}</td>
 		                            <td>
-		                                <a href="/admin-users/edit/{{Id}}" class="btn btn-primary btn-sm" >
+		                                <a href="/admin-users/edit/{{Permission}}/{{Id}}" class="btn btn-primary btn-sm" >
 		                                   <i class="fa fa-edit"></i>
 		                                </a>
 		                            </td>
@@ -272,12 +272,14 @@
 		                            <td>{{Permission}}</td>
 									<td>{{Subscribe_date}}</td>
 		                            <td>
-										<a href="/admin-users/edit/{{Id}}" class="btn btn-primary btn-sm" >
-		                                   <i class="fa fa-edit"></i> Gia hạn
-		                                </a>
-		                                <a href="/admin-users/edit/{{Id}}" class="btn btn-primary btn-sm" >
-		                                   <i class="fa fa-edit"></i>
-		                                </a>
+										<form method="POST" action="/admin-users/renew/{{Id}}">
+											<button class="btn btn-success" >
+		                                   		<i class=""></i> Gia hạn
+											</button>
+											<a href="/admin-users/edit/{{Permission}}/{{Id}}" class="btn btn-primary btn-sm" >
+												<i class="fa fa-edit"></i>
+											</a>
+										</form>
 		                            </td>
 		                        </tr>
 								{{/each}}
@@ -304,7 +306,7 @@
 		                            <td>{{Permission}}</td>
 									<td>{{Category}}</td>
 		                            <td>
-		                                <a href="/admin-users/edit/{{Id}}" class="btn btn-primary btn-sm" >
+		                                <a href="/admin-users/edit/{{Permission}}/{{Id}}" class="btn btn-primary btn-sm" >
 		                                   <i class="fa fa-edit"></i>
 		                                </a>
 		                            </td>
