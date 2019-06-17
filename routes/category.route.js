@@ -64,7 +64,13 @@ router.get('/:catname/:id', (req, res, next) =>{
         newspaperModel.loadDetail(id),
         newspaperModel.allByCategory(cat),
         newspaperModel.allByNewPost(),
-        ]).then(([Detail, Category, NewPosts]) => {
+        newspaperModel.allByNewEach("Mobile"),
+        newspaperModel.allByNewEach("Laptop"),
+        newspaperModel.allByNewEach("AI"),
+        newspaperModel.allByNewEach("Camera"),
+        newspaperModel.allByNewEach("Design"),
+
+        ]).then(([Detail, Category, NewPosts, EachMobile, EachLaptop, EachAI, EachCamera, EachDesign]) => {
 
             Detail.forEach(detail => {
                 detail.Created_date = moment().format('YYYY-MM-DD');
@@ -86,6 +92,11 @@ router.get('/:catname/:id', (req, res, next) =>{
                 category4: Category[3],
                 category5: Category[4],
                 newPost: NewPosts,
+                eachMobile: EachMobile[0],
+                eachLaptop: EachLaptop[0],
+                eachAI: EachAI[0],
+                eachCamera: EachCamera[0],
+                eachDesign: EachDesign[0],
             });
         }).catch(next);
 })

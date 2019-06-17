@@ -5,8 +5,8 @@ var createConnection = () => {
         host: 'localhost',
         port: '3306',
         user: 'root',
-        password: 't2ntruong811',
-        database: 'newspaper'
+        password: 'thuyan123',
+        database: 'newspapers'
     });
 } 
 
