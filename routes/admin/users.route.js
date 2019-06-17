@@ -1,6 +1,7 @@
 var express = require('express');
 var userModel = require('../../models/admin/users.model');
 var categoryModel = require('../../models/admin/categories.model');
+var permissionModel = require('../../models/admin/categories.model');
 var moment = require('moment');
 var router = express.Router();
 
@@ -38,7 +39,7 @@ router.get('/:permission', (req, res, next) => {
 
   Promise.all([
     userModel.pageByPermission(permission, limit, offset),
-    userModel.countByUser(),
+    userModel.countByUser(permission),
   ]).then(([rows, count_rows]) => {
     // for (const c of res.locals.lcCategories) {
     //   if (c.Id === +id) {
@@ -58,7 +59,7 @@ router.get('/:permission', (req, res, next) => {
     rows.forEach(user => {
       user.Subscribe_date = moment(user.Subscribe_date).format('YYYY-MM-DD');
     });
-    
+
     res.render('admin/users/admin-users', {
       layout: false,
       users: rows,
@@ -170,13 +171,19 @@ router.get('/edit/:permission/:id', (req, res) =>{
   });
 })
 
-router.post('/update', (req, res) => {
+router.post('/update/:permission', (req, res, next) => {
+    permission = req.params.permission;
     userModel.update(req.body).then(n => {
-      res.redirect('/admin-users');
-    }).catch(err => {
-      console.log(err);
-      res.end('error occured.')
-    });
+      if(permission === 'admin'){
+        res.redirect('/admin-users/admin');
+      }else if(permission === 'editor'){
+        res.redirect('/admin-users/editor');
+      }else if(permission === 'writer'){
+        res.redirect('/admin-users/writer');
+      }else{
+        res.redirect('/admin-users/subscriber');
+      }
+    }).catch(next);
 })
 
 router.post('/delete', (req, res) => {

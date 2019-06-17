@@ -126,29 +126,19 @@
 								</div>
 								<div class="form-group">
 									<label for="cbbPerName" class="form-control-label">Quyền người dùng</label>
-									{{!-- <input type="text" id="txtPerName" name="permission" class="form-control" value="{{this.user.Permission}}" placeholder="Nhập quyền"> --}}
 									<select class="form-control" name="Permission" id="cbbPerName">
 										{{#each this.permissions}}
 										<option value="{{Id}}">{{Name}}</option>
 										{{/each}}
 									</select>
 								</div>
-								<div class="form-group">
-									<label for="txtUserPse" class="form-control-label">Bút danh</label>
-									<input type="text" id="txtUserPse" name="Pseudonym" class="form-control" placeholder="Nhập bút danh">
-								</div>
-								<div class="form-group">
-									<label for="cbbCatName" class="form-control-label">Tên chuyên mục</label>
-									{{!-- <input type="text" id="txtCatName" name="category" class="form-control" value="{{this.user.Category}}" autofocus placeholder="Nhập chuyên mục"> --}}
-									<select class="form-control" name="IdCategory" id="cbbCatName">
-										{{#each this.categories}}
-										<option value="{{Id}}">{{Name}}</option>
-										{{/each}}
-									</select>
+								<div class="form-group" hidden>
+									<label for="txtIdCat" class="form-control-label"></label>
+									<input type="text" id="txtIdCat" name="IdCategory" class="form-control" value="0">
 								</div>
 								<div class="form-group" hidden>
 									<label for="txtUserIsDel" class="form-control-label"></label>
-									<input type="text" id="txtUseIsDel" name="IsDelete" class="form-control" placeholder="Nhập bút danh" value="0">
+									<input type="text" id="txtUseIsDel" name="IsDelete" class="form-control" value="0">
 								</div>
 							</div>
 							<div class="modal-footer">
