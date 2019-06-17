@@ -36,6 +36,9 @@ app.use('/categories', require('./routes/category.route'));
 // tags
 app.use('/tags', require('./routes/tags.route'));
 
+//search
+app.use('/search', require('./routes/seach.route'));
+
 //log in
 app.use('/account', require('./routes/account.route'));
 

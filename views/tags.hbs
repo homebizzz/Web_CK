@@ -17,7 +17,7 @@
             <div class="col-md-5">
                 <div class="top_article_img">
                     <a href="/categories/{{Name}}/{{Id}}" target="_self">
-                        <img style="height: 200px" class="img-responsive" src="{{Thumbnail}}g" alt="feature-top">
+                        <img style="height: 200px" class="img-responsive" src="{{Thumbnail}}" alt="feature-top">
                     </a>
                 </div>
                 <!-- top_article_img -->
@@ -64,17 +64,25 @@
 
 <nav aria-label="Page navigation" class="pagination_section">
     <ul class="pagination">
-        <li>
-            <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
+        
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
         </li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next" class="active"> <span aria-hidden="true">&raquo;</span> </a>
+        {{#each this.pages}}
+            {{#if active}}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="javascript:;">{{value}} <span class="sr-only">(current)</span></a>
+                </li>
+            {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{value}}">{{value}}</a>
+                </li>
+            {{/if}}
+        {{/each}}
+        <li class="page-item">
+        <a class="page-link" href="#">Next</a>
         </li>
+
     </ul>
 </nav>
 <!-- navigation -->
