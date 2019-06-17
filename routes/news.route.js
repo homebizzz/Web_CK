@@ -21,9 +21,10 @@ router.get('/', (req, res, next) => {
             newspaperModel.allByNewEach("AI"),
             newspaperModel.allByNewEach("Camera"),
             newspaperModel.allByNewEach("Design"),
+            newspaperModel.allByPremium(),
             userModel.single(res.locals.authUser.Id),
     
-            ]).then(([NoiBat, Mobiles, Laptops, AIs, Cameras, Designs, NewPosts, EachMobile, EachLaptop, EachAI, EachCamera, EachDesign, Users]) => {
+            ]).then(([NoiBat, Mobiles, Laptops, AIs, Cameras, Designs, NewPosts, EachMobile, EachLaptop, EachAI, EachCamera, EachDesign,Premiums, Users]) => {
                 NoiBat[0].Created_date = moment(NoiBat[0].Created_date).format('YYYY-MM-DD');
                 NoiBat[1].Created_date = moment(NoiBat[1].Created_date).format('YYYY-MM-DD');
                 NoiBat[2].Created_date = moment(NoiBat[2].Created_date).format('YYYY-MM-DD');
@@ -72,6 +73,10 @@ router.get('/', (req, res, next) => {
                     temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
                 //
+
+                Premiums.forEach(temp => {
+                    temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+                });
     
                 res.render('index', {
                     newspaper_TinNong: NoiBat[0],
@@ -104,6 +109,11 @@ router.get('/', (req, res, next) => {
                     eachCamera: EachCamera[0],
                     eachDesign: EachDesign[0],
                     user: Users,
+                    premium1: Premiums[0],
+                    premium2: Premiums[1],
+                    premium3: Premiums[2],
+                    premium4: Premiums[3],
+                    premium5: Premiums[4],
                 });
         }).catch(next);
     }  

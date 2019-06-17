@@ -126,10 +126,144 @@
 </section>
 <!-- Feature News Section -->
 
+
+
 <section id="category_section" class="category_section">
 <div class="container">
 <div class="row">
 <div class="col-md-8">
+
+{{#if premium1}}
+    <div class="category_section mobile">
+        <div class="article_title header_purple">
+            <h2><a href="#" target="_self">Premium</a></h2>
+        </div>
+        <!----article_title------>
+        <div class="category_article_wrapper">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="top_article_img">
+                        <a href="/categories/{{this.premium1.Name}}/{{this.premium1.Id}}" target="_self"><img class="img-responsive"
+                                                                src="img/cat-mobi-left-1.jpg" alt="feature-top">
+                        </a>
+                    </div>
+                    <!----top_article_img------>
+                </div>
+                <div class="col-md-6">
+                    <span class="tag gold">Premium</span>
+                    <span class="tag purple">{{this.premium1.Name}}</span>
+
+                    <div class="category_article_title">
+                        <h2><a href="/categories/{{this.premium1.Name}}/{{this.premium1.Id}}" target="_self">{{this.premium1.Title}}
+                        </a></h2>
+                    </div>
+                    <!----category_article_title------>
+                    <div class="category_article_date"><a href="#">{{this.premium1.Created_date}}</a>, Người đăng: <a href="#">Minh Trí</a></div>
+                    <!----category_article_date------>
+                    <div class="category_article_content">
+                        {{this.premium1.Summary}}
+                    </div>
+                    <!----category_article_content------>
+                    <div class="media_social">
+                        <span><a href="#"><i class="fa fa-share-alt"></i>{{this.premium1.Count_Like}} </a> Like</span>
+                        <span><i class="fa fa-comments-o"></i><a href="#">4</a> Bình luận</span>
+                    </div>
+                    <!----media_social------>
+                </div>
+            </div>
+        </div>
+        <div class="category_article_wrapper">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="/categories/{{this.premium2.Name}}/{{this.premium2.Id}}"><img class="media-object" src="img/cat-mobi-sm1.jpg"
+                                            alt="Generic placeholder image"></a>
+                        </div>
+                        <div class="media-body">
+                            <span class="tag gold">Premium</span>
+                            <span class="tag purple">{{this.premium2.Name}}</span>
+
+                            <h3 class="media-heading">
+                                <a href="/categories/{{this.premium2.Name}}/{{this.premium2.Id}}" target="_self">{{this.premium2.Title}}</a>
+                            </h3>
+                            <span class="media-date"><a href="#">{{this.premium2.Created_date}}</a>, Người đăng: <a href="#">Minh Trí</a></span>
+
+                            <div class="media_social">
+                                <span><a href="#"><i class="fa fa-share-alt"></i>{{this.premium2.Id}}</a> Like</span>
+                                <span><a href="#"><i class="fa fa-comments-o"></i>40</a> Bình luận</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="/categories/{{this.premium3.Name}}/{{this.premium3.Id}}"><img class="media-object" src="img/cat-mobi-sm3.jpg"
+                                            alt="Generic placeholder image"></a>
+                        </div>
+                        <div class="media-body">
+                            <span class="tag gold">Premium</span>
+                            <span class="tag black">{{this.premium3.Name}}</span>
+
+                            <h3 class="media-heading"><a href="/categories/{{this.premium3.Name}}/{{this.premium3.Id}}" target="_self">{{this.premium3.Title}}                           
+                            </a></h3>
+                            <span class="media-date"><a href="#">{{this.premium3.Created_date}}</a>, Người đăng: <a href="#">Minh Trí</a></span>
+
+                            <div class="media_social">
+                                <span><a href="#"><i class="fa fa-share-alt"></i>{{this.premium3.Count_Like}}</a> Like</span>
+                                <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Bình luận</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="/categories/{{this.premium4.Name}}/{{this.premium4.Id}}"><img class="media-object" src="img/cat-mobi-sm2.jpg"
+                                            alt="Generic placeholder image"></a>
+                        </div>
+                        <div class="media-body">
+                            <span class="tag gold">Premium</span>
+                            <span class="tag orange">{{this.premium4.Name}}</span>
+
+                            <h3 class="media-heading">
+                                <a href="/categories/{{this.premium4.Name}}/{{this.premium4.Id}}" target="_self">{{this.premium4.Title}}</a>
+                            </h3>
+                            <span class="media-date"><a href="#">{{this.premium4.Created_date}}</a>,  Người đăng: <a href="#">Minh Trí</a></span>
+
+                            <div class="media_social">
+                                <span><a href="#"><i class="fa fa-share-alt"></i>{{this.premium4.Count_Like}}</a> Like</span>
+                                <span><a href="#"><i class="fa fa-comments-o"></i>12</a> Bình luận</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="/categories/{{this.premium5.Name}}/{{this.premium5.Id}}"><img class="media-object" src="img/cat-mobi-sm4.jpg"
+                                            alt="Generic placeholder image"></a>
+                        </div>
+                        <div class="media-body">
+                            <span class="tag gold">Premium</span>
+                            <span class="tag pink">{{this.premium5.Name}}</span>
+
+                            <h3 class="media-heading">
+                                <a href="/categories/{{this.premium5.Name}}/{{this.premium5.Id}}" target="_self">{{this.premium5.Title}}</a>
+                                </h3>
+                            <span class="media-date"><a href="#">{{this.premium5.Created_date}}</a>, Người đăng: <a href="#">Minh Trí</a></span>
+
+                            <div class="media_social">
+                                <span><a href="#"><i class="fa fa-share-alt"></i>{{this.premium5.Count_Like}}</a> Like</span>
+                                <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Bình luận</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="divider"><a href="#">Xem thêm&nbsp;&raquo;</a></p>
+    </div>
+    <!-- Premium News Section -->
+{{/if}}
+
 <div class="category_section mobile">
     <div class="article_title header_purple">
         <h2><a href="cotegories" target="_self">Mobile</a></h2>
