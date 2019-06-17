@@ -110,6 +110,28 @@ router.get('/:catname/:id', (req, res, next) =>{
                 newPost.Created_date = moment(newPost.Created_date).format('YYYY-MM-DD');
             });
 
+            //
+            EachMobile.forEach(temp => {
+                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+            });
+
+            EachLaptop.forEach(temp => {
+                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+            });
+
+            EachAI.forEach(temp => {
+                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+            });
+
+            EachCamera.forEach(temp => {
+                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+            });
+
+            EachDesign.forEach(temp => {
+                temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
+            });
+            //
+
             res.render('detail', {
                 detail: Detail[0],
                 category1: Category[0],

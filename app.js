@@ -39,6 +39,9 @@ app.use('/tags', require('./routes/tags.route'));
 //search
 app.use('/search', require('./routes/seach.route'));
 
+//
+app.use('/premium', require('./routes/premium.route'));
+
 //log in
 app.use('/account', require('./routes/account.route'));
 
