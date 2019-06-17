@@ -52,11 +52,17 @@
 				<em class="fa fa-navicon">&nbsp;</em> Quản lý bài viết <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
-					<li><a class="" href="/admin-posts">
-						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết đã duyệt
+					<li><a class="" href="/admin-posts/published">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết đã xuất bản
 					</a></li>
 					<li><a class="" href="/admin-posts/draft">
 						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết chưa duyệt
+					</a></li>
+					<li><a class="" href="/admin-posts/wait">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết chờ xuất bản
+					</a></li>
+					<li><a class="" href="/admin-posts/refuse">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết bị từ chối
 					</a></li>
 				</ul>
 			</li>
@@ -90,20 +96,40 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
+				{{#if isPublished}}
+				<li class="active">Quản lý bài viết đã xuất bản</li>
+				{{else}}
 				{{#if isDraft}}
 				<li class="active">Quản lý bài viết chưa duyệt</li>
 				{{else}}
-				<li class="active">Quản lý bài viết đã duyệt</li>
+				{{#if isWait}}
+				<li class="active">Quản lý bài viết chờ xuất bản</li>
+				{{else}}
+				{{#if isRefuse}}
+				<li class="active">Quản lý bài viết bị từ chối</li>
+				{{/if}}
+				{{/if}}
+				{{/if}}
 				{{/if}}
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
+				{{#if isPublished}}
+				<h1 class="page-header">Quản lý bài viết đã xuất bản</h1>
+				{{else}}
 				{{#if isDraft}}
 				<h1 class="page-header">Quản lý bài viết chưa duyệt</h1>
 				{{else}}
-				<h1 class="page-header">Quản lý bài viết đã duyệt</h1>
+				{{#if isWait}}
+				<h1 class="page-header">Quản lý bài viết chờ xuất bản</h1>
+				{{else}}
+				{{#if isRefuse}}
+				<h1 class="page-header">Quản lý bài viết bị từ chối</h1>
+				{{/if}}
+				{{/if}}
+				{{/if}}
 				{{/if}}
 			</div>
 		</div><!--/.row-->
@@ -149,6 +175,9 @@
 									<td>{{user_Name}}</td>
 		                            <td>{{news_cr_date}}</td>
 		                            <td>
+										 <a href="/admin-posts/edit/{{Id}}" class="btn btn-primary btn-sm" >
+		                                   <i class="fa fa-edit"></i>
+		                                </a>
 		                                <a href="#" class="btn btn-secondary">
 		                                    <i class="fa fa-location-arrow"> Chi tiết</i>
 		                                </a>
