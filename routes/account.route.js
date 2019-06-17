@@ -83,15 +83,35 @@ router.post('/login', (req , res, next)=>{
 })
 
 router.post('/changeInfo', (req , res, next)=>{
-  var entity={
+  console.log(req.body);
+  console.log(req.user);
+  if(req.user.Permission===4)
+  {
+    var entity={
+      Id: req.user.Id,
+      Name: req.body.username,
+      Email: req.body.email,
+      Pseudonym: null
+    }
+  }
+  else{
+    var entity={
     Id: req.user.Id,
     Name: req.body.username,
     Email: req.body.email,
-    Pseudonym: req.body.pseudonym,
-    Permission: req.body.permission
+    Pseudonym: req.body.pseudonym
+    }
   }
-  userModel.update(entity).then( n => {
-    res.redirect('/account/profile');
+ 
+  userModel.updateInfo(entity).then( n => {
+    if(req.user.Permission==4)
+    {
+      res.redirect('/account/userprofile');
+    }
+    else
+    {
+      res.redirect('/account/profile');
+    }
   }).catch(err => {
     console.log(err);
     res.end('error occured.')
@@ -111,7 +131,14 @@ router.post('/changePasword', (req ,  res, next)=>{
         Password: hash
       }
       userModel.updatePassword(entity).then( n => {
-        res.redirect('/account/profile');
+        if(req.user.Permission==4)
+        {
+          res.redirect('/account/userprofile');
+        }
+        else
+        {
+          res.redirect('/account/profile');
+        }
       }).catch(err => {
         res.end('error occured.')
       });
@@ -124,7 +151,6 @@ router.post('/changePasword', (req ,  res, next)=>{
 })
 
 router.post('/deviceroute', (req, res, next) => {
-  console.log(res.locals.authUser);
   if(res.locals.authUser.Permission==1)
   {
     res.redirect('/account/profile');
@@ -136,7 +162,11 @@ router.post('/deviceroute', (req, res, next) => {
 })
 
 router.get('/userprofile', (req, res, next) => {
-  res.render('userProfile',{layout: false});
+  userModel.singleByEmail(res.locals.authUser.Email)
+  .then(value =>{
+    var expirationdate = moment(value.Subscribe_date).format('YYYY-MM-DD');
+    res.render('userprofile',{layout: false, user : value, expirationdatehbs: expirationdate});
+  })
 })
 
 router.get('/profile', (req, res, next) => {
