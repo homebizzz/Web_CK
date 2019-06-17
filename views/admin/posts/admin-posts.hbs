@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Tech - Quản lý nhãn</title>
+	<title>Tech - Quản lý bài viết</title>
 	<link href="../../../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../../css/font-awesome.min.css" rel="stylesheet">
 	<link href="../../../css/datepicker3.css" rel="stylesheet">
@@ -15,6 +15,8 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+
+	<script src="../../../ckeditor.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -59,7 +61,7 @@
 				</ul>
 			</li>
 			<li><a href="/admin-categories"><em class="fa fa-cubes">&nbsp;</em> Quản lý chuyên mục</a></li>
-			<li class="active"><a href="/admin-tags"><em class="fa fa-tags">&nbsp;</em> Quản lý nhãn</a></li>
+			<li><a href="/admin-tags"><em class="fa fa-tags">&nbsp;</em> Quản lý nhãn</a></li>
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-2">
 				<em class="fa fa-navicon">&nbsp;</em> Quản lý người dùng <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
@@ -88,46 +90,96 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Quản lý nhãn</li>
+				{{#if isDraft}}
+				<li class="active">Quản lý bài viết chưa duyệt</li>
+				{{else}}
+				<li class="active">Quản lý bài viết đã duyệt</li>
+				{{/if}}
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Quản lý nhãn</h1>
+				{{#if isDraft}}
+				<h1 class="page-header">Quản lý bài viết chưa duyệt</h1>
+				{{else}}
+				<h1 class="page-header">Quản lý bài viết đã duyệt</h1>
+				{{/if}}
 			</div>
 		</div><!--/.row-->
 
 		<div class="row">
 			<!-- Viết tiếp nội dung ở đây -->
+			<section id="actions" class="py-4 mb-4 bg-faded">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-md-4">
+	                        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
+	                            <i class="fa fa-plus"></i> Thêm bài viết mới
+	                        </a>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
 
-			<!-- ADD TAG MODAL -->
-			<div>
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header bg-primary">
-							<h5 class="modal-title text-white" id="addPostModalLabel">Thêm nhãn</h5>
-						</div>
-						<form method="POST">
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="txtTagName" class="form-control-label">Tên nhãn</label>
-									<input type="text" id="txtTagName" name="Name" class="form-control" autofocus placeholder="Nhập tên nhãn">
-							</div>
-						</div>
-						<div class="modal-footer">
-							<a class="btn btn-primary" data-dismiss="modal" href="/admin-tags">
-								<i class="fa fa-backward" aria-hidden="true"></i> Quay lại</a>
-							<button type="submit" class="btn btn-success" data-dismiss="modal">
-								<i class="fa fa-check" aria-hidden="true"></i>
-								Lưu
-							</button>
-						</div>
-						</form>
-					</div>
-				</div>
-			</div>
+	        <section id="posts">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col">
+		                    <div class="card-header">
+		                        <h4>&nbsp;</h4>
+		                    </div>
+		                    <table class="table table-striped">
+		                        <thead class="thead-inverse">
+		                        <tr>
+		                            <th>#</th>
+		                            <th>Tiêu đề</th>
+		                            <th>Chuyên mục</th>
+									<th>Tác giả</th>
+		                            <th>Ngày đăng</th>
+		                            <th></th>
+		                        </tr>
+		                        </thead>
+		                        <tbody>
+								{{#each this.posts}}
+		                        <tr>
+		                            <td scope="row">{{news_Id}}</td>
+		                            <td>{{news_Title}}</td>
+		                            <td>{{cat_Name}}</td>
+									<td>{{user_Name}}</td>
+		                            <td>{{news_cr_date}}</td>
+		                            <td>
+		                                <a href="#" class="btn btn-secondary">
+		                                    <i class="fa fa-location-arrow"> Chi tiết</i>
+		                                </a>
+		                            </td>
+		                        </tr>
+								{{/each}}
+		                        </tbody>
+		                    </table>
+
+		                    <nav class="ml-4">
+		                        <ul class="pagination">
+									{{#each this.pages}}
+									{{#if active}}
+									<li class="page-item active" aria-current="page">
+										<a class="page-link" href="javascript:;">{{value}} <span class="sr-only">(current)</span></a>
+									</li>
+									{{else}}
+									<li class="page-item">
+										<a class="page-link" href="?page={{value}}">{{value}}</a>
+									</li>
+									{{/if}}
+									{{/each}}
+		                        </ul>
+		                    </nav>
+		                </div>
+		            </div>
+		        </div>
+		    </section>
+
 		</div>
+
 	</div>
 	<!--/.main-->
 
@@ -139,6 +191,9 @@
 	<script src="../../../js/easypiechart-data.js"></script>
 	<script src="../../../js/bootstrap-datepicker.js"></script>
 	<script src="../../../js/custom.js"></script>
-	
+	<script>
+		CKEDITOR.replace('editor1');
+		CKEDITOR.replace('editor2');
+	</script>
 </body>
 </html>

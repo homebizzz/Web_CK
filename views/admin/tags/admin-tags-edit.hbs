@@ -46,10 +46,38 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="/admin-posts"><em class="fa fa-pencil-square-o">&nbsp;</em> Quản lý bài viết</a></li>
+			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
+				<em class="fa fa-navicon">&nbsp;</em> Quản lý bài viết <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="sub-item-1">
+					<li><a class="" href="/admin-posts">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết đã duyệt
+					</a></li>
+					<li><a class="" href="/admin-posts/draft">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết chưa duyệt
+					</a></li>
+				</ul>
+			</li>
 			<li><a href="/admin-categories"><em class="fa fa-cubes">&nbsp;</em> Quản lý chuyên mục</a></li>
 			<li class="active"><a href="/admin-tags"><em class="fa fa-tags">&nbsp;</em> Quản lý nhãn</a></li>
-			<li><a href="/admin-users"><em class="fa fa-users">&nbsp;</em> Quản lý người dùng</a></li>
+			<li class="parent "><a data-toggle="collapse" href="#sub-item-2">
+				<em class="fa fa-navicon">&nbsp;</em> Quản lý người dùng <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="sub-item-2">
+					<li><a class="" href="/admin-users/admin">
+						<span class="fa fa-users">&nbsp;</span> Admin
+					</a></li>
+					<li><a class="" href="/admin-users/editor">
+						<span class="fa fa-users">&nbsp;</span> Editor
+					</a></li>
+					<li><a class="" href="/admin-users/subscriber">
+						<span class="fa fa-users">&nbsp;</span> Subscriber
+					</a></li>
+					<li><a class="" href="/admin-users/writer">
+						<span class="fa fa-users">&nbsp;</span> Writer
+					</a></li>
+				</ul>
+			</li>
 			<li><a href="/sign-in-up"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->

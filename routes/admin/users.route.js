@@ -1,9 +1,11 @@
 var express = require('express');
 var userModel = require('../../models/admin/users.model');
-var categoryModel = require('../../models/admin/categories.model')
+var categoryModel = require('../../models/admin/categories.model');
+var moment = require('moment');
 var router = express.Router();
 
-router.get('/', (req, res, next) => {
+
+router.get('/admin', (req, res, next) => {
     var id = req.params.id;
   var page = req.query.page || 1;
   if (page < 1) page = 1;
@@ -12,7 +14,7 @@ router.get('/', (req, res, next) => {
   var offset = (page - 1) * limit;
 
   Promise.all([
-    userModel.pageByUser(limit, offset),
+    userModel.pageByPermission('Admin', limit, offset),
     userModel.countByUser(),
   ]).then(([rows, count_rows]) => {
     // for (const c of res.locals.lcCategories) {
@@ -33,9 +35,122 @@ router.get('/', (req, res, next) => {
     res.render('admin/users/admin-users', {
       layout: false,
       users: rows,
-      pages
+      pages,
+      isAdmin: true
     });
   }).catch(next);
+})
+
+router.get('/editor', (req, res, next) => {
+  var id = req.params.id;
+var page = req.query.page || 1;
+if (page < 1) page = 1;
+
+var limit = 6;
+var offset = (page - 1) * limit;
+
+Promise.all([
+  userModel.pageByPermission('Editor', limit, offset),
+  userModel.countByUser(),
+]).then(([rows, count_rows]) => {
+  // for (const c of res.locals.lcCategories) {
+  //   if (c.Id === +id) {
+  //     c.isActive = true;
+  //   }
+  // }
+
+  var total = count_rows[0].total;
+  var nPages = Math.floor(total / limit);
+  if (total % limit > 0) nPages++;
+  var pages = [];
+  for (i = 1; i <= nPages; i++) {
+    var obj = { value: i, active: i === +page };
+    pages.push(obj);
+  }
+
+  res.render('admin/users/admin-users', {
+    layout: false,
+    users: rows,
+    pages,
+    isEditor: true
+  });
+}).catch(next);
+})
+
+router.get('/subscriber', (req, res, next) => {
+  var id = req.params.id;
+var page = req.query.page || 1;
+if (page < 1) page = 1;
+
+var limit = 6;
+var offset = (page - 1) * limit;
+
+Promise.all([
+  userModel.pageByPermission('Subscriber', limit, offset),
+  userModel.countByUser(),
+]).then(([rows, count_rows]) => {
+  // for (const c of res.locals.lcCategories) {
+  //   if (c.Id === +id) {
+  //     c.isActive = true;
+  //   }
+  // }
+
+  rows.forEach(user => {
+    user.Subscribe_date = moment().format('YYYY-MM-DD');
+});
+
+  var total = count_rows[0].total;
+  var nPages = Math.floor(total / limit);
+  if (total % limit > 0) nPages++;
+  var pages = [];
+  for (i = 1; i <= nPages; i++) {
+    var obj = { value: i, active: i === +page };
+    pages.push(obj);
+  }
+
+  res.render('admin/users/admin-users', {
+    layout: false,
+    users: rows,
+    pages,
+    isSubscriber: true
+  });
+}).catch(next);
+})
+
+router.get('/writer', (req, res, next) => {
+  var id = req.params.id;
+var page = req.query.page || 1;
+if (page < 1) page = 1;
+
+var limit = 6;
+var offset = (page - 1) * limit;
+
+Promise.all([
+  userModel.pageByPermission('Writer', limit, offset),
+  userModel.countByUser(),
+]).then(([rows, count_rows]) => {
+  // for (const c of res.locals.lcCategories) {
+  //   if (c.Id === +id) {
+  //     c.isActive = true;
+  //   }
+  // }
+
+  var total = count_rows[0].total;
+  var nPages = Math.floor(total / limit);
+  if (total % limit > 0) nPages++;
+  var pages = [];
+  for (i = 1; i <= nPages; i++) {
+    var obj = { value: i, active: i === +page };
+    pages.push(obj);
+  }
+
+  res.render('admin/users/admin-users', {
+    layout: false,
+    users: rows,
+    pages,
+    isWriter: true
+  });
+}).catch(next);
 })
 
 router.get('/add', (req, res) => {
@@ -103,7 +218,7 @@ router.post('/update', (req, res) => {
       res.end('error occured.')
     });
 })
-  
+
 router.post('/delete', (req, res) => {
     userModel.delete(req.body.Id).then(n => {
         res.redirect('/admin-users');
