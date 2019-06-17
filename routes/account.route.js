@@ -57,7 +57,7 @@ router.post('/register', (req ,  res, next)=>{
         Permission: 4
     }
     userModel.add(entity).then(id =>{
-        res.redirect('/');
+        res.redirect('/account/sign-in-up');
     })
 })
 
