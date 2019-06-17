@@ -33,10 +33,8 @@ app.use('/categoriesSon', require('./routes/categorySon.route'));
 // chi tiet 1 bai viet
 app.use('/categories', require('./routes/category.route'));
 
-// trang chu cua subcriber co dki
-app.get('/subcriber', (req, res) => {
-    res.render('indexSubcriber');
-})
+// tags
+app.use('/tags', require('./routes/tags.route'));
 
 //log in
 app.use('/account', require('./routes/account.route'));
