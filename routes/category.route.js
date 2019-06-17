@@ -57,19 +57,35 @@ router.get('/:catname', (req, res, next) => {
 })
 
 router.get('/:catname/:id', (req, res, next) =>{
+    let cat = req.params.catname;
     let id = req.params.id;
     console.log(id);
     Promise.all([
         newspaperModel.loadDetail(id),
-        ]).then(([Detail]) => {
+        newspaperModel.allByCategory(cat),
+        newspaperModel.allByNewPost(),
+        ]).then(([Detail, Category, NewPosts]) => {
 
             Detail.forEach(detail => {
                 detail.Created_date = moment().format('YYYY-MM-DD');
             });
 
+            Category.forEach(categories => {
+                categories.Created_date = moment().format('YYYY-MM-DD');
+            });
+
+            NewPosts.forEach(newPost => {
+                newPost.Created_date = moment().format('YYYY-MM-DD');
+            });
+
             res.render('detail', {
-                detail: Detail,
-                
+                detail: Detail[0],
+                category1: Category[0],
+                category2: Category[1],
+                category3: Category[2],
+                category4: Category[3],
+                category5: Category[4],
+                newPost: NewPosts,
             });
         }).catch(next);
 })
