@@ -214,9 +214,6 @@ router.get('/', (req, res, next) => {
                     var currentDate = moment();
                     var expiryDate = Users[0].Subscribe_date;
                     var isafter = moment(expiryDate).isAfter(currentDate);
-                    console.log(currentDate);
-                    console.log(expiryDate);
-                    console.log(isafter);
                     if(isafter)
                     {
                         res.render('index', {
