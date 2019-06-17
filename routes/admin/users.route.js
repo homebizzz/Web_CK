@@ -8,8 +8,6 @@ router.get('/:permission', (req, res, next) => {
   var permission = req.params.permission;
   var id = req.params.id;
 
-  var isAdmin, isEditor, isWriter, isSubscriber;
-
   var page = req.query.page || 1;
   if (page < 1) page = 1;
 
