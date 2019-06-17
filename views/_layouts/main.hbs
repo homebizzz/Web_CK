@@ -100,15 +100,42 @@
                                     </a>
                                     {{/each}}
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="javascript: $('#frmroute').submit();">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        Profile
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript: $('#frmSignout').submit();">
-                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                        Sign Out
-                                        </a>
+                                        {{#if isSubscriber}}
+                                            <a class="dropdown-item" href="javascript: $('#frmroute').submit();">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            Profile
+                                            </a>
+                                        {{/if}}
+                                        {{#if isAdmin}}
+                                            <a class="dropdown-item" href="javascript: $('#frmroute').submit();">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            Profile
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/admin-posts">
+                                            <i class="fa-caret-square-o-up" aria-hidden="true"></i>
+                                            dartboard
+                                            </a>
+                                        {{/if}}
+                                        {{#if isWriter}}
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/writer-posts">
+                                            <i class="fa-caret-square-o-up" aria-hidden="true"></i>
+                                            dartboard
+                                            </a>
+                                        {{/if}}
+                                        {{#if isEditor}}
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/editor-posts">
+                                            <i class="fa-caret-square-o-up" aria-hidden="true"></i>
+                                            dartboard
+                                            </a>
+                                        {{/if}}
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="javascript: $('#frmSignout').submit();">
+                                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                            Sign Out
+                                            </a>
                                     </div>
                                 </li>
                             {{else}}
