@@ -372,6 +372,8 @@ router.get('/', (req, res, next) => {
                     temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
                 });
                 //
+
+                console.log(Mobiles[0]);
     
                 res.render('index', {
                     newspaper_TinNong: NoiBat[0],

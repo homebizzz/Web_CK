@@ -11,7 +11,7 @@
             <div class="col-md-5">
                 <div class="top_article_img">
                     <a href="/categories/{{Name}}/{{Id}}" target="_self">
-                        <img style="height: 200px" class="img-responsive" src="img/cam_left1.jpg" alt="feature-top">
+                        <img style="height: 200px" class="img-responsive" src="{{Thumbnail}}" alt="feature-top">
                     </a>
                 </div>
                 <!-- top_article_img -->
@@ -85,7 +85,7 @@
     {{#each this.newPost}}
     <div class="media">
         <div class="media-left">
-            <a href="/categories/{{Name}}/{{Id}}"><img style="width: 100px; height: 100px" class="media-object" src="img/pop_right1.jpg" alt="Generic placeholder image"></a>
+            <a href="/categories/{{Name}}/{{Id}}"><img style="width: 100px; height: 100px" class="media-object" src="{{Thumbnail}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
 
@@ -125,7 +125,7 @@
 
     <div class="media">
         <div class="media-left">
-            <a href="/categories/Mobile/{{this.eachMobile.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="img/pop_right4.jpg" alt="Generic placeholder image"></a>
+            <a href="/categories/Mobile/{{this.eachMobile.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="{{this.eachMobile.Thumbnail}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
 
@@ -149,7 +149,7 @@
 
     <div class="media">
         <div class="media-left">
-            <a href="/categories/Laptop/{{this.eachLaptop.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="img/pop_right4.jpg" alt="Generic placeholder image"></a>
+            <a href="/categories/Laptop/{{this.eachLaptop.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="{{this.eachLaptop.Thumbnail}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
 
@@ -173,7 +173,7 @@
 
     <div class="media">
         <div class="media-left">
-            <a href="/categories/AI/{{this.eachAI.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="img/pop_right4.jpg" alt="Generic placeholder image"></a>
+            <a href="/categories/AI/{{this.eachAI.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="{{this.eachAI.Thumbnail}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
 
@@ -197,7 +197,7 @@
 
     <div class="media">
         <div class="media-left">
-            <a href="/categories/Camera/{{this.eachCamera.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="img/pop_right4.jpg" alt="Generic placeholder image"></a>
+            <a href="/categories/Camera/{{this.eachCamera.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="{{this..eachCamera.Thumbnail}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
 
@@ -221,7 +221,7 @@
 
     <div class="media">
         <div class="media-left">
-            <a href="/categories/Design/{{this.eachDesign.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="img/pop_right4.jpg" alt="Generic placeholder image"></a>
+            <a href="/categories/Design/{{this.eachDesign.Id}}"><img style="width: 100px; height: 100px" class="media-object" src="{{this.eachDesign.Thumbnail}}" alt="Generic placeholder image"></a>
         </div>
         <div class="media-body">
 
