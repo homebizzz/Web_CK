@@ -92,9 +92,8 @@ router.get('/:catname/:id', (req, res, next) =>{
         newspaperModel.allByNewEach("AI"),
         newspaperModel.allByNewEach("Camera"),
         newspaperModel.allByNewEach("Design"),
-        newspaperModel.loadCommet(id),
 
-        ]).then(([Detail, Category, NewPosts, EachMobile, EachLaptop, EachAI, EachCamera, EachDesign, Comments]) => {
+        ]).then(([Detail, Category, NewPosts, EachMobile, EachLaptop, EachAI, EachCamera, EachDesign]) => {
 
             Detail.forEach(detail => {
                 detail.Created_date = moment(detail.Created_date).format('YYYY-MM-DD');
@@ -129,10 +128,6 @@ router.get('/:catname/:id', (req, res, next) =>{
                 temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
             });
             //
-            Comments.forEach(temp => {
-                temp.cmCreate_date = moment(temp.Created_date).format('YYYY-MM-DD');
-            });
-
 
             res.render('detail', {
                 detail: Detail[0],
@@ -147,29 +142,8 @@ router.get('/:catname/:id', (req, res, next) =>{
                 eachAI: EachAI[0],
                 eachCamera: EachCamera[0],
                 eachDesign: EachDesign[0],
-                comments : Comments,
             });
         }).catch(next);
-})
-
-router.post('/comment', (req , res, next)=>{
-    console.log("12345");
-    console.log(req.body.link);
-    console.log("12345");
-
-    if(res.locals.authUser)
-    {
-        var entity= {
-            Content: req.body.comment,
-            User_id: res.locals.authUser.Id,
-            Created_date: moment().format('YYYY-MM-DD'),
-            News_id: req.body.id,
-        }
-        newspaperModel.addComment(entity).then(n => {
-            
-            res.redirect(req.body.link);
-        })
-    }
 })
 
 module.exports = router;
