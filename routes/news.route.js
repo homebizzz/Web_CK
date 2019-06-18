@@ -79,7 +79,6 @@ router.get('/', (req, res, next) => {
 
                 if(Users[0].Permission==1)
                 {
-                    console.log('so 1 sdfsdfdsfsdfdsfsd');
                     res.render('index', {
                         newspaper_TinNong: NoiBat[0],
                         newspaper_NoiBat1: NoiBat[1],
