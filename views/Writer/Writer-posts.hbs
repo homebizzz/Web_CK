@@ -119,7 +119,7 @@
 	            <div class="container">
 	                <div class="row">
 	                    <div class="col-md-4">
-	                        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
+	                        <a href="/writer-posts/add/post" class="btn btn-primary btn-block">
 	                            <i class="fa fa-plus"></i> Thêm bài viết mới
 	                        </a>
 	                    </div>
@@ -157,9 +157,6 @@
 		                            <td>{{news_cr_date}}</td>
 									<td>{{news_pb_date}}</td>
 		                            <td>
-										<a href="/writer-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
-										<i class="fa fa-edit"></i>
-										</a>
 										<a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
 											<i class="fa fa-location-arrow"> Chi tiết</i>
 										</a>
@@ -193,14 +190,9 @@
 									<td>{{news_pb_date}}</td>
 		                            <td>
 										<form method="POST" action="/writer-posts/publish/{{news_Id}}">
-											{{!-- <button class="btn btn-success"><i class="fa fa-check"></i>
-											</button> --}}
-											<a href="/writer-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
-											<i class="fa fa-edit"></i>
-											</a>
-											{{!-- <a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
+											<a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
 												<i class="fa fa-location-arrow"> Chi tiết</i>
-											</a> --}}
+											</a>
 										</form>
 		                            </td>
 		                        </tr>
@@ -229,14 +221,9 @@
 		                            <td>{{news_cr_date}}</td>
 		                            <td>
 										<form method="POST" action="/writer-posts/publish/{{news_Id}}">
-											{{!-- <button class="btn btn-success"><i class="fa fa-check"></i>
-											</button> --}}
 											<a href="/writer-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
 											<i class="fa fa-edit"></i>
 											</a>
-											{{!-- <a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
-												<i class="fa fa-location-arrow"> Chi tiết</i>
-											</a> --}}
 										</form>
 		                            </td>
 		                        </tr>
