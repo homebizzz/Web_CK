@@ -89,6 +89,55 @@ router.get('/:status', (req, res, next) => {
     }
 })
 
+router.get('/add/post', (req, res) => {
+    if(res.locals.authUser)
+    {   
+        if(res.locals.authUser.Permission === 1){
+    Promise.all([userModel.single(res.locals.authUser.Id),
+                catsModel.allofCatSon(),
+                tagsModel.all()
+                ]).then(([value, categories, tags]) =>{
+                    res.render('admin/posts/admin-posts-add',{
+                        layout: false,
+                        user: value,
+                        categories,
+                        tags
+                });
+            })
+        }
+        else{
+            res.end('Quyen truy cap khong hop le');
+        }
+    }
+    else{
+    res.redirect('/account/sign-in-up');
+    }
+  })
+  
+router.post('/add/post', (req, res) => {
+    var entity = {
+     Title: req.body.Title,
+     CategorySon_Id: parseInt(req.body.CategorySon_Id),
+     Created_date: moment().format('YYYY-MM-DD'),
+     Thumbnail: req.body.Thumbnail,
+     Content: req.body.Content,
+     Is_premium: 0,
+     status: 1,
+     Count_Like: 0,
+     Summary: req.body.Summary, 
+     Id_Author: res.locals.authUser.Id,
+     tag1: parseInt(req.body.tag1),
+     tag2: parseInt(req.body.tag2),
+     Publish_date: moment().format('YYYY-MM-DD')
+    }
+
+    postsModel.add(entity).then(id => {
+        res.redirect('/admin-posts/published');
+    }).catch(err => {
+        res.end('error occured.');
+    });
+})
+
 router.get('/edit/post/:id', (req, res, next) =>{
     if(res.locals.authUser.Permission==1)
     {

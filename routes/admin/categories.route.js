@@ -52,7 +52,7 @@ router.get('/', (req, res, next) => {
   }
 })
 
-router.get('/add', (req, res) => {
+router.get('/add/post', (req, res) => {
   userModel.single(res.locals.authUser.Id).then(value=>{
     res.render('admin/categories/admin-categories-add',{
       layout: false,
@@ -66,7 +66,7 @@ router.get('/add', (req, res) => {
 //   res.redirect('/admin-categories',{user:value});
 // })
 
-router.post('/add', (req, res) => {
+router.post('/add/post', (req, res) => {
   categoryModel.add(req.body).then(id => {
     res.redirect('/admin-categories');
   }).catch(err => {
