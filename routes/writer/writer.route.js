@@ -89,14 +89,59 @@ router.get('/:status', (req, res, next) => {
     }
 })
 
+router.get('/add/post', (req, res) => {
+    if(res.locals.authUser)
+    {   
+        if(res.locals.authUser.Permission === 2){
+            Promise.all([userModel.single(res.locals.authUser.Id),
+                        catsModel.allofCatSon(),
+                        tagsModel.all()
+                        ]).then(([value, categories, tags]) =>{
+                            res.render('Writer/writer-posts-add',{
+                                layout: false,
+                                user: value,
+                                categories,
+                                tags
+                        });
+                    })
+        }
+        else{
+            res.end('Quyen truy cap khong hop le');
+        }
+    }
+    else{
+    res.redirect('/account/sign-in-up');
+    }
+  })
+  
+router.post('/add/post', (req, res) => {
+    var entity = {
+     Title: req.body.Title,
+     CategorySon_Id: parseInt(req.body.CategorySon_Id),
+     Created_date: moment().format('YYYY-MM-DD'),
+     Thumbnail: req.body.Thumbnail,
+     Content: req.body.Content,
+     Is_premium: 0,
+     status: 3,
+     Count_Like: 0,
+     Summary: req.body.Summary, 
+     Id_Author: res.locals.authUser.Id,
+     tag1: parseInt(req.body.tag1),
+     tag2: parseInt(req.body.tag2),
+     Publish_date: null
+    }
+
+    postsModel.add(entity).then(id => {
+        res.redirect('/writer-posts/wait');
+    }).catch(err => {
+        res.end('error occured.');
+    });
+})
+
 router.post('/update/:status', (req, res, next) => {
     var status = req.params.status;
     postsModel.update(req.body).then(n => {
-        if(status === 'published'){
-            res.redirect('/writer-posts/published');
-        }else if(status === 'wait'){
-           res.redirect('/writer-posts/wait');
-        }else if(status === 'draft'){
+        if(status === 'draft'){
             res.redirect('/writer-posts/draft');
         }else{
             res.redirect('/writer-posts/refuse');
@@ -105,20 +150,20 @@ router.post('/update/:status', (req, res, next) => {
 })
 
 router.get('/edit/post/:id', (req, res, next) =>{
-    if(res.locals.authUser.Permission==2)
+    if(res.locals.authUser.Permission == 2)
     {
         var id = req.params.id;
-    if (isNaN(id)) {
-        userModel.single(res.locals.authUser.Id).then(value=>{
-            res.render('writer/posts/writer-posts-edit', {
-                error: true,
-                layout: false,
-                user: value
-            });
-        })
-    }
+        if (isNaN(id)) {
+            userModel.single(res.locals.authUser.Id).then(value=>{
+                res.render('Writer/writer-posts-edit', {
+                    error: true,
+                    layout: false,
+                    user: value
+                });
+            })
+        }
 
-    Promise.all([postsModel.singleForEdit(id),
+    Promise.all([postsModel.singleForEdit(id, res.locals.authUser.Id),
         catsModel.allofCatSon(),
         tagsModel.all()
     ]).then(([rows, cats, tags]) => {
@@ -150,7 +195,7 @@ router.get('/edit/post/:id', (req, res, next) =>{
         userModel.single(res.locals.authUser.Id),
         ]).then(([catSon, tag1, tag2, Users]) => {
                 if (rows.length > 0) {
-                res.render('writer/writer-posts-edit', {
+                res.render('Writer/writer-posts-edit', {
                     error: false,
                     layout: false,
                     post: rows[0],
@@ -166,7 +211,7 @@ router.get('/edit/post/:id', (req, res, next) =>{
                     user: Users
                 });
                 } else {
-                res.render('writer/writer-posts-edit', {
+                res.render('Writer/writer-posts-edit', {
                     error: true,
                     layout: false,
                     user: Users

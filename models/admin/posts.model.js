@@ -70,11 +70,6 @@ module.exports = {
         return db.add('newspapers', entity);
     },
 
-    adminAdd: (Title, CategorySon_Id, Created_date, Thumbnail, Content, Summary, Id_Author, tag1, tag2)=> {
-        return db.load(`INSERT INTO newspapers 
-                        VALUES (${Title}, ${CategorySon_Id}, ${Created_date}, ${Thumbnail}, ${Content}, 0, 1, 0, ${Summary}, ${Id_Author}, ${tag1}, ${tag2}, NULL`)
-    },
-
     update: entity => {
         return db.update('newspapers', 'Id', entity);
     },
