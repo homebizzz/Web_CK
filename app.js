@@ -73,23 +73,12 @@ app.use('/admin-categories', require('./routes/admin/categories.route'));
 app.use('/admin-posts', require('./routes/admin/posts.route'));
 app.use('/admin-tags', require('./routes/admin/tags.route'));
 app.use('/admin-users', require('./routes/admin/users.route'));
-app.use('/editor-users', require('./routes/admin/users.route'));
-app.use('/writer-users', require('./routes/Writer/writer.route'));
-// app.use('/editor-posts', require('./routes/admin/posts.route'));
-//PROFILE
-// app.use('/profile', require('./routes/profile.route'));
 
-app.get('/BTV-post', (req, res)=> {
-    app.engine('hbs', exphbs({
-        defaultLayout: 'mainAdmin.hbs',
-        layoutsDir: 'views/_layouts'
-    }));
-    res.render('BTV/BTV-post');
-})
+//Writer
+app.use('/writer-posts', require('./routes/writer/writer.route'));
 
-//////////
-app.use('/writer', require('./routes/writer/upload.route'));
-
+//Editor
+// app.use('/editor-posts', require('./routes/editor/editor.route'));
 
 app.get('/Writer-detail', (req, res)=> {
     app.engine('hbs', exphbs({

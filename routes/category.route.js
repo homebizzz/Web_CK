@@ -66,8 +66,6 @@ router.get('/:catname', (req, res, next) => {
             EachDesign.forEach(temp => {
                 temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
             });
-            //
-            console.log(Mobiles[0]);
 
             res.render('categories', {
                 mobile: Mobiles,
@@ -85,7 +83,6 @@ router.get('/:catname', (req, res, next) => {
 router.get('/:catname/:id', (req, res, next) =>{
     let cat = req.params.catname;
     let id = req.params.id;
-    console.log(id);
     Promise.all([
         newspaperModel.loadDetail(id),
         newspaperModel.allByCategory(cat),

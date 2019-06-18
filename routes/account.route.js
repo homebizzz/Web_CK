@@ -20,8 +20,6 @@ router.get('/is-available', (req, res, next) => {
 router.get('/is-available1', (req, res, next) => {
   var email = req.query.email;
   userModel.singleByEmail(email).then(rows => {
-    // console.log(rows[0].Email);
-    // console.log(req.user);
     if (rows.length > 0 && rows[0].Email != req.user.Email){
       return res.json(false);
     }
@@ -77,8 +75,6 @@ router.post('/login', (req , res, next)=>{
 })
 
 router.post('/changeInfo', (req , res, next)=>{
-  console.log(req.body);
-  console.log(req.user);
   if(req.user.Permission===4)
   {
     var entity={
@@ -107,7 +103,6 @@ router.post('/changeInfo', (req , res, next)=>{
       res.redirect('/account/profile');
     }
   }).catch(err => {
-    console.log(err);
     res.end('error occured.')
   });
 })
@@ -145,13 +140,13 @@ router.post('/changePasword', (req ,  res, next)=>{
 })
 
 router.post('/deviceroute', (req, res, next) => {
-  if(res.locals.authUser.Permission==1)
+  if(res.locals.authUser.Permission==4)
   {
-    res.redirect('/account/profile');
+    res.redirect('/account/userprofile');
   }
   else
   {
-    res.redirect('/account/userprofile');
+    res.redirect('/account/profile');
   }
 })
 

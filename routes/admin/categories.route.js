@@ -1,5 +1,6 @@
 var express = require('express');
 var categoryModel = require('../../models/admin/categories.model');
+var userModel = require('../../models/user.model');
 
 var router = express.Router();
 
@@ -17,7 +18,8 @@ router.get('/', (req, res, next) => {
       Promise.all([
         categoryModel.pageByCat(limit, offset),
         categoryModel.countByCat(),
-      ]).then(([rows, count_rows]) => {
+        userModel.single(res.locals.authUser.Id),
+      ]).then(([rows, count_rows, Users]) => {
         // for (const c of res.locals.lcCategories) {
         //   if (c.Id === +id) {
         //     c.isActive = true;
@@ -32,11 +34,12 @@ router.get('/', (req, res, next) => {
           var obj = { value: i, active: i === +page };
           pages.push(obj);
         }
-    
+        
         res.render('admin/categories/admin-categories', {
           layout: false,
           categories: rows,
-          pages
+          pages,
+          user: Users
         });
       }).catch(next);
     }
@@ -50,16 +53,23 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/add', (req, res) => {
-  res.render('admin/categories/admin-categories-add',{
-    layout: false,
-  });
+  userModel.single(res.locals.authUser.Id).then(value=>{
+    res.render('admin/categories/admin-categories-add',{
+      layout: false,
+      user: value
+    });
+  })
 })
+
+// userModel.single(res.locals.authUser.Id)
+// .then(value =>{
+//   res.redirect('/admin-categories',{user:value});
+// })
 
 router.post('/add', (req, res) => {
   categoryModel.add(req.body).then(id => {
     res.redirect('/admin-categories');
   }).catch(err => {
-    console.log(err);
     res.end('error occured.')
   });
 })
@@ -67,27 +77,36 @@ router.post('/add', (req, res) => {
 router.get('/edit/:id', (req, res) =>{
     var id = req.params.id;
     if (isNaN(id)) {
-      res.render('admin/categories/admin-categories-edit', {
-        error: true,
-        layout: false
-      });
+      userModel.single(res.locals.authUser.Id).then(value=>{
+        res.render('admin/categories/admin-categories-edit', {
+          error: true,
+          layout: false,
+          user: value
+        });
+      })
     }
   
     categoryModel.single(id).then(rows => {
       if (rows.length > 0) {
-        res.render('admin/categories/admin-categories-edit', {
-          error: false,
-          layout: false,
-          category: rows[0]
-        });
+        userModel.single(res.locals.authUser.Id).then(value=>{
+          res.render('admin/categories/admin-categories-edit', {
+            error: false,
+            layout: false,
+            category: rows[0],
+            user: value
+          });
+        })
+        
       } else {
-        res.render('admin/categories/admin-categories-edit', {
-          error: true,
-          layout: false
-        });
+        userModel.single(res.locals.authUser.Id).then(value=>{
+          res.render('admin/categories/admin-categories-edit', {
+            error: true,
+            layout: false,
+            user: value
+          });
+        })
       }
     }).catch(err => {
-      console.log(err);
       res.end('error occured.')
     });
 })
@@ -96,7 +115,6 @@ router.post('/update', (req, res) => {
   categoryModel.update(req.body).then(n => {
     res.redirect('/admin-categories');
   }).catch(err => {
-    console.log(err);
     res.end('error occured.')
   });
 })
@@ -105,7 +123,6 @@ router.post('/delete', (req, res) => {
   categoryModel.delete(req.body.Id).then(n => {
     res.redirect('/admin-categories');
   }).catch(err => {
-    console.log(err);
     res.end('error occured.')
   });
 })

@@ -1,5 +1,6 @@
 var express = require('express');
 var userModel = require('../../models/admin/users.model');
+var userModel1 = require('../../models/user.model');
 var categoryModel = require('../../models/admin/categories.model');
 var permissionModel = require('../../models/admin/categories.model');
 var moment = require('moment');
@@ -43,13 +44,16 @@ router.get('/:permission', (req, res, next) => {
       Promise.all([
         userModel.pageByPermission(permission, limit, offset),
         userModel.countByUser(permission),
-      ]).then(([rows, count_rows]) => {
+        userModel1.single(res.locals.authUser.Id),
+      ]).then(([rows, count_rows, Users]) => {
         // for (const c of res.locals.lcCategories) {
         //   if (c.Id === +id) {
         //     c.isActive = true;
         //   }
         // }
-    
+        
+        console.log(Users[0]);
+
         var total = count_rows[0].total;
         var nPages = Math.floor(total / limit);
         if (total % limit > 0) nPages++;
@@ -70,7 +74,8 @@ router.get('/:permission', (req, res, next) => {
           isAdmin,
           isEditor,
           isSubscriber,
-          isWriter
+          isWriter,
+          user: Users
         });
       }).catch(next);
     }
@@ -85,16 +90,17 @@ router.get('/:permission', (req, res, next) => {
 
 router.get('/add/user', (req, res) => {
     Promise.all([categoryModel.all(),
-                userModel.allOfPermission()
-                ]).then(([cats, pers]) => {
+                userModel.allOfPermission(),
+                userModel1.single(res.locals.authUser.Id)
+                ]).then(([cats, pers, Users]) => {
                     res.render('admin/users/admin-users-add', {
                     error: false,
                     layout: false,
                     categories: cats,
                     permissions: pers,
+                    user: Users
                     });
                 }).catch(err => {
-                    console.log(err);
                     res.end('error occured.')
                 });
 })
@@ -103,7 +109,6 @@ router.post('/add/user', (req, res) => {
   userModel.add(req.body).then(id => {
     res.redirect('/admin-users/admin');
   }).catch(err => {
-    console.log(err);
     res.end('error occured.')
   });
 })
@@ -116,7 +121,6 @@ router.post('/renew/:id', (req, res) => {
     userModel.renew(id, newDate).then(p => {
       res.redirect('/admin-users/subscriber');
     }).catch(err => {
-      console.log(err);
       res.end('error occured.')
     });
   })
@@ -126,10 +130,13 @@ router.get('/edit/:permission/:id', (req, res) =>{
   var permission = req.params.permission;
   var id = req.params.id;
   if (isNaN(id)) {
-    res.render('admin/users/admin-users-edit', {
-      error: true,
-      layout: false
-    });
+    userModel1.single(res.locals.authUser.Id).then(value=>{
+      res.render('admin/users/admin-users-edit', {
+        error: true,
+        layout: false,
+        user: value
+      });
+    })
   }
 
   if(permission === 'Admin'){
@@ -156,8 +163,9 @@ router.get('/edit/:permission/:id', (req, res) =>{
 
   Promise.all([userModel.singleByPermission(permission, id),
               categoryModel.all(),
-              userModel.allOfPermission()
-  ]).then(([rows, cats, pers]) => {
+              userModel.allOfPermission(),
+              userModel1.single(res.locals.authUser.Id),
+  ]).then(([rows, cats, pers, Users]) => {
     if (rows.length > 0) {
       res.render('admin/users/admin-users-edit', {
         error: false,
@@ -168,16 +176,17 @@ router.get('/edit/:permission/:id', (req, res) =>{
         isAdmin,
         isEditor,
         isSubscriber,
-        isWriter
+        isWriter,
+        user: Users
       });
     } else {
       res.render('admin/users/admin-users-edit', {
         error: true,
-        layout: false
+        layout: false,
+        user: Users
       });
     }
   }).catch(err => {
-    console.log(err);
     res.end('error occured.')
   });
 })
@@ -201,7 +210,6 @@ router.post('/delete', (req, res) => {
     userModel.delete(req.body.Id).then(n => {
         res.redirect('/admin-users/admin');
     }).catch(err => {
-        console.log(err);
         res.end('error occured.')
     });
 })

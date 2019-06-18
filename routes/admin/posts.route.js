@@ -92,10 +92,13 @@ router.get('/:status', (req, res, next) => {
 router.get('/edit/post/:id', (req, res, next) =>{
     var id = req.params.id;
     if (isNaN(id)) {
-      res.render('admin/posts/admin-posts-edit', {
-        error: true,
-        layout: false
-      });
+        userModel.single(res.locals.authUser.Id).then(value=>{
+            res.render('admin/posts/admin-posts-edit', {
+                error: true,
+                layout: false,
+                user: value
+            });
+        })
     }
 
     Promise.all([postsModel.singleForEdit(id),
@@ -126,8 +129,9 @@ router.get('/edit/post/:id', (req, res, next) =>{
 
         Promise.all([catsModel.singleOfCatSon(rows[0].CategorySon_id),
                     tagsModel.single(rows[0].tag1),
-                    tagsModel.single(rows[0].tag2)
-                    ]).then(([catSon, tag1, tag2]) => {
+                    tagsModel.single(rows[0].tag2),
+                    userModel.single(res.locals.authUser.Id),
+                    ]).then(([catSon, tag1, tag2, Users]) => {
                           if (rows.length > 0) {
                             res.render('admin/posts/admin-posts-edit', {
                               error: false,
@@ -141,12 +145,14 @@ router.get('/edit/post/:id', (req, res, next) =>{
                               isRefuse,
                               isDraft,
                               isPublished,
-                              isWait
+                              isWait,
+                              user: Users
                             });
                           } else {
                             res.render('admin/posts/admin-posts-edit', {
                               error: true,
-                              layout: false
+                              layout: false,
+                              user: Users
                             });
                           }
                         }).catch(next);

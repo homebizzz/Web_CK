@@ -1,5 +1,6 @@
 var express = require('express');
 var tagModel = require('../../models/admin/tags.model');
+var userModel = require('../../models/user.model');
 
 var router = express.Router();
 
@@ -17,7 +18,8 @@ router.get('/', (req, res, next) => {
       Promise.all([
         tagModel.pageByTag(limit, offset),
         tagModel.countByTag(),
-      ]).then(([rows, count_rows]) => {
+        userModel.single(res.locals.authUser.Id),
+      ]).then(([rows, count_rows, Users]) => {
         // for (const c of res.locals.lcCategories) {
         //   if (c.Id === +id) {
         //     c.isActive = true;
@@ -36,7 +38,8 @@ router.get('/', (req, res, next) => {
         res.render('admin/tags/admin-tags', {
           layout: false,
           tags: rows,
-          pages
+          pages,
+          user: Users
         });
       }).catch(next);
     }
@@ -50,16 +53,18 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/add', (req, res) => {
+  userModel.single(res.locals.authUser.Id).then(value=>{
     res.render('admin/tags/admin-tags-add',{
       layout: false,
+      user: value
     });
+  })
 })
   
 router.post('/add', (req, res) => {
     tagModel.add(req.body).then(id => {
       res.redirect('/admin-tags');
     }).catch(err => {
-      console.log(err);
       res.end('error occured.')
     });
 })
@@ -67,27 +72,35 @@ router.post('/add', (req, res) => {
 router.get('/edit/:id', (req, res) =>{
     var id = req.params.id;
     if (isNaN(id)) {
-      res.render('admin/tags/admin-tags-edit', {
-        error: true,
-        layout: false
-      });
+      userModel.single(res.locals.authUser.Id).then(value=>{
+        res.render('admin/tags/admin-tags-edit', {
+          error: true,
+          layout: false,
+          user: value
+        });
+      })
     }
   
     tagModel.single(id).then(rows => {
       if (rows.length > 0) {
-        res.render('admin/tags/admin-tags-edit', {
-          error: false,
-          layout: false,
-          tag: rows[0]
-        });
+        userModel.single(res.locals.authUser.Id).then(value=>{
+          res.render('admin/tags/admin-tags-edit', {
+            error: false,
+            layout: false,
+            tag: rows[0],
+            user: value
+          });
+        })
       } else {
-        res.render('admin/tags/admin-tags-edit', {
-          error: true,
-          layout: false
-        });
+        userModel.single(res.locals.authUser.Id).then(value=>{
+          res.render('admin/tags/admin-tags-edit', {
+            error: true,
+            layout: false,
+            user: value
+          });
+        })
       }
     }).catch(err => {
-      console.log(err);
       res.end('error occured.')
     });
 })
@@ -96,7 +109,6 @@ router.post('/update', (req, res) => {
   tagModel.update(req.body).then(n => {
     res.redirect('/admin-tags');
   }).catch(err => {
-    console.log(err);
     res.end('error occured.')
   });
 })
@@ -105,7 +117,6 @@ router.post('/delete', (req, res) => {
   tagModel.delete(req.body.Id).then(n => {
     res.redirect('/admin-tags');
   }).catch(err => {
-    console.log(err);
     res.end('error occured.')
   });
 })

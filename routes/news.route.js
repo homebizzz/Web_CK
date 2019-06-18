@@ -75,10 +75,11 @@ router.get('/', (req, res, next) => {
                 //
                 Premiums.forEach(temp => {
                     temp.Created_date = moment(temp.Created_date).format('YYYY-MM-DD');
-                })
+                });
 
-                if(Users[0].Permission===1)
+                if(Users[0].Permission==1)
                 {
+                    console.log('so 1 sdfsdfdsfsdfdsfsd');
                     res.render('index', {
                         newspaper_TinNong: NoiBat[0],
                         newspaper_NoiBat1: NoiBat[1],
@@ -121,8 +122,9 @@ router.get('/', (req, res, next) => {
                         isNotExpiryDate: true
                     });
                 }
-                else if(Users[0].Permission===2)
+                else if(Users[0].Permission==2)
                 {
+                    console.log('so 2 sdfsdfdsfsdfdsfsd');
                     res.render('index', {
                         newspaper_TinNong: NoiBat[0],
                         newspaper_NoiBat1: NoiBat[1],
@@ -165,8 +167,9 @@ router.get('/', (req, res, next) => {
                         isNotExpiryDate: true
                     });
                 }
-                else if(Users[0].Permission===3)
+                else if(Users[0].Permission==3)
                 {
+                    console.log('trtrwewewewaewaewa');
                     res.render('index', {
                         newspaper_TinNong: NoiBat[0],
                         newspaper_NoiBat1: NoiBat[1],

@@ -19,9 +19,6 @@ router.get('/', (req, res, next) => {
             Mobiles.forEach(mobile => {
                 mobile.Created_date = moment(mobile.Created_date).format('YYYY-MM-DD');
             });
-            console.log(key);
-            console.log(Mobiles[0]);
-
 
             NewPosts.forEach(newPost => {
                 newPost.Created_date = moment(newPost.Created_date).format('YYYY-MM-DD');
