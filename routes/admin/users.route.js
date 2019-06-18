@@ -52,6 +52,8 @@ router.get('/:permission', (req, res, next) => {
         //   }
         // }
         
+        console.log(Users[0]);
+
         var total = count_rows[0].total;
         var nPages = Math.floor(total / limit);
         if (total % limit > 0) nPages++;
@@ -73,7 +75,7 @@ router.get('/:permission', (req, res, next) => {
           isEditor,
           isSubscriber,
           isWriter,
-          userLogin: Users
+          user: Users
         });
       }).catch(next);
     }
@@ -96,7 +98,7 @@ router.get('/add/user', (req, res) => {
                     layout: false,
                     categories: cats,
                     permissions: pers,
-                    userLogin: Users
+                    user: Users
                     });
                 }).catch(err => {
                     res.end('error occured.')
@@ -132,7 +134,7 @@ router.get('/edit/:permission/:id', (req, res) =>{
       res.render('admin/users/admin-users-edit', {
         error: true,
         layout: false,
-        userLogin: value
+        user: value
       });
     })
   }
@@ -175,13 +177,13 @@ router.get('/edit/:permission/:id', (req, res) =>{
         isEditor,
         isSubscriber,
         isWriter,
-        userLogin: Users
+        user: Users
       });
     } else {
       res.render('admin/users/admin-users-edit', {
         error: true,
         layout: false,
-        userLogin: Users
+        user: Users
       });
     }
   }).catch(err => {
