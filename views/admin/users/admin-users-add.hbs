@@ -33,10 +33,12 @@
 			<div class="profile-userpic">
 				<a href="/account/profile"><img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""></a>
 			</div>
+			{{#each this.user}}
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name"><a href="/account/profile">Truong TRAN</a></div>
+				<div class="profile-usertitle-name"><a href="/account/profile">{{Name}}</a></div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
+			{{/each}}
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
@@ -47,7 +49,7 @@
 		</form>
 		<ul class="nav menu">
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-				<em class="fa fa-navicon">&nbsp;</em> Quản lý bài viết <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon">&nbsp;</em> Quản lý bài viết <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
 					<li><a class="" href="/admin-posts/published">
@@ -67,7 +69,7 @@
 			<li><a href="/admin-categories"><em class="fa fa-cubes">&nbsp;</em> Quản lý chuyên mục</a></li>
 			<li><a href="/admin-tags"><em class="fa fa-tags">&nbsp;</em> Quản lý nhãn</a></li>
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-2">
-				<em class="fa fa-navicon">&nbsp;</em> Quản lý người dùng <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon">&nbsp;</em> Quản lý người dùng <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"></span>
 				</a>
 				<ul class="children collapse" id="sub-item-2">
 					<li><a class="" href="/admin-users/admin">
@@ -84,7 +86,8 @@
 					</a></li>
 				</ul>
 			</li>
-			<li><a href="/account/sign-in-up"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="javascript: $('#frmSignout').submit();"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<form id="frmSignout" action="/account/logout" method="POST"></form>
 		</ul>
 	</div><!--/.sidebar-->
 

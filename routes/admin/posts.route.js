@@ -1,7 +1,8 @@
 var express = require('express');
 var postsModel = require('../../models/admin/posts.model');
 var catsModel = require('../../models/admin/categories.model');
-var tagsModel = require('../../models/admin/tags.model')
+var tagsModel = require('../../models/admin/tags.model');
+var userModel = require('../../models/user.model');
 var moment = require('moment');
 
 var router = express.Router();
@@ -46,7 +47,8 @@ router.get('/:status', (req, res, next) => {
             Promise.all([
                 postsModel.pageByStatus(status, limit, offset),
                 postsModel.countByPost(status),
-            ]).then(([rows, count_rows]) => {
+                userModel.single(res.locals.authUser.Id),
+            ]).then(([rows, count_rows, Users]) => {
                 // for (const c of res.locals.lcCategories) {
                 //   if (c.Id === +id) {
                 //     c.isActive = true;
@@ -73,7 +75,8 @@ router.get('/:status', (req, res, next) => {
                 isRefuse,
                 isDraft,
                 isPublished,
-                isWait
+                isWait,
+                user: Users
                 });
             }).catch(next);
         }
