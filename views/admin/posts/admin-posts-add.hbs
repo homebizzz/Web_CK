@@ -16,7 +16,7 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
-	<script src="ckeditor.js"></script>
+	<script src="../../../ckeditor.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -94,63 +94,121 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Quản lý bài viết</li>
+				<li class="active">Thêm bài viết</li>
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Quản lý bài viết</h1>
+				<h1 class="page-header">thêm bài viết</h1>
 			</div>
 		</div><!--/.row-->
 
 		<div class="row">
 			<!-- Viết tiếp nội dung ở đây -->
 			<!-- ADD POST MODAL -->
-    <div>
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header bg-primary">
-					<h5 class="modal-title text-white" id="addPostModalLabel">Thêm bài viết</h5>
-					<button class="close" data-dismiss="modal">
-						<span>&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="title" class="form-control-label">Tiêu đề</label>
-							<input type="text" id="title" class="form-control">
+			<div>
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header bg-primary">
+							<h5 class="modal-title text-white" id="detailPostModalLabel">Thêm bài viết</h5>
 						</div>
-						<div class="form-group">
-							<label for="category" class="form-control-label">Chuyên mục</label>
-							<select id="category" class="form-control">
-								<option value="">Web Development</option>
-								<option value="">Tech Gadgets</option>
-								<option value="">Business</option>
-								<option value="">Health & Wellness</option>
-							</select>
-						</div>
-						<div class="form-group bg-faded p-5">
-							<label for="file">Ảnh đính kèm</label>
-							<input type="file" class="form-control-file" id="file">
-							<small id="fileHelp" class="form-text text-muted">
-								Max Size 3MB
-							</small>
-						</div>
-						<div class="form-group">
-							<label for="body">Bài viết</label><br>
-							<textarea name="editor1" id="body" cols="60" rows="3"></textarea>  
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-					<button class="btn btn-primary" data-dismiss="modal">Thêm</button>
+						<form method="post" action="/admin-posts/add/post">
+							<div class="modal-body">
+								<div class="form-group">
+									<label for="txtTitle" class="form-control-label">Tiêu đề</label>
+									<input type="text" id="txtTitle" name="Title" class="form-control" placeholder="Nhập tiêu đề">
+								</div>
+								<div class="form-group">
+									<label for="txtSummary" class="form-control-label">Tóm tắt</label>
+									<input type="text" id="txtSummary" name="Summary" class="form-control" placeholder="Nhập tóm tắt bài viết">
+								</div>
+								<div class="form-group">
+									<label for="cbbCatName" class="form-control-label">Chuyên mục</label>
+									<select id="cbbCatName" class="form-control" name="CategorySon_Id">
+										{{#each this.categories}}
+										<option value="{{Id}}">{{NameSon}}</option>
+										{{/each}}
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="cbbTagName1" class="form-control-label">Nhãn 1</label>
+									<select id="cbbTagName1" class="form-control" name="tag1">
+										{{#each this.tags}}
+										<option value="{{Id}}">{{Name}}</option>
+										{{/each}}
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="cbbTagName2" class="form-control-label">Nhãn 2</label>
+									<select id="cbbTagName2" class="form-control" name="tag2">
+										{{#each this.tags}}
+										<option value="{{Id}}">{{Name}}</option>
+										{{/each}}
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="txtThumbnail" class="form-control-label">Link ảnh đại diện</label>
+									<input type="text" id="txtThumbnail" name="Thumbnail" class="form-control" placeholder="Nhập link ảnh đại diện bài viết">
+								</div>
+								<div class="form-group">
+									<label for="body">Bài viết</label><br>
+									<textarea name="Content" id="body" cols="60" rows="5">
+									</textarea>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<a class="btn btn-primary" data-dismiss="modal" href="/admin-posts/published">
+									<i class="fa fa-backward" aria-hidden="true"></i> Quay lại</a>
+								<button type="submit" class="btn btn-success" data-dismiss="modal">
+									<i class="fa fa-check" aria-hidden="true"></i>
+									Lưu
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
-		</div>
-    </div>
+				{{!-- <div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header bg-primary">
+							<h5 class="modal-title text-white" id="addPostModalLabel">Thêm bài viết</h5>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="form-group">
+									<label for="title" class="form-control-label">Tiêu đề</label>
+									<input type="text" id="title" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="category" class="form-control-label">Chuyên mục</label>
+									<select id="category" class="form-control">
+										<option value="">Web Development</option>
+										<option value="">Tech Gadgets</option>
+										<option value="">Business</option>
+										<option value="">Health & Wellness</option>
+									</select>
+								</div>
+								<div class="form-group bg-faded p-5">
+									<label for="file">Ảnh đính kèm</label>
+									<input type="file" class="form-control-file" id="file">
+									<small id="fileHelp" class="form-text text-muted">
+										Max Size 3MB
+									</small>
+								</div>
+								<div class="form-group">
+									<label for="body">Bài viết</label><br>
+									<textarea name="editor1" id="body" cols="60" rows="3"></textarea>  
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+							<button class="btn btn-primary" data-dismiss="modal">Thêm</button>
+						</div>
+					</div>
+				</div> --}}
+			</div>
 		</div>
 
 	</div>
@@ -165,8 +223,7 @@
 	<script src="../../../js/bootstrap-datepicker.js"></script>
 	<script src="../../../js/custom.js"></script>
 	<script>
-		CKEDITOR.replace('editor1');
-		CKEDITOR.replace('editor2');
+		CKEDITOR.replace('Content');
 	</script>
 </body>
 </html>
