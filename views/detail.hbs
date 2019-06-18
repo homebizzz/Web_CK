@@ -15,102 +15,6 @@
             {{{this.detail.Content}}}
     </div>
     <!-- entity_wrapper -->
-
-
-        <div class="readers_comment">
-        <div class="entity_inner__title header_purple">
-            <h2>Bình luận</h2>
-        </div>
-        <!-- entity_title -->
-        {{#each this.comments}}
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img alt="64x64" class="media-object" data-src="/img/reader_img1.jpg"
-                         src="/img/reader_img1.jpg" data-holder-rendered="true">
-                </a>
-            </div>
-            <div class="media-body">
-                <h2 class="media-heading"><a href="#">{{cmName}}</a></h2>
-                <p>Ngày đăng: {{cmCreate_date}}</p>
-
-                <p style="font-size: 20px">{{cmContent}}</p>
-
-                <div class="entity_vote">
-                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                    {{!-- <a href="#"><span class="reply_ic">Reply </span></a> --}}
-                </div>
-                {{!-- <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img alt="64x64" class="media-object" data-src="/img/reader_img2.jpg"
-                                 src="/img/reader_img2.jpg" data-holder-rendered="true">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h2 class="media-heading"><a href="#">Admin</a></h2>
-                        But who has any right to find fault with a man who chooses to enjoy a pleasure
-                        that has no annoying consequences, or one who avoids a pain that produces no
-                        resultant pleasure?
-    
-                        <div class="entity_vote">
-                            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                            <a href="#"><span class="reply_ic">Reply </span></a>
-                        </div>
-                    </div>
-                </div> --}}
-            </div>
-    
-        </div>
-        {{/each}}
-        <!-- media end -->
-    
-        {{!-- <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img alt="64x64" class="media-object" data-src="/img/reader_img3.jpg"
-                         src="/img/reader_img3.jpg" data-holder-rendered="true">
-                </a>
-            </div>
-            <div class="media-body">
-                <h2 class="media-heading"><a href="#">S. Joshep</a></h2>
-                But who has any right to find fault with a man who chooses to enjoy a pleasure that has
-                no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
-    
-                <div class="entity_vote">
-                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                    <a href="#"><span class="reply_ic">Reply </span></a>
-                </div>
-            </div>
-        </div>
-        <!-- media end --> --}}
-    </div>
-    <!--Readers Comment-->
-    
-    <div class="entity_comments">
-        <div class="entity_inner__title header_black">
-            <h2>Thêm bình luận</h2>
-        </div>
-        <!--Entity Title -->
-    
-        <div class="entity_comment_from">
-            <form novalidate method="POST" action="/categories/comment">
-                <div class="form-group comment">
-                    <textarea name="comment" class="form-control" id="inputComment" placeholder="Nội dung"></textarea>
-                </div>
-                <textarea name="id" hidden>{{this.detail.Id}}</textarea>
-                <textarea name="link" hidden>/categories/{{this.detail.Name}}/{{this.detail.Id}}</textarea>
-                <button type="submit" class="btn btn-submit red">Bình luận</button>
-            </form>
-        </div>
-        <!--Entity Comments From -->
-    
-    </div>
-    <!--Entity Comments -->
-
     
     <div class="related_news">
         <div class="entity_inner__title header_purple">
@@ -217,6 +121,102 @@
     </div>
     <!-- Related news -->
     
+    {{!-- <div class="readers_comment">
+        <div class="entity_inner__title header_purple">
+            <h2>Readers Comment</h2>
+        </div>
+        <!-- entity_title -->
+    
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img alt="64x64" class="media-object" data-src="/img/reader_img1.jpg"
+                         src="/img/reader_img1.jpg" data-holder-rendered="true">
+                </a>
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading"><a href="#">Sr. Ryan</a></h2>
+                But who has any right to find fault with a man who chooses to enjoy a pleasure that has
+                no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+    
+                <div class="entity_vote">
+                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+                    <a href="#"><span class="reply_ic">Reply </span></a>
+                </div>
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img alt="64x64" class="media-object" data-src="/img/reader_img2.jpg"
+                                 src="/img/reader_img2.jpg" data-holder-rendered="true">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h2 class="media-heading"><a href="#">Admin</a></h2>
+                        But who has any right to find fault with a man who chooses to enjoy a pleasure
+                        that has no annoying consequences, or one who avoids a pain that produces no
+                        resultant pleasure?
+    
+                        <div class="entity_vote">
+                            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+                            <a href="#"><span class="reply_ic">Reply </span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+        <!-- media end -->
+    
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img alt="64x64" class="media-object" data-src="/img/reader_img3.jpg"
+                         src="/img/reader_img3.jpg" data-holder-rendered="true">
+                </a>
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading"><a href="#">S. Joshep</a></h2>
+                But who has any right to find fault with a man who chooses to enjoy a pleasure that has
+                no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+    
+                <div class="entity_vote">
+                    <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+                    <a href="#"><span class="reply_ic">Reply </span></a>
+                </div>
+            </div>
+        </div>
+        <!-- media end -->
+    </div>
+    <!--Readers Comment--> --}}
+    
+    {{!-- <div class="entity_comments">
+        <div class="entity_inner__title header_black">
+            <h2>Add a Comment</h2>
+        </div>
+        <!--Entity Title -->
+    
+        <div class="entity_comment_from">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputName" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+                <div class="form-group comment">
+                    <textarea class="form-control" id="inputComment" placeholder="Comment"></textarea>
+                </div>
+    
+                <button type="submit" class="btn btn-submit red">Submit</button>
+            </form>
+        </div>
+        <!--Entity Comments From -->
+    
+    </div>
+    <!--Entity Comments --> --}}
     
     </div>
     <!--Left Section-->
