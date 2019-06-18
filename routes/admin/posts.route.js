@@ -139,73 +139,80 @@ router.post('/add/post', (req, res) => {
 })
 
 router.get('/edit/post/:id', (req, res, next) =>{
-    var id = req.params.id;
-    if (isNaN(id)) {
-        userModel.single(res.locals.authUser.Id).then(value=>{
-            res.render('admin/posts/admin-posts-edit', {
-                error: true,
-                layout: false,
-                user: value
-            });
+    if(res.locals.authUser.Permission==1)
+    {
+        var id = req.params.id;
+        if (isNaN(id)) {
+            userModel.single(res.locals.authUser.Id).then(value=>{
+                res.render('admin/posts/admin-posts-edit', {
+                    error: true,
+                    layout: false,
+                    user: value
+                });
+            })
+        }
+    
+        Promise.all([postsModel.singleForEdit(id),
+                    catsModel.allofCatSon(),
+                    tagsModel.all()
+        ]).then(([rows, cats, tags]) => {
+            if(rows[0].status === 1){ 
+                isRefuse = false;
+                isDraft = false;
+                isPublished = true;
+                isWait = false;
+            }else if(rows[0].status === 2){
+                isRefuse = false;
+                isDraft = false;
+                isPublished = false;
+                isWait = true;
+            }else if(rows[0].status === 3){
+                isRefuse = false;
+                isDraft = true;
+                isPublished = false;
+                isWait = false;
+            }else{
+                isRefuse = true;
+                isDraft = false;
+                isPublished = false;
+                isWait = false;
+            }
+    
+            Promise.all([catsModel.singleOfCatSon(rows[0].CategorySon_id),
+                tagsModel.single(rows[0].tag1),
+                tagsModel.single(rows[0].tag2),
+                userModel.single(res.locals.authUser.Id),
+                ]).then(([catSon, tag1, tag2, Users]) => {
+                    if (rows.length > 0) {
+                    res.render('admin/posts/admin-posts-edit', {
+                        error: false,
+                        layout: false,
+                        post: rows[0],
+                        categories: cats,
+                        tags,
+                        catName: catSon[0].NameSon,
+                        tagName1: tag1[0].Name,
+                        tagName2: tag2[0].Name,
+                        isRefuse,
+                        isDraft,
+                        isPublished,
+                        isWait,
+                        user: Users
+                    });
+                    }else {
+                        res.render('admin/posts/admin-posts-edit', {
+                            error: true,
+                            layout: false,
+                            user: Users
+                        });
+                    }
+            }).catch(next);
         })
     }
-
-    Promise.all([postsModel.singleForEdit(id),
-                catsModel.allofCatSon(),
-                tagsModel.all()
-    ]).then(([rows, cats, tags]) => {
-        if(rows[0].status === 1){ 
-            isRefuse = false;
-            isDraft = false;
-            isPublished = true;
-            isWait = false;
-        }else if(rows[0].status === 2){
-            isRefuse = false;
-            isDraft = false;
-            isPublished = false;
-            isWait = true;
-        }else if(rows[0].status === 3){
-            isRefuse = false;
-            isDraft = true;
-            isPublished = false;
-            isWait = false;
-        }else{
-            isRefuse = true;
-            isDraft = false;
-            isPublished = false;
-            isWait = false;
-        }
-
-        Promise.all([catsModel.singleOfCatSon(rows[0].CategorySon_id),
-                    tagsModel.single(rows[0].tag1),
-                    tagsModel.single(rows[0].tag2),
-                    userModel.single(res.locals.authUser.Id),
-                    ]).then(([catSon, tag1, tag2, Users]) => {
-                          if (rows.length > 0) {
-                            res.render('admin/posts/admin-posts-edit', {
-                              error: false,
-                              layout: false,
-                              post: rows[0],
-                              categories: cats,
-                              tags,
-                              catName: catSon[0].NameSon,
-                              tagName1: tag1[0].Name,
-                              tagName2: tag2[0].Name,
-                              isRefuse,
-                              isDraft,
-                              isPublished,
-                              isWait,
-                              user: Users
-                            });
-                          } else {
-                            res.render('admin/posts/admin-posts-edit', {
-                              error: true,
-                              layout: false,
-                              user: Users
-                            });
-                          }
-                        }).catch(next);
-                    })
+    else
+    {
+        res.end('You do not have permission to login');
+    }
 })
 
 router.post('/update/:status', (req, res, next) => {

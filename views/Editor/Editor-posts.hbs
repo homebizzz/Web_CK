@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tech - Quản lý bài viết</title>
+	<link href="../../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../../css/datepicker3.css" rel="stylesheet">
+	<link href="../../../css/styles.css" rel="stylesheet">
+	
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	<script src="../../../ckeditor.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+				<a class="navbar-brand" href="/">Tech</a>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div class="profile-sidebar">
+			<div class="profile-userpic">
+				<a href="/account/profile"><img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt=""></a>
+			</div>
+			{{#each this.user}}
+			<div class="profile-usertitle">
+				<div class="profile-usertitle-name"><a href="/account/profile">{{Name}}</a></div>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+			</div>
+			{{/each}}
+			<div class="clear"></div>
+		</div>
+		<div class="divider"></div>
+		<ul class="nav menu">
+			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
+				<em class="fa fa-navicon">&nbsp;</em> Quản lý bài viết <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"></span>
+				</a>
+				<ul class="children collapse" id="sub-item-1">
+					<li><a class="" href="/writer-posts/published">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết đã xuất bản
+					</a></li>
+					<li><a class="" href="/writer-posts/draft">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết chưa duyệt
+					</a></li>
+					<li><a class="" href="/writer-posts/wait">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết chờ xuất bản
+					</a></li>
+					<li><a class="" href="/writer-posts/refuse">
+						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết bị từ chối
+					</a></li>
+				</ul>
+			</li>
+		
+			<li><a href="javascript: $('#frmSignout').submit();"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<form id="frmSignout" action="/account/logout" method="POST"></form>
+		</ul>
+	</div><!--/.sidebar-->
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				{{#if isPublished}}
+				<li class="active">Quản lý bài viết đã xuất bản</li>
+				{{else}}
+				{{#if isDraft}}
+				<li class="active">Quản lý bài viết chưa duyệt</li>
+				{{else}}
+				{{#if isWait}}
+				<li class="active">Quản lý bài viết chờ xuất bản</li>
+				{{else}}
+				{{#if isRefuse}}
+				<li class="active">Quản lý bài viết bị từ chối</li>
+				{{/if}}
+				{{/if}}
+				{{/if}}
+				{{/if}}
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				{{#if isPublished}}
+				<h1 class="page-header">Quản lý bài viết đã xuất bản</h1>
+				{{else}}
+				{{#if isDraft}}
+				<h1 class="page-header">Quản lý bài viết chưa duyệt</h1>
+				{{else}}
+				{{#if isWait}}
+				<h1 class="page-header">Quản lý bài viết chờ xuất bản</h1>
+				{{else}}
+				{{#if isRefuse}}
+				<h1 class="page-header">Quản lý bài viết bị từ chối</h1>
+				{{/if}}
+				{{/if}}
+				{{/if}}
+				{{/if}}
+			</div>
+		</div><!--/.row-->
+
+		<div class="row">
+			<!-- Viết tiếp nội dung ở đây -->
+			<section id="actions" class="py-4 mb-4 bg-faded">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-md-4">
+	                        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
+	                            <i class="fa fa-plus"></i> Thêm bài viết mới
+	                        </a>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+
+	        <section id="posts">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col">
+		                    <div class="card-header">
+		                        <h4>&nbsp;</h4>
+		                    </div>
+		                    {{#if isPublished}}
+							<table class="table table-striped">
+		                        <thead class="thead-inverse">
+		                        <tr>
+		                            <th>#</th>
+		                            <th>Tiêu đề</th>
+		                            <th>Chuyên mục</th>
+									<th>Tác giả</th>
+		                            <th>Ngày đăng</th>
+									<th>Ngày xuất bản</th>
+		                            <th></th>
+		                        </tr>
+		                        </thead>
+		                        <tbody>
+								{{#each this.posts}}
+		                        <tr>
+		                            <td scope="row">{{news_Id}}</td>
+		                            <td width="400px">{{news_Title}}</td>
+		                            <td>{{cat_Name}}</td>
+									<td>{{user_Name}}</td>
+		                            <td>{{news_cr_date}}</td>
+									<td>{{news_pb_date}}</td>
+		                            <td>
+										<a href="/admin-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
+										<i class="fa fa-edit"></i>
+										</a>
+										<a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
+											<i class="fa fa-location-arrow"> Chi tiết</i>
+										</a>
+		                            </td>
+		                        </tr>
+								{{/each}}
+		                        </tbody>
+		                    </table>
+							{{else}}
+							{{#if isWait}}
+							<table class="table table-striped">
+		                        <thead class="thead-inverse">
+		                        <tr>
+		                            <th>#</th>
+		                            <th>Tiêu đề</th>
+		                            <th>Chuyên mục</th>
+									<th>Tác giả</th>
+		                            <th>Ngày đăng</th>
+									<th>Ngày xuất bản</th>
+		                            <th></th>
+		                        </tr>
+		                        </thead>
+		                        <tbody>
+								{{#each this.posts}}
+		                        <tr>
+		                            <td scope="row">{{news_Id}}</td>
+		                            <td width="400px">{{news_Title}}</td>
+		                            <td>{{cat_Name}}</td>
+									<td>{{user_Name}}</td>
+		                            <td>{{news_cr_date}}</td>
+									<td>{{news_pb_date}}</td>
+		                            <td>
+										<form method="POST" action="/admin-posts/publish/{{news_Id}}">
+											{{!-- <button class="btn btn-success"><i class="fa fa-check"></i>
+											</button> --}}
+											<a href="/admin-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
+											<i class="fa fa-edit"></i>
+											</a>
+											{{!-- <a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
+												<i class="fa fa-location-arrow"> Chi tiết</i>
+											</a> --}}
+										</form>
+		                            </td>
+		                        </tr>
+								{{/each}}
+		                        </tbody>
+		                    </table>
+							{{else}}
+							<table class="table table-striped">
+		                        <thead class="thead-inverse">
+		                        <tr>
+		                            <th>#</th>
+		                            <th>Tiêu đề</th>
+		                            <th>Chuyên mục</th>
+									<th>Tác giả</th>
+		                            <th>Ngày đăng</th>
+		                            <th></th>
+		                        </tr>
+		                        </thead>
+		                        <tbody>
+								{{#each this.posts}}
+		                        <tr>
+		                            <td scope="row">{{news_Id}}</td>
+		                            <td width="400px">{{news_Title}}</td>
+		                            <td>{{cat_Name}}</td>
+									<td>{{user_Name}}</td>
+		                            <td>{{news_cr_date}}</td>
+		                            <td>
+										<form method="POST" action="/admin-posts/publish/{{news_Id}}">
+											{{!-- <button class="btn btn-success"><i class="fa fa-check"></i>
+											</button> --}}
+											<a href="/admin-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
+											<i class="fa fa-edit"></i>
+											</a>
+											{{!-- <a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
+												<i class="fa fa-location-arrow"> Chi tiết</i>
+											</a> --}}
+										</form>
+		                            </td>
+		                        </tr>
+								{{/each}}
+		                        </tbody>
+							</table>
+							{{/if}}
+							{{/if}}
+							
+
+		                    <nav class="ml-4">
+		                        <ul class="pagination">
+									{{#each this.pages}}
+									{{#if active}}
+									<li class="page-item active" aria-current="page">
+										<a class="page-link" href="javascript:;">{{value}} <span class="sr-only">(current)</span></a>
+									</li>
+									{{else}}
+									<li class="page-item">
+										<a class="page-link" href="?page={{value}}">{{value}}</a>
+									</li>
+									{{/if}}
+									{{/each}}
+		                        </ul>
+		                    </nav>
+		                </div>
+		            </div>
+		        </div>
+		    </section>
+
+		</div>
+
+	</div>
+	<!--/.main-->
+
+	<script src="../../../js/jquery-1.11.1.min.js"></script>
+	<script src="../../../js/bootstrap.min.js"></script>
+	<script src="../../../js/chart.min.js"></script>
+	<script src="../../../js/chart-data.js"></script>
+	<script src="../../../js/easypiechart.js"></script>
+	<script src="../../../js/easypiechart-data.js"></script>
+	<script src="../../../js/bootstrap-datepicker.js"></script>
+	<script src="../../../js/custom.js"></script>
+	<script>
+		CKEDITOR.replace('editor1');
+		CKEDITOR.replace('editor2');
+	</script>
+</body>
+</html>

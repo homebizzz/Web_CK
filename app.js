@@ -78,7 +78,7 @@ app.use('/admin-users', require('./routes/admin/users.route'));
 app.use('/writer-posts', require('./routes/writer/writer.route'));
 
 //Editor
-// app.use('/editor-posts', require('./routes/editor/editor.route'));
+app.use('/editor-posts', require('./routes/editor/editor.route'));
 
 app.get('/Writer-detail', (req, res)=> {
     app.engine('hbs', exphbs({

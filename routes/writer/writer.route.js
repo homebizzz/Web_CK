@@ -89,11 +89,28 @@ router.get('/:status', (req, res, next) => {
     }
 })
 
+router.post('/update/:status', (req, res, next) => {
+    var status = req.params.status;
+    postsModel.update(req.body).then(n => {
+        if(status === 'published'){
+            res.redirect('/writer-posts/published');
+        }else if(status === 'wait'){
+           res.redirect('/writer-posts/wait');
+        }else if(status === 'draft'){
+            res.redirect('/writer-posts/draft');
+        }else{
+            res.redirect('/writer-posts/refuse');
+        }
+    }).catch(next);
+})
+
 router.get('/edit/post/:id', (req, res, next) =>{
-    var id = req.params.id;
+    if(res.locals.authUser.Permission==2)
+    {
+        var id = req.params.id;
     if (isNaN(id)) {
         userModel.single(res.locals.authUser.Id).then(value=>{
-            res.render('admin/posts/admin-posts-edit', {
+            res.render('writer/posts/writer-posts-edit', {
                 error: true,
                 layout: false,
                 user: value
@@ -102,8 +119,8 @@ router.get('/edit/post/:id', (req, res, next) =>{
     }
 
     Promise.all([postsModel.singleForEdit(id),
-                catsModel.allofCatSon(),
-                tagsModel.all()
+        catsModel.allofCatSon(),
+        tagsModel.all()
     ]).then(([rows, cats, tags]) => {
         if(rows[0].status === 1){ 
             isRefuse = false;
@@ -128,48 +145,49 @@ router.get('/edit/post/:id', (req, res, next) =>{
         }
 
         Promise.all([catsModel.singleOfCatSon(rows[0].CategorySon_id),
-                    tagsModel.single(rows[0].tag1),
-                    tagsModel.single(rows[0].tag2),
-                    userModel.single(res.locals.authUser.Id),
-                    ]).then(([catSon, tag1, tag2, Users]) => {
-                          if (rows.length > 0) {
-                            res.render('admin/posts/admin-posts-edit', {
-                              error: false,
-                              layout: false,
-                              post: rows[0],
-                              categories: cats,
-                              tags,
-                              catName: catSon[0].NameSon,
-                              tagName1: tag1[0].Name,
-                              tagName2: tag2[0].Name,
-                              isRefuse,
-                              isDraft,
-                              isPublished,
-                              isWait,
-                              user: Users
-                            });
-                          } else {
-                            res.render('admin/posts/admin-posts-edit', {
-                              error: true,
-                              layout: false,
-                              user: Users
-                            });
-                          }
-                        }).catch(next);
-                    })
+        tagsModel.single(rows[0].tag1),
+        tagsModel.single(rows[0].tag2),
+        userModel.single(res.locals.authUser.Id),
+        ]).then(([catSon, tag1, tag2, Users]) => {
+                if (rows.length > 0) {
+                res.render('writer/writer-posts-edit', {
+                    error: false,
+                    layout: false,
+                    post: rows[0],
+                    categories: cats,
+                    tags,
+                    catName: catSon[0].NameSon,
+                    tagName1: tag1[0].Name,
+                    tagName2: tag2[0].Name,
+                    isRefuse,
+                    isDraft,
+                    isPublished,
+                    isWait,
+                    user: Users
+                });
+                } else {
+                res.render('writer/writer-posts-edit', {
+                    error: true,
+                    layout: false,
+                    user: Users
+                });
+                }
+            }).catch(next);
+        })
+    }
 })
 
 router.post('/delete/:status', (req, res, next) => {
     var status = req.params.status;
     postsModel.delete(req.body.Id).then(n => {
         if(status === 'published'){
-            res.redirect('/admin-posts/published');
+            res.redirect('/writer-posts/published');
         }else if(status === 'wait'){
-           res.redirect('/admin-posts/wait');
+           res.redirect('/writer-posts/wait');
         }else if(status === 'draft'){
-            res.redirect('/admin-posts/draft');
+            res.redirect('/writer-posts/draft');
         }else{
-            res.redirect('/admin-posts/refuse');
+            res.redirect('/writer-posts/refuse');
         }
     }).catch(next);
 })
