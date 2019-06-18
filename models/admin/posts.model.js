@@ -11,7 +11,7 @@ module.exports = {
         return db.load(`select news.Id as news_Id, news.Title as news_Title, catson.NameSon as cat_Name, news.Created_date as news_cr_date, news.Publish_date as news_pb_date, user.Name as user_Name
                         from newspapers as news, categorysons as catson, users as user 
                         where news.CategorySon_Id = catson.Id and news.Id_Author = user.Id and news.status = 1
-                        order by news.Id asc limit ${limit} offset ${offset}`);
+                        order by news.Id desc limit ${limit} offset ${offset}`);
     },
 
     pageByStatus: (status, limit, offset) => {
@@ -20,25 +20,25 @@ module.exports = {
             return db.load(`select news.Id as news_Id, news.Title as news_Title, catson.NameSon as cat_Name, news.Created_date as news_cr_date, news.Publish_date as news_pb_date, user.Name as user_Name
                             from newspapers as news, categorysons as catson, users as user 
                             where news.CategorySon_Id = catson.Id and news.Id_Author = user.Id and news.status = 4
-                            order by news.Id asc limit ${limit} offset ${offset}`);
+                            order by news.Id desc limit ${limit} offset ${offset}`);
         }else if(status === 'draft'){ 
             // dang cho duyet
             return db.load(`select news.Id as news_Id, news.Title as news_Title, catson.NameSon as cat_Name, news.Created_date as news_cr_date, news.Publish_date as news_pb_date, user.Name as user_Name
                             from newspapers as news, categorysons as catson, users as user 
                             where news.CategorySon_Id = catson.Id and news.Id_Author = user.Id and news.status = 3
-                            order by news.Id asc limit ${limit} offset ${offset}`);
+                            order by news.Id desc limit ${limit} offset ${offset}`);
         }else if(status === 'published'){
             // da xuat ban
             return db.load(`select news.Id as news_Id, news.Title as news_Title, catson.NameSon as cat_Name, news.Created_date as news_cr_date, news.Publish_date as news_pb_date, user.Name as user_Name
                             from newspapers as news, categorysons as catson, users as user 
                             where news.CategorySon_Id = catson.Id and news.Id_Author = user.Id and news.status = 1
-                            order by news.Id asc limit ${limit} offset ${offset}`);
+                            order by news.Id desc limit ${limit} offset ${offset}`);
         }else{
             // da duyet va choi xuat ban
             return db.load(`select news.Id as news_Id, news.Title as news_Title, catson.NameSon as cat_Name, news.Created_date as news_cr_date, news.Publish_date as news_pb_date, user.Name as user_Name
                             from newspapers as news, categorysons as catson, users as user 
                             where news.CategorySon_Id = catson.Id and news.Id_Author = user.Id and news.status = 2
-                            order by news.Id asc limit ${limit} offset ${offset}`);
+                            order by news.Id desc limit ${limit} offset ${offset}`);
         }
     },
 
@@ -68,6 +68,11 @@ module.exports = {
 
     add: entity => {
         return db.add('newspapers', entity);
+    },
+
+    adminAdd: (Title, CategorySon_Id, Created_date, Thumbnail, Content, Summary, Id_Author, tag1, tag2)=> {
+        return db.load(`INSERT INTO newspapers 
+                        VALUES (${Title}, ${CategorySon_Id}, ${Created_date}, ${Thumbnail}, ${Content}, 0, 1, 0, ${Summary}, ${Id_Author}, ${tag1}, ${tag2}, NULL`)
     },
 
     update: entity => {
