@@ -49,16 +49,16 @@
 				<em class="fa fa-navicon">&nbsp;</em> Quản lý bài viết <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
-					<li><a class="" href="/writer-posts/published">
+					<li><a class="" href="/editor-posts/published">
 						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết đã xuất bản
 					</a></li>
-					<li><a class="" href="/writer-posts/draft">
+					<li><a class="" href="/editor-posts/draft">
 						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết chưa duyệt
 					</a></li>
-					<li><a class="" href="/writer-posts/wait">
+					<li><a class="" href="/editor-posts/wait">
 						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết chờ xuất bản
 					</a></li>
-					<li><a class="" href="/writer-posts/refuse">
+					<li><a class="" href="/editor-posts/refuse">
 						<span class="fa fa-pencil-square-o">&nbsp;</span> Bài viết bị từ chối
 					</a></li>
 				</ul>
@@ -114,19 +114,6 @@
 		</div><!--/.row-->
 
 		<div class="row">
-			<!-- Viết tiếp nội dung ở đây -->
-			<section id="actions" class="py-4 mb-4 bg-faded">
-	            <div class="container">
-	                <div class="row">
-	                    <div class="col-md-4">
-	                        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
-	                            <i class="fa fa-plus"></i> Thêm bài viết mới
-	                        </a>
-	                    </div>
-	                </div>
-	            </div>
-	        </section>
-
 	        <section id="posts">
 		        <div class="container">
 		            <div class="row">
@@ -157,7 +144,7 @@
 		                            <td>{{news_cr_date}}</td>
 									<td>{{news_pb_date}}</td>
 		                            <td>
-										<a href="/admin-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
+										<a href="/editor-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
 										<i class="fa fa-edit"></i>
 										</a>
 										<a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
@@ -192,10 +179,10 @@
 		                            <td>{{news_cr_date}}</td>
 									<td>{{news_pb_date}}</td>
 		                            <td>
-										<form method="POST" action="/admin-posts/publish/{{news_Id}}">
+										<form method="POST" action="/editor-posts/publish/{{news_Id}}">
 											{{!-- <button class="btn btn-success"><i class="fa fa-check"></i>
 											</button> --}}
-											<a href="/admin-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
+											<a href="/editor-posts/edit/post/{{news_Id}}" class="btn btn-success" >
 											<i class="fa fa-edit"></i>
 											</a>
 											{{!-- <a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
@@ -228,16 +215,22 @@
 									<td>{{user_Name}}</td>
 		                            <td>{{news_cr_date}}</td>
 		                            <td>
-										<form method="POST" action="/admin-posts/publish/{{news_Id}}">
-											{{!-- <button class="btn btn-success"><i class="fa fa-check"></i>
-											</button> --}}
-											<a href="/admin-posts/edit/post/{{news_Id}}" class="btn btn-primary btn-sm" >
+										
+											
+										
+		                            </td>
+									<td>
+										<form method="POST" id="refuseForm" action="/editor-posts/refuse/{{news_Id}}"></form>
+										<form method="POST" id="waitForm" action="/editor-posts/wait/{{news_Id}}"></form>
+											<a type="submit" href="javascript: $('#refuseForm').submit();" class="btn btn-danger"><i class="fa fa-times"></i></a>
+											<a type="submit" href="javascript: $('#waitForm').submit();" class="btn btn-success"><i class="fa fa-check"></i>
+											</a>
+											<a href="/editor-posts/edit/post/{{news_Id}}" class="fa fa-location-arrow" >
 											<i class="fa fa-edit"></i>
 											</a>
 											{{!-- <a href="/categories/{{cat_Name}}/{{news_Id}}" class="btn btn-secondary">
 												<i class="fa fa-location-arrow"> Chi tiết</i>
 											</a> --}}
-										</form>
 		                            </td>
 		                        </tr>
 								{{/each}}

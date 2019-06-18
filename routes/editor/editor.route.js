@@ -91,6 +91,8 @@ router.get('/:status', (req, res, next) => {
 
 router.post('/update/:status', (req, res, next) => {
     var status = req.params.status;
+    req.body.Publish_date = moment(req.body.Publish_date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    
     postsModel.update(req.body).then(n => {
         if(status === 'published'){
             res.redirect('/editor-posts/published');
@@ -110,7 +112,7 @@ router.get('/edit/post/:id', (req, res, next) =>{
         var id = req.params.id;
     if (isNaN(id)) {
         userModel.single(res.locals.authUser.Id).then(value=>{
-            res.render('editor/posts/writer-posts-edit', {
+            res.render('Editor/editor-posts-edit', {
                 error: true,
                 layout: false,
                 user: value
@@ -150,7 +152,8 @@ router.get('/edit/post/:id', (req, res, next) =>{
         userModel.single(res.locals.authUser.Id),
         ]).then(([catSon, tag1, tag2, Users]) => {
                 if (rows.length > 0) {
-                res.render('editor/editor-posts-edit', {
+                    rows[0].Publish_date = moment(rows[0].Publish_date).format('DD/MM/YYYY');
+                res.render('Editor/editor-posts-edit', {
                     error: false,
                     layout: false,
                     post: rows[0],
@@ -166,7 +169,7 @@ router.get('/edit/post/:id', (req, res, next) =>{
                     user: Users
                 });
                 } else {
-                res.render('editor/editor-posts-edit', {
+                res.render('Editor/editor-posts-edit', {
                     error: true,
                     layout: false,
                     user: Users
@@ -177,12 +180,19 @@ router.get('/edit/post/:id', (req, res, next) =>{
     }
 })
 
-router.post('/publish/:id', (req, res, next) => {
+router.post('/wait/:id', (req, res, next) => {
     var id = req.params.id;
     var currentDay = moment().format('YYYY-MM-DD');
 
-    postsModel.publish(id, currentDay).then(n => {
-        res.redirect('/editor-posts/published');
+    postsModel.wait(id, currentDay).then(n => {
+        res.redirect('/editor-posts/wait');
+    }).catch(next);
+})
+
+router.post('/refuse/:id', (req, res, next) => {
+    var id = req.params.id;
+    postsModel.refuse(id).then(n => {
+        res.redirect('/editor-posts/refuse');
     }).catch(next);
 })
 

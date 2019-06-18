@@ -110,7 +110,7 @@ router.get('/edit/post/:id', (req, res, next) =>{
         var id = req.params.id;
     if (isNaN(id)) {
         userModel.single(res.locals.authUser.Id).then(value=>{
-            res.render('writer/posts/writer-posts-edit', {
+            res.render('Writer/writer-posts-edit', {
                 error: true,
                 layout: false,
                 user: value
@@ -150,7 +150,7 @@ router.get('/edit/post/:id', (req, res, next) =>{
         userModel.single(res.locals.authUser.Id),
         ]).then(([catSon, tag1, tag2, Users]) => {
                 if (rows.length > 0) {
-                res.render('writer/writer-posts-edit', {
+                res.render('Writer/writer-posts-edit', {
                     error: false,
                     layout: false,
                     post: rows[0],
@@ -166,7 +166,7 @@ router.get('/edit/post/:id', (req, res, next) =>{
                     user: Users
                 });
                 } else {
-                res.render('writer/writer-posts-edit', {
+                res.render('Writer/writer-posts-edit', {
                     error: true,
                     layout: false,
                     user: Users

@@ -66,6 +66,14 @@ module.exports = {
         }
     },
 
+    wait: (id, currentDay) => {
+        return db.load(`update newspapers set status = 2, Publish_date = '${currentDay}' where Id = ${id}`)
+    },
+
+    refuse: (id) => {
+        return db.load(`update newspapers set status = 4 where Id = ${id}`)
+    },
+
     single: id => {
         return db.load(`select * from newspapers where Id = ${id} and status = 1`);
     },

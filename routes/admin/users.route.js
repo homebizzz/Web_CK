@@ -2,6 +2,7 @@ var express = require('express');
 var userModel = require('../../models/admin/users.model');
 var userModel1 = require('../../models/user.model');
 var categoryModel = require('../../models/admin/categories.model');
+var bcrypt = require('bcrypt');
 var permissionModel = require('../../models/admin/categories.model');
 var moment = require('moment');
 var router = express.Router();
@@ -106,7 +107,17 @@ router.get('/add/user', (req, res) => {
 })
   
 router.post('/add/user', (req, res) => {
-  userModel.add(req.body).then(id => {
+  var saltRounds = 10;
+  var hash = bcrypt.hashSync('123456', saltRounds);
+  var entity = {
+    Name: req.body.Name,
+    Email: req.body.Email,
+    Permission: req.body.Permission,
+    Password: hash,
+    Subscribe_date: moment().format('YYYY-MM-DD'),
+    IsDelete: 0
+  }
+  userModel1.add(entity).then(id => {
     res.redirect('/admin-users/admin');
   }).catch(err => {
     res.end('error occured.')
