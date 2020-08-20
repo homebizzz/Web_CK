@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/homebizzz/Web_CK#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "epress": "0.0.1-security",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
